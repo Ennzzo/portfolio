@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ContactForm } from "@/components/contact-form";
 import { CopyEmail } from "@/components/copy-email";
 import { PageHeading } from "@/components/page-heading";
+import { WhatsAppComposer } from "@/components/whatsapp-composer";
 import { Reveal } from "@/components/reveal";
 import { socials } from "@/components/social-links";
 import { profile } from "@/data/profile";
@@ -18,10 +19,17 @@ export default async function Contact({ params }: PageProps<"/[lang]/contact">) 
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang).contact;
+  const wa = getDictionary(lang).whatsapp;
 
   return (
     <>
       <PageHeading title={dict.title} subtitle={dict.subtitle} />
+
+      <Reveal className="mb-16 max-w-2xl">
+        <h2 className="text-2xl font-medium">{wa.title}</h2>
+        <p className="mt-2 mb-5 text-muted">{wa.subtitle}</p>
+        <WhatsAppComposer dict={wa} />
+      </Reveal>
 
       <Reveal>
         <CopyEmail email={profile.contact.email} copyLabel={dict.copy} copiedLabel={dict.copied} />
