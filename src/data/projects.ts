@@ -8,48 +8,16 @@ export type Project = {
   description: Localized;
   tech: string[];
   /** "owner/repo" no GitHub — as estatísticas vêm da API do GitHub. */
-  repo: string;
+  repo?: string;
+  /** Projetos em equipe: integrantes e perfis no GitHub. */
+  team?: { name: string; github?: string }[];
   url?: string;
   /** Imagem ou GIF em /public/projects. */
   image?: string;
   featured?: boolean;
 };
 
-// TODO(enzo): revisar descrições, escolher os destaques e adicionar prints/GIFs.
 export const projects: Project[] = [
-  {
-    slug: "compasso",
-    name: "Compasso",
-    date: "2021-09",
-    description: {
-      pt: "Meu primeiro site: uma página sobre danças, feita para aprender HTML e CSS.",
-      en: "My first website: a page about dance styles, built to learn HTML and CSS.",
-    },
-    tech: ["HTML", "CSS"],
-    repo: "Ennzzo/Compasso-",
-  },
-  {
-    slug: "world-dance",
-    name: "World Dance",
-    date: "2022-05",
-    description: {
-      pt: "Versão reformulada do Compasso, com novo layout e mais conteúdo.",
-      en: "A redesigned version of Compasso with a new layout and more content.",
-    },
-    tech: ["HTML", "CSS", "JavaScript"],
-    repo: "Ennzzo/World-Dance",
-  },
-  {
-    slug: "site-noticias",
-    name: "Site de Notícias",
-    date: "2023-06",
-    description: {
-      pt: "Mini-projeto de portal de notícias com layout em grid.",
-      en: "A small news portal project with a grid layout.",
-    },
-    tech: ["HTML", "CSS"],
-    repo: "Ennzzo/Mini-Projeto-Site-Noticias",
-  },
   {
     slug: "condingevents",
     name: "Coding Events",
@@ -70,7 +38,7 @@ export const projects: Project[] = [
       pt: "Gerador de QR Code a partir de qualquer texto ou link, com download da imagem.",
       en: "Generates a QR code from any text or link, with image download.",
     },
-    tech: ["TypeScript"],
+    tech: ["Next.js", "TypeScript", "qrcode.react"],
     repo: "Ennzzo/qrcode",
   },
   {
@@ -78,11 +46,18 @@ export const projects: Project[] = [
     name: "Acadus",
     date: "2026-06",
     description: {
-      pt: "Projeto de Trabalho Interdisciplinar da PUC Minas, desenvolvido em equipe.",
-      en: "PUC Minas interdisciplinary team project.",
+      pt: "Aplicação web para organizar trabalhos acadêmicos em equipe: quadro Kanban, distribuição de tarefas, chat e painel de progresso. Trabalho Interdisciplinar da PUC Minas.",
+      en: "Web app to organize academic team projects: Kanban board, task assignment, chat and a progress dashboard. PUC Minas interdisciplinary project.",
     },
-    tech: ["TypeScript", "React"],
-    repo: "Ennzzo/plf-es-2026-1-ti2-1381100-Acadus",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "Spring Boot", "MySQL"],
+    // Repositório da organização da PUC Minas (privado).
+    team: [
+      { name: "Enzo Bambirra Pinto", github: "Ennzzo" },
+      { name: "Francisco Maycon Lima Castro", github: "franciscopuc" },
+      { name: "Rafael Henrique de Oliveira Cruz", github: "rafaelhoc" },
+      { name: "Sofia Ferreira Costa", github: "costa-sofia" },
+      { name: "Thiago Junio Oliveira da Silva", github: "ThiagoOliveiraJ" },
+    ],
     url: "https://plf-es-2026-1-ti2-1381100-acadus.vercel.app",
     featured: true,
   },
