@@ -92,10 +92,10 @@ export const profile = {
     ] satisfies (string | Localized)[],
   },
   /** Contas usadas nos cards "Fora do código" (null = card sem dados ao vivo). */
-  games: {
-    // TODO(enzo): preencher com o Riot ID e a BattleTag.
-    valorant: null as { region: "br" | "na" | "eu" | "ap" | "kr" | "latam"; name: string; tag: string } | null,
-    overwatch: null as string | null, // BattleTag no formato "Nome-1234" (perfil público)
+  accounts: {
+    valorant: { region: "br", name: "Sparkyzz", tag: "11111" },
+    // TODO(enzo): usuário do Letterboxd (letterboxd.com/<usuario>).
+    letterboxd: null as string | null,
   },
   contact: {
     email: "enzzobambirra@gmail.com",
