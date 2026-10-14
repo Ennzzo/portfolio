@@ -25,6 +25,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Ignora API, arquivos internos e qualquer arquivo com extensão (imagens, favicon…).
   matcher: ["/((?!api|_next|.*\\..*).*)"],
 };

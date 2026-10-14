@@ -7,11 +7,9 @@ import type { Dictionary } from "@/i18n/dictionaries";
 const KEY = "portfolio:intro-seen";
 const GREETINGS = ["Olá", "Hello", "Hola", "Bonjour", "Ciao", "こんにちは"];
 
-// Roda antes do primeiro paint: se a intro já foi vista nesta sessão, marca o <html>
-// e o CSS esconde o splash (sem piscar e sem erro de hidratação).
+// Roda antes do primeiro paint para esconder o splash via CSS se ele já foi visto na sessão.
 const seenScript = `try{if(sessionStorage.getItem("${KEY}"))document.documentElement.dataset.introSeen="";sessionStorage.setItem("${KEY}","1")}catch(e){}`;
 
-/** Splash de saudações, mostrado uma vez por sessão. */
 export function Intro({ dict }: { dict: Dictionary["intro"] }) {
   const [show, setShow] = useState(true);
   const [i, setI] = useState(0);

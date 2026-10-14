@@ -8,7 +8,6 @@ import { ProjectsSection } from "@/components/sections/projects";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
-/** Página única: cada seção tem um id usado pelo menu do cabeçalho (#about, #projects…). */
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();

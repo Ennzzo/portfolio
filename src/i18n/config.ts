@@ -5,5 +5,4 @@ export const defaultLocale: Locale = "pt";
 export const hasLocale = (value: string): value is Locale =>
   (locales as readonly string[]).includes(value);
 
-/** Texto disponível nos dois idiomas. */
 export type Localized<T = string> = Record<Locale, T>;

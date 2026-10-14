@@ -2,7 +2,6 @@ import type { Locale } from "@/i18n/config";
 
 const intlLocale: Record<Locale, string> = { pt: "pt-BR", en: "en-US" };
 
-/** "2026-10" → "out. 2026" / "Oct 2026" */
 export function formatMonth(yyyyMm: string, locale: Locale) {
   const [y, m] = yyyyMm.split("-").map(Number);
   return new Intl.DateTimeFormat(intlLocale[locale], {

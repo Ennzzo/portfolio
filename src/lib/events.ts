@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 
-/** Eventos globais simples entre componentes que não se conhecem (Buck, menu Ctrl+K, jogo…). */
 type Events = {
   "game:open": undefined;
   "buck:zoomies": undefined;

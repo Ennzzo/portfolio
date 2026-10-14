@@ -3,16 +3,12 @@ import type { Localized } from "@/i18n/config";
 export type Project = {
   slug: string;
   name: string;
-  /** Data de início (AAAA-MM), usada para ordenar a linha do tempo. */
-  date: string;
+  date: string; // AAAA-MM
   description: Localized;
   tech: string[];
-  /** "owner/repo" no GitHub — as estatísticas vêm da API do GitHub. */
   repo?: string;
-  /** Projetos em equipe: integrantes e perfis no GitHub. */
   team?: { name: string; github?: string }[];
   url?: string;
-  /** Imagem ou GIF em /public/projects. */
   image?: string;
 };
 
@@ -50,7 +46,6 @@ export const projects: Project[] = [
       en: "Web app to organize academic team projects: Kanban board, task assignment, chat and a progress dashboard. PUC Minas interdisciplinary project.",
     },
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "Spring Boot", "MySQL"],
-    // Repositório da organização da PUC Minas (privado).
     team: [
       { name: "Enzo Bambirra Pinto", github: "Ennzzo" },
       { name: "Francisco Maycon Lima Castro", github: "franciscopuc" },

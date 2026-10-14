@@ -10,7 +10,6 @@ export function ProjectsSection({ lang, dict, index }: { lang: Locale; dict: Dic
     <Section id="projects">
       <SectionHeading index={index} label={dict.nav.projects} title={dict.projects.title} subtitle={dict.projects.subtitle} />
 
-      {/* Linha do tempo: do mais antigo ao mais recente */}
       <ol className="relative border-l border-border pl-6 sm:pl-10">
         {projectsByDate.map((project, i) => (
           <li key={project.slug} className="relative pb-12 last:pb-0">

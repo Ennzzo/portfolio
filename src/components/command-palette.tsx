@@ -11,7 +11,6 @@ import { ArrowUpRight, Copy, GitHub, WhatsApp } from "./icons";
 
 type Item = { id: string; group: "navigation" | "actions"; label: string; icon?: ReactNode; run: () => void };
 
-/** Menu de comandos (Ctrl+K / ⌘K): navega pelo site e dispara ações. */
 export function CommandPalette({ lang, nav, dict }: { lang: Locale; nav: Dictionary["nav"]; dict: Dictionary["palette"] }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");

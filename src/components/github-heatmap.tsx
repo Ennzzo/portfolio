@@ -13,7 +13,6 @@ const LEVEL_BG = [
   "var(--accent)",
 ];
 
-/** Calendário de contribuições estilo GitHub; passar o mouse mostra o dia. */
 export function GithubHeatmap({ calendar, lang, dict }: { calendar: ContributionCalendar; lang: Locale; dict: Dictionary["github"] }) {
   const [hover, setHover] = useState<ContributionDay | null>(null);
   const locale = lang === "pt" ? "pt-BR" : "en-US";
@@ -26,7 +25,6 @@ export function GithubHeatmap({ calendar, lang, dict }: { calendar: Contribution
     <div>
       <div className="-mx-1 overflow-x-auto px-1 pb-2" dir="rtl">
         <div dir="ltr" className="inline-block">
-          {/* Meses */}
           <div className="relative mb-2 ml-8 h-4 font-mono text-[10px] text-muted" style={{ width: calendar.weeks.length * 15 }}>
             {calendar.months.map(({ week, month }) => (
               <span key={`${week}-${month}`} className="absolute" style={{ left: week * 15 }}>
@@ -35,7 +33,6 @@ export function GithubHeatmap({ calendar, lang, dict }: { calendar: Contribution
             ))}
           </div>
           <div className="flex gap-2">
-            {/* Dias da semana */}
             <div className="grid w-6 grid-rows-7 gap-[3px] font-mono text-[10px] leading-3 text-muted">
               {dict.weekdays.map((w, i) => (
                 <span key={i} className="h-3">

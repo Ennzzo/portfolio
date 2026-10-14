@@ -1,4 +1,3 @@
-/** Marca do Enzo: raio + estrelinhas (mesmo desenho do favicon, sem o fundo). */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" className={`logo-mark ${className ?? ""}`} aria-hidden>

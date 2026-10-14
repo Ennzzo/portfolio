@@ -5,10 +5,6 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 
 type Mode = "default" | "hover" | "play" | "hidden";
 
-/**
- * Cursor próprio: um ponto que segue o mouse e um anel que vem atrás com mola.
- * Só liga em dispositivos com mouse e sem preferência por menos movimento.
- */
 export function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
   const [mode, setMode] = useState<Mode>("default");
@@ -34,7 +30,6 @@ export function CustomCursor() {
       x.set(e.clientX);
       y.set(e.clientY);
       const el = e.target as Element | null;
-      // Áreas com cursor próprio (ex.: mira do jogo) escondem o nosso.
       if (el?.closest("[data-cursor='none']")) setMode("hidden");
       else if (el?.closest("[data-cursor='play']")) setMode("play");
       else if (el?.closest("a, button, [role='button'], input, textarea, select, label, [data-cursor='hover']")) setMode("hover");
@@ -70,7 +65,6 @@ export function CustomCursor() {
         style={{ x, y, translateX: "-50%", translateY: "-50%" }}
         animate={{ opacity: mode === "hidden" ? 0 : 1, scale: mode === "hover" || mode === "play" ? 0 : 1 }}
       />
-      {/* Sobre o Buck o cursor vira uma bolinha de tênis. */}
       <motion.span
         className="absolute top-0 left-0 leading-none"
         style={{ x, y, translateX: "-50%", translateY: "-50%" }}

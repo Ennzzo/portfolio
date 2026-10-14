@@ -5,11 +5,7 @@ import type { MouseEvent } from "react";
 const LIT_MS = 480;
 const timers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
 
-/**
- * Acende a letra por um instante. Só troca uma classe: a animação é feita pelo CSS
- * com transform + background (sem medir layout nem mudar o peso da fonte), por isso
- * roda liso mesmo passando o mouse rápido — e deixa um "rastro" pelas letras.
- */
+// Só troca a classe: a animação fica no CSS (transform + background), sem forçar layout.
 function lightUp(e: MouseEvent<HTMLSpanElement>) {
   const el = e.currentTarget;
   clearTimeout(timers.get(el));

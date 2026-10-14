@@ -9,12 +9,11 @@ function headers(): HeadersInit {
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
   };
-  // Opcional: sem token o limite é 60 req/h por IP, mas o cache segura isso.
+  // Sem token o limite é 60 req/h por IP; o cache de 1h dá conta.
   if (process.env.GITHUB_TOKEN) h.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   return h;
 }
 
-/** Estatísticas de um repositório. Retorna null se for privado ou a API falhar. */
 export async function getRepoStats(repo: string): Promise<RepoStats | null> {
   "use cache";
   cacheLife("hours");

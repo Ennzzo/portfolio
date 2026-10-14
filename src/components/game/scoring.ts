@@ -1,7 +1,6 @@
 export type RankId = "iron" | "bronze" | "silver" | "gold" | "platinum" | "diamond" | "ascendant" | "immortal" | "radiant";
 export type Rank = { id: RankId; color: string };
 
-/** Ranks no estilo do Valorant, do Ferro ao Radiante. */
 export const RANKS: (Rank & { min: number })[] = [
   { id: "iron", min: 0, color: "#8b8b93" },
   { id: "bronze", min: 10, color: "#b0743c" },
@@ -21,7 +20,6 @@ export const accuracy = ({ hits, misses }: Stats) => (hits + misses === 0 ? 0 : 
 export const avgReaction = ({ reactions }: Stats) =>
   reactions.length === 0 ? 0 : Math.round(reactions.reduce((a, b) => a + b, 0) / reactions.length);
 
-/** Pontos = acertos ponderados pela precisão (errar clique custa). */
 export const points = (stats: Stats) => Math.round(stats.hits * accuracy(stats) * 10) / 10;
 
 export function rankFor(pts: number): Rank {

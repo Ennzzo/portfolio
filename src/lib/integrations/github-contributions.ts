@@ -11,9 +11,8 @@ export type ContributionStats = {
 };
 
 export type ContributionCalendar = {
-  /** Colunas de 7 dias (domingo → sábado); null preenche o início e o fim. */
+  // Colunas de domingo a sábado; null completa a primeira e a última semana.
   weeks: (ContributionDay | null)[][];
-  /** Rótulo de mês na primeira semana em que ele aparece. */
   months: { week: number; month: number }[];
   stats: ContributionStats;
 };
@@ -68,7 +67,6 @@ export function buildCalendar(days: ContributionDay[]): ContributionCalendar {
   };
 }
 
-/** Contribuições dos últimos 12 meses (API pública que lê o calendário do perfil do GitHub). */
 export async function getContributions(user: string): Promise<ContributionCalendar | null> {
   "use cache";
   cacheLife("hours");

@@ -23,13 +23,12 @@ function readBest() {
   }
 }
 
-/** Aim trainer: bolinhas aparecem e encolhem; acerte antes que sumam. */
 export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClose: () => void }) {
   const [phase, setPhase] = useState<Phase>("intro");
   const [targets, setTargets] = useState<Target[]>([]);
   const [stats, setStats] = useState<Stats>(emptyStats);
   const [remaining, setRemaining] = useState(DURATION);
-  // Só renderiza depois de um clique (nunca no servidor), então ler o storage aqui é seguro.
+  // Só monta depois de um clique, nunca no servidor.
   const [best, setBest] = useState(readBest);
   const [newBest, setNewBest] = useState(false);
   const [pops, setPops] = useState<{ id: number; x: number; y: number }[]>([]);
@@ -53,7 +52,6 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
     statsRef.current = stats;
   }, [stats]);
 
-  // Relógio da partida; no fim salva o recorde.
   useEffect(() => {
     if (phase !== "playing") return;
     const id = setInterval(() => {
@@ -73,7 +71,6 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
     return () => clearInterval(id);
   }, [phase]);
 
-  // Gera alvos cada vez mais rápido e com vida mais curta.
   useEffect(() => {
     if (phase !== "playing") return;
     let timer: ReturnType<typeof setTimeout>;
@@ -219,7 +216,6 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
                 </span>
               ))}
 
-              {/* Mira estilo Valorant */}
               <div ref={crosshairRef} className="pointer-events-none absolute top-0 left-0 hidden [@media(pointer:fine)]:block">
                 <div className="relative -translate-x-1/2 -translate-y-1/2">
                   <span className="absolute top-1/2 left-1/2 size-[3px] -translate-1/2 bg-accent" />

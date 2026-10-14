@@ -7,7 +7,6 @@ import { useEvent } from "@/lib/events";
 import { Close } from "../icons";
 import { AimTrainer } from "./aim-trainer";
 
-/** Modal do jogo, aberto pelo Buck, pelo menu Ctrl+K ou por qualquer `emit("game:open")`. */
 export function GameModal({ dict }: { dict: Dictionary["game"] }) {
   const [open, setOpen] = useState(false);
   useEvent("game:open", useCallback(() => setOpen(true), []));

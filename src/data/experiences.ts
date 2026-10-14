@@ -13,14 +13,11 @@ export type Experience = {
   organization: string;
   role: Localized;
   type: ExperienceType;
-  /** AAAA-MM */
-  start: string;
-  /** AAAA-MM; ausente = atual */
-  end?: string;
+  start: string; // AAAA-MM
+  end?: string; // ausente = atual
   description: Localized;
   highlights?: Localized<string[]>;
   url?: string;
-  /** Documentos comprobatórios em /public/docs. */
   attachments?: { label: Localized; href: string }[];
 };
 

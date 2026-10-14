@@ -1,8 +1,4 @@
-/**
- * Física do Buck, inspirada no gato do munim.io: gravidade, arremesso com a
- * velocidade real do mouse, quique nas paredes e um quique só em quedas fortes.
- * Tudo em pixels e segundos, em coordenadas do documento (y = posição das patas).
- */
+// Unidades: px e segundos, em coordenadas do documento. `y` é a altura das patas.
 
 export const G = 2600; // gravidade (px/s²)
 export const V_TERM = 1900; // velocidade terminal de queda
@@ -30,10 +26,6 @@ export type Body = {
 
 export type AirResult = { landed: Platform; impactVy: number; bounce: boolean } | null;
 
-/**
- * Um passo no ar. Retorna a plataforma em que pousou (se pousou).
- * Só colide quando está caindo e cruza o topo da plataforma neste passo.
- */
 export function stepAir(b: Body, dt: number, platforms: Platform[], width: number, viewportW: number): AirResult {
   b.vy = Math.min(V_TERM, b.vy + G * dt);
   b.vx *= Math.exp(-DRAG_K * dt);
@@ -59,7 +51,6 @@ export function stepAir(b: Body, dt: number, platforms: Platform[], width: numbe
 
   const impactVy = b.vy;
   b.y = land.y;
-  // Queda forte: um quique e depois assenta.
   if (impactVy > HEAVY_LAND_VY && !b.bounced) {
     b.bounced = true;
     b.vy = -impactVy * E_FLOOR;
@@ -70,16 +61,13 @@ export function stepAir(b: Body, dt: number, platforms: Platform[], width: numbe
   return { landed: land, impactVy, bounce: false };
 }
 
-/** Amassado ao pousar: quanto mais forte, mais achatado (0.5 a 0.9). */
 export const squashFor = (impactVy: number) => clamp(1 - impactVy / 3800, 0.5, 0.9);
 
-/** Mola do amassado: volta para 1 passando um pouco do ponto (estica e assenta). */
 export function stepSquash(s: { squash: number; squashV: number }, dt: number) {
   s.squashV += ((1 - s.squash) * 140 - s.squashV * 14) * dt;
   s.squash = clamp(s.squash + s.squashV * dt, 0.45, 1.12);
 }
 
-/** Pontos recentes do ponteiro: [x, y, t] em px e ms. */
 export type PointerSample = { x: number; y: number; t: number };
 
 /** Velocidade do ponteiro (px/s) olhando `msBack` ms para trás. */
@@ -96,7 +84,6 @@ export function pointerVelocity(samples: PointerSample[], msBack = 80): [number,
   return [((a.x - b.x) / d) * 1000, ((a.y - b.y) / d) * 1000];
 }
 
-/** Converte a velocidade do mouse na hora de soltar em velocidade de arremesso. */
 export function throwVelocity([vx, vy]: [number, number]): [number, number] {
   const speed = Math.hypot(vx, vy);
   if (speed < 120) return [0, 0]; // soltou parado: só cai
@@ -104,7 +91,6 @@ export function throwVelocity([vx, vy]: [number, number]): [number, number] {
   return [vx * k, clamp(vy * k, THROW_VY_MIN, THROW_VY_MAX)];
 }
 
-/** Plataforma sob as patas (para saber se ainda está no chão ao andar). */
 export function platformUnder(cx: number, y: number, platforms: Platform[]): Platform | null {
   for (const p of platforms) if (Math.abs(p.y - y) < 2 && cx >= p.x1 && cx <= p.x2) return p;
   return null;

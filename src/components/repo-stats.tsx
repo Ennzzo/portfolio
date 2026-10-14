@@ -4,7 +4,6 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Star } from "./icons";
 
-/** Dados ao vivo da API do GitHub (cacheados por hora). */
 export async function RepoStats({ repo, lang, dict }: { repo: string; lang: Locale; dict: Dictionary["projects"] }) {
   const stats = await getRepoStats(repo);
   if (!stats) return <span className="font-mono text-xs text-muted">{dict.private}</span>;

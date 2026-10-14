@@ -1,6 +1,5 @@
 import { Reveal } from "../reveal";
 
-/** Título de seção da página única: "01 / Sobre" + título grande + subtítulo opcional. */
 export function SectionHeading({ index, label, title, subtitle }: { index: string; label: string; title: string; subtitle?: string }) {
   return (
     <Reveal className="mb-12">

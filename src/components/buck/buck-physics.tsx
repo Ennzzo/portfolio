@@ -29,11 +29,6 @@ type Mode = "walk" | "idle" | "held" | "air";
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
 const pick = <T,>(arr: readonly T[]) => arr[Math.floor(Math.random() * arr.length)];
 
-/**
- * Buck solto pela página: anda sobre os elementos marcados com `data-buck-floor`
- * (títulos, tags, cards, rodapé), cai quando sai da borda, pode ser agarrado,
- * arrastado e arremessado. Clique rápido abre o jogo.
- */
 export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
   const elRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -54,7 +49,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
     if (!el || !inner || !layer) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // ---------- estado ----------
     const body: Body = { x: 0, y: 0, vx: 0, vy: 0, bounced: false };
     let mode: Mode = "idle";
     let modeT = 1.5; // tempo restante no modo atual
@@ -91,14 +85,13 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       bubbleTimer = setTimeout(() => setBubble(null), ms);
     };
 
-    // ---------- plataformas (topo dos elementos marcados + rodapé) ----------
     const refresh = () => {
       const sy = scrollY;
       const list: Platform[] = [];
       document.querySelectorAll("[data-buck-floor]").forEach((node) => {
         const r = node.getBoundingClientRect();
         if (r.width < 80 || r.height <= 0) return;
-        // "wide": linha que atravessa a tela toda (divisórias das seções).
+        // "wide" = divisória de seção, ocupa a largura toda.
         const wide = (node as HTMLElement).dataset.buckFloor === "wide";
         list.push({ x1: wide ? 8 : r.left, x2: wide ? innerWidth - 8 : r.right, y: r.top + sy, el: node });
       });
@@ -108,7 +101,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
         list.push({ x1: 8, x2: innerWidth - 8, y: r.top + sy, el: footer });
       }
       platforms = list.sort((a, b) => a.y - b.y);
-      // Se a plataforma onde ele está mudou de lugar (layout/animação), acompanha.
       if (plat && mode !== "air" && mode !== "held") {
         const same = platforms.find((p) => p.el === plat!.el);
         if (same) {
@@ -125,7 +117,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       return platforms.filter((p) => p.y > top && p.y < bottom);
     };
 
-    // ---------- modos ----------
     const startWalk = () => {
       mode = "walk";
       modeT = rand(2.5, 6);
@@ -147,14 +138,12 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       body.bounced = false;
       setP("air");
     }
-    /** Entra caindo do topo da tela, em cima de alguma plataforma visível. */
     const dropIn = () => {
       const target = pick(visiblePlatforms().filter((p) => p.x2 - p.x1 > W)) ?? platforms.at(-1);
       body.y = scrollY - 40;
       body.x = target ? clamp(rand(target.x1, target.x2 - W), 4, innerWidth - W - 4) : innerWidth / 2;
       startFall(0, 0);
     };
-    /** Pulo calculado para pousar numa plataforma próxima (sobe ou desce). */
     const jumpTo = (p: Platform) => {
       const tx = clamp(rand(p.x1, p.x2 - W), p.x1 - W * 0.3, p.x2 - W * 0.7);
       // Ápice 60px acima do ponto mais alto entre a origem e o destino.
@@ -190,7 +179,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       }
     };
 
-    // ---------- posição inicial: no topo do selo "Aberto a novas oportunidades" ----------
     refresh();
     const start = visiblePlatforms()[0] ?? platforms[0];
     if (start) {
@@ -200,7 +188,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
     }
     el.style.opacity = "1";
 
-    // ---------- loop ----------
     let last = performance.now();
     let raf = 0;
     const loop = (now: number) => {
@@ -215,7 +202,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
         heldY += (ty - heldY) * (1 - Math.exp(-10 * dt));
         body.x = heldX;
         body.y = heldY;
-        // Inclina conforme o movimento do mouse (mola amortecida).
         const [pvx] = pointerVelocity(samples, 60);
         const target = clamp(-pvx * 0.018, -16, 16);
         fx.tiltV += (50 * (target - fx.tilt) - 8 * fx.tiltV) * dt;
@@ -244,7 +230,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
           }
           if (modeT <= 0) startIdle();
         } else if (mode === "idle" && modeT <= 0) {
-          // Às vezes pula para outra plataforma visível por perto.
           const options = visiblePlatforms().filter(
             (p) => p !== plat && Math.abs(p.y - body.y) < 320 && Math.abs((p.x1 + p.x2) / 2 - body.x) < 700,
           );
@@ -269,7 +254,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       raf = requestAnimationFrame(loop);
     };
 
-    // ---------- ponteiro ----------
     const onMove = (e: PointerEvent) => {
       pointer = { x: e.clientX, y: e.clientY };
       samples.push({ x: e.clientX, y: e.clientY + scrollY, t: performance.now() });

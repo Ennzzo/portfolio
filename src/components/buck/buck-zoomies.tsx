@@ -7,7 +7,6 @@ import { BuckSvg } from "./buck-svg";
 
 const KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
 
-/** Easter egg: o Konami code (ou o menu Ctrl+K) solta o Buck correndo pela tela. */
 export function BuckZoomies({ label }: { label: string }) {
   const [runs, setRuns] = useState<{ id: number; width: number }[]>([]);
 

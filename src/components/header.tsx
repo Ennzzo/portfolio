@@ -13,7 +13,6 @@ import { LogoMark } from "./logo-mark";
 const sections = ["home", "about", "projects", "github", "experience", "contact"] as const;
 type SectionId = (typeof sections)[number];
 
-/** Seção visível agora (a que cruza a faixa de 35% do topo da tela). */
 function useActiveSection() {
   const [active, setActive] = useState<SectionId>("home");
   useEffect(() => {

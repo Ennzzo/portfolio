@@ -5,7 +5,6 @@ import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { WhatsApp } from "./icons";
 
-/** Campo de mensagem que abre a conversa no WhatsApp já com o texto preenchido. */
 export function WhatsAppComposer({ dict }: { dict: Dictionary["whatsapp"] }) {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
@@ -33,7 +32,6 @@ export function WhatsAppComposer({ dict }: { dict: Dictionary["whatsapp"] }) {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => {
-          // Enter envia, Shift+Enter quebra linha (como no próprio WhatsApp).
           if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             e.currentTarget.form?.requestSubmit();

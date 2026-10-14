@@ -1,6 +1,5 @@
 import { defaultLocale, locales, type Locale } from "./config";
 
-/** Escolhe o idioma suportado de maior prioridade no cabeçalho Accept-Language. */
 export function negotiateLocale(acceptLanguage: string | null): Locale {
   const ranked = (acceptLanguage ?? "")
     .split(",")

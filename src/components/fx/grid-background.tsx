@@ -1,4 +1,3 @@
-/** Grade sutil no fundo com marcadores "+", que some nas bordas. */
 export function GridBackground() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">

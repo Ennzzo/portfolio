@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { emit } from "@/lib/events";
 
-/** Foto pequena do Buck estilo polaroid; clicar abre o jogo. */
 export function BuckPhoto({ alt, play }: { alt: string; play: string }) {
   return (
     <figure className="group w-24 shrink-0 rotate-3 rounded-xl border border-border bg-surface p-1.5 shadow-xl transition-transform duration-300 hover:rotate-0 sm:w-28">
