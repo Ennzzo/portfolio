@@ -11,13 +11,15 @@ import { Close, Menu } from "./icons";
 import { LogoMark } from "./logo-mark";
 
 const sections = ["home", "about", "projects", "github", "experience", "contact"] as const;
-type SectionId = (typeof sections)[number];
+// Seções observadas pelo destaque do menu (inclui as que não têm link próprio).
+const observed = ["home", "about", "projects", "github", "experience", "off-clock", "contact"] as const;
+type SectionId = (typeof observed)[number];
 
 /** Seção visível agora (a que cruza a faixa de 35% do topo da tela). */
 function useActiveSection() {
   const [active, setActive] = useState<SectionId>("home");
   useEffect(() => {
-    const els = sections.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const els = observed.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     if (!els.length) return;
     const io = new IntersectionObserver(
       (entries) => {
@@ -54,7 +56,7 @@ export function Header({ lang, dict, paletteLabel }: { lang: Locale; dict: Dicti
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8">
         <Link href={`/${lang}`} className="group inline-flex items-center gap-2 font-mono text-lg font-semibold tracking-tight" aria-label={profile.name}>
           <LogoMark className="size-7" />
-          {profile.monogram}
+          Enzzo
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm md:flex" aria-label="Principal">

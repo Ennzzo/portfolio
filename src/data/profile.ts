@@ -3,7 +3,6 @@ import type { Localized } from "@/i18n/config";
 export const profile = {
   name: "Enzo Bambirra",
   shortName: "Enzo",
-  monogram: "EB",
   githubUser: "Ennzzo",
   location: "Belo Horizonte, MG",
   timeZone: "America/Sao_Paulo",
