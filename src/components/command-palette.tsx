@@ -48,6 +48,7 @@ export function CommandPalette({ lang, nav, dict }: { lang: Locale; nav: Diction
       { id: "projects", group: "navigation", label: nav.projects, run: go("#projects") },
       { id: "github", group: "navigation", label: "GitHub", run: go("#github") },
       { id: "experience", group: "navigation", label: nav.experience, run: go("#experience") },
+      { id: "design", group: "navigation", label: "Design System", run: go("#design") },
       { id: "contact", group: "navigation", label: nav.contact, run: go("#contact") },
       {
         id: "lang",

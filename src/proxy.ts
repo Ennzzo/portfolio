@@ -3,7 +3,7 @@ import { locales } from "@/i18n/config";
 import { negotiateLocale } from "@/i18n/negotiate";
 
 // Rotas da versão com várias páginas viraram seções da página única.
-const SECTIONS = new Set(["about", "projects", "experience", "contact", "github"]);
+const SECTIONS = new Set(["about", "projects", "experience", "contact", "github", "design"]);
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

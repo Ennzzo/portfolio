@@ -11,7 +11,7 @@ import { Close, Menu } from "./icons";
 import { LogoMark } from "./logo-mark";
 import { ThemeToggle } from "./theme-toggle";
 
-const sections = ["home", "about", "projects", "github", "experience", "contact"] as const;
+const sections = ["home", "about", "projects", "github", "experience", "design", "contact"] as const;
 type SectionId = (typeof sections)[number];
 
 function useActiveSection() {
@@ -67,7 +67,7 @@ export function Header({
           Enzzo
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm md:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-6 text-sm lg:flex" aria-label="Principal">
           {links}
           <LangSwitch href={`/${otherLang}${hash}`} label={otherLang} />
           <ThemeToggle labels={themeLabels} />
@@ -82,7 +82,7 @@ export function Header({
           </button>
         </nav>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           <LangSwitch href={`/${otherLang}${hash}`} label={otherLang} />
           <ThemeToggle labels={themeLabels} />
           <button
@@ -105,7 +105,7 @@ export function Header({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-border bg-background md:hidden"
+            className="overflow-hidden border-b border-border bg-background lg:hidden"
             aria-label="Principal"
           >
             <div className="flex flex-col gap-5 px-5 py-6 text-2xl">{links}</div>

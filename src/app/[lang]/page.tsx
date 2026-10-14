@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { AboutSection } from "@/components/sections/about";
 import { ContactSection } from "@/components/sections/contact";
+import { DesignSystemSection } from "@/components/sections/design-system";
 import { ExperienceSection } from "@/components/sections/experience";
 import { GithubSection } from "@/components/sections/github";
 import { HeroSection } from "@/components/sections/hero";
@@ -20,7 +21,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <ProjectsSection lang={lang} dict={dict} index="02" />
       <GithubSection lang={lang} dict={dict} index="03" />
       <ExperienceSection lang={lang} dict={dict} index="04" />
-      <ContactSection dict={dict} index="05" />
+      <DesignSystemSection lang={lang} dict={dict} index="05" />
+      <ContactSection dict={dict} index="06" />
     </>
   );
 }
