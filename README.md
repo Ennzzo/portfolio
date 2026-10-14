@@ -33,7 +33,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-007ec6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-007ec6?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-007ec6?style=for-the-badge&logo=docker&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-31_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-30_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ennzzo/portfolio?style=for-the-badge&logo=clockify)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Ennzzo/portfolio?style=for-the-badge&color=007ec6&logo=gitkraken)
 
@@ -387,7 +387,7 @@ Com dados inválidos (`HTTP 400`):
 npm test
 ```
 
-Testes unitários com **Vitest** (31 casos):
+Testes unitários com **Vitest** (30 casos):
 
 | Arquivo | O que cobre |
 | :--- | :--- |
