@@ -226,6 +226,7 @@ Outros scripts:
 | `npm run build` | Build de produção |
 | `npm start` | Servidor de produção (após o build) |
 | `npm run lint` | ESLint |
+| `npm run typecheck` | Gera os tipos das rotas e checa o TypeScript |
 | `npm test` | Testes unitários (Vitest) |
 
 ---
