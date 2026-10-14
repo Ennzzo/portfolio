@@ -140,3 +140,59 @@
     animation: none !important;
   }
 }
+
+/* Segurado pelo cursor: patas penduradas e balançando, rabo agitado, língua de fora. */
+.buck--held .buck-leg--a {
+  animation: buck-dangle 0.5s ease-in-out infinite alternate;
+}
+.buck--held .buck-leg--b {
+  animation: buck-dangle 0.5s ease-in-out infinite alternate-reverse;
+}
+.buck--held .buck-tail {
+  animation-duration: 0.12s;
+}
+.buck--held .buck-tongue,
+.buck--air .buck-tongue {
+  opacity: 1;
+}
+.buck--held .buck-head {
+  rotate: -6deg;
+}
+
+/* No ar: patas da frente esticadas para a frente, as de trás para trás. */
+.buck--air .buck-leg--a {
+  rotate: -32deg;
+}
+.buck--air .buck-leg--b {
+  rotate: 30deg;
+}
+.buck--air .buck-ear {
+  rotate: -18deg;
+}
+
+@keyframes buck-dangle {
+  from {
+    rotate: -10deg;
+  }
+  to {
+    rotate: 12deg;
+  }
+}
+
+/* Poeirinha ao pousar */
+.buck-puff {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(237, 237, 239, 0.35);
+  pointer-events: none;
+  animation: buck-puff 0.55s ease-out forwards;
+}
+@keyframes buck-puff {
+  to {
+    translate: var(--dx) -14px;
+    scale: 0.2;
+    opacity: 0;
+  }
+}

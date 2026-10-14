@@ -1,6 +1,6 @@
 import "./buck.css";
 
-export type BuckPose = "walk" | "idle" | "happy" | "run";
+export type BuckPose = "walk" | "idle" | "happy" | "run" | "held" | "air";
 
 /**
  * Buck desenhado em SVG (de perfil, olhando para a direita): pelo preto com reflexos
