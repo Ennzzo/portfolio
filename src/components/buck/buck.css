@@ -1,0 +1,142 @@
+/* Animações do Buck (ver buck-svg.tsx). */
+.buck {
+  overflow: visible;
+  /* Luz de contorno para o pelo preto não sumir no fundo escuro. */
+  filter: drop-shadow(0 0 0.8px rgba(200, 190, 175, 0.75)) drop-shadow(0 0 6px rgba(212, 255, 63, 0.08));
+}
+
+.buck .buck-shadow {
+  fill: #000;
+  opacity: 0.35;
+}
+
+.buck .buck-leg,
+.buck .buck-tail,
+.buck .buck-head,
+.buck .buck-ear,
+.buck .buck-eye {
+  transform-box: fill-box;
+}
+
+.buck .buck-leg {
+  transform-origin: 50% 8%;
+}
+
+.buck .buck-tail {
+  transform-origin: 95% 90%;
+  animation: buck-wag 0.6s ease-in-out infinite alternate;
+}
+
+.buck .buck-head {
+  transform-origin: 20% 70%;
+  transition: rotate 0.3s ease;
+}
+
+.buck .buck-ear {
+  transform-origin: 60% 5%;
+}
+
+.buck .buck-eye {
+  transform-origin: center;
+  animation: buck-blink 4.5s infinite;
+}
+
+.buck .buck-tongue {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Andando */
+.buck--walk .buck-leg--a,
+.buck--run .buck-leg--a {
+  animation: buck-step 0.36s ease-in-out infinite alternate;
+}
+.buck--walk .buck-leg--b,
+.buck--run .buck-leg--b {
+  animation: buck-step 0.36s ease-in-out infinite alternate-reverse;
+}
+.buck--walk .buck-bob,
+.buck--run .buck-bob {
+  animation: buck-bob 0.18s ease-in-out infinite alternate;
+}
+.buck--walk .buck-ear,
+.buck--run .buck-ear {
+  animation: buck-flop 0.36s ease-in-out infinite alternate;
+}
+
+/* Correndo (zoomies) */
+.buck--run .buck-leg--a,
+.buck--run .buck-leg--b,
+.buck--run .buck-ear {
+  animation-duration: 0.16s;
+}
+.buck--run .buck-bob {
+  animation-duration: 0.08s;
+}
+.buck--run .buck-tongue {
+  opacity: 1;
+}
+
+/* Feliz (mouse em cima) */
+.buck--happy .buck-tail {
+  animation-duration: 0.14s;
+}
+.buck--happy .buck-head {
+  rotate: -9deg;
+}
+.buck--happy .buck-tongue {
+  opacity: 1;
+}
+
+@keyframes buck-step {
+  from {
+    rotate: -24deg;
+  }
+  to {
+    rotate: 24deg;
+  }
+}
+
+@keyframes buck-wag {
+  from {
+    rotate: -10deg;
+  }
+  to {
+    rotate: 16deg;
+  }
+}
+
+@keyframes buck-bob {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -2px;
+  }
+}
+
+@keyframes buck-flop {
+  from {
+    rotate: -6deg;
+  }
+  to {
+    rotate: 8deg;
+  }
+}
+
+@keyframes buck-blink {
+  0%,
+  92%,
+  100% {
+    scale: 1 1;
+  }
+  95% {
+    scale: 1 0.1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buck * {
+    animation: none !important;
+  }
+}
