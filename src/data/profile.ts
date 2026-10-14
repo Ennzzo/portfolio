@@ -19,7 +19,7 @@ export const profile = {
     pt: "Desenvolvedor full stack na Abrasel e estudante de Engenharia de Software na PUC Minas. Técnico em Informática pelo CEFET-MG, com passagem pela seção de TI do Exército Brasileiro.",
     en: "Full stack developer at Abrasel and Software Engineering student at PUC Minas. IT technician from CEFET-MG, formerly on the Brazilian Army's IT team.",
   } satisfies Localized,
-  tags: ["Belo Horizonte", "Full Stack", "PHP · Laravel", "TypeScript"],
+  tags: ["Belo Horizonte", "Full Stack", "React · Next.js", "TypeScript"],
   about: {
     intro: {
       pt: [
