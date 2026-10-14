@@ -1,0 +1,72 @@
+import { ArrowUpRight } from "../icons";
+import { Reveal } from "../reveal";
+import { Section, SectionHeading } from "./section-heading";
+import { experiencesByDate } from "@/data/experiences";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
+import { formatMonth } from "@/lib/format";
+
+export function ExperienceSection({ lang, dict: all, index }: { lang: Locale; dict: Dictionary; index: string }) {
+  const dict = all.experience;
+  return (
+    <Section id="experience">
+      <SectionHeading index={index} label={all.nav.experience} title={dict.title} subtitle={dict.subtitle} />
+
+      <ul className="divide-y divide-border border-y border-border">
+        {experiencesByDate.map((exp) => (
+          <li key={exp.organization + exp.start}>
+            <Reveal className="grid gap-3 py-8 md:grid-cols-[200px_1fr] md:gap-10">
+              <div className="font-mono text-sm text-muted">
+                <p>
+                  {formatMonth(exp.start, lang)} — {exp.end ? formatMonth(exp.end, lang) : dict.present}
+                </p>
+                <p className="mt-2 inline-block rounded-full border border-border px-2.5 py-0.5 text-xs">
+                  {dict.types[exp.type]}
+                </p>
+              </div>
+              <div>
+                <h3 className="text-xl font-medium">{exp.role[lang]}</h3>
+                <p className="mt-1 text-muted">
+                  {exp.url ? (
+                    <a href={exp.url} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                      {exp.organization}
+                    </a>
+                  ) : (
+                    exp.organization
+                  )}
+                </p>
+                <p className="mt-4 max-w-2xl leading-relaxed">{exp.description[lang]}</p>
+                {exp.highlights && (
+                  <ul className="mt-4 max-w-2xl space-y-1.5 text-muted">
+                    {exp.highlights[lang].map((h) => (
+                      <li key={h} className="flex gap-3">
+                        <span className="mt-2.5 size-1 shrink-0 rounded-full bg-accent" aria-hidden />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {exp.attachments && (
+                  <ul className="mt-5 flex flex-wrap gap-3">
+                    {exp.attachments.map((doc) => (
+                      <li key={doc.href}>
+                        <a
+                          href={doc.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-accent transition-colors hover:border-accent"
+                        >
+                          {doc.label[lang]} <ArrowUpRight width={14} height={14} />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  );
+}
