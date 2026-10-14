@@ -17,7 +17,12 @@ export function SectionHeading({ index, label, title, subtitle }: { index: strin
 
 export function Section({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <section id={id} data-section className="scroll-mt-20 border-t border-border/60 py-24 first:border-t-0">
+    <section
+      id={id}
+      data-section
+      data-buck-floor="wide"
+      className="relative scroll-mt-20 py-24 before:absolute before:top-0 before:left-1/2 before:w-screen before:-translate-x-1/2 before:border-t before:border-border/60"
+    >
       {children}
     </section>
   );
