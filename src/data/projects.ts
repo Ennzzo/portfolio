@@ -23,11 +23,12 @@ export const projects: Project[] = [
     name: "Coding Events",
     date: "2025-06",
     description: {
-      pt: "Plataforma de eventos de tecnologia com cadastro, autenticação e inscrição em eventos.",
-      en: "A tech events platform with sign-up, authentication and event registration.",
+      pt: "Plataforma de eventos de tecnologia: lista os próximos eventos e permite criar novos com título, cidade, descrição e visibilidade. Meu primeiro projeto com Laravel e arquitetura MVC.",
+      en: "A tech events platform: lists upcoming events and lets you create new ones with title, city, description and visibility. My first Laravel project using MVC.",
     },
-    tech: ["PHP", "Laravel", "MySQL", "Blade"],
+    tech: ["PHP", "Laravel", "Blade", "SQLite", "Eloquent ORM"],
     repo: "Ennzzo/condingevents",
+    image: "/projects/coding-events.webp",
     featured: true,
   },
   {
@@ -35,11 +36,12 @@ export const projects: Project[] = [
     name: "QR Code Generator",
     date: "2025-07",
     description: {
-      pt: "Gerador de QR Code a partir de qualquer texto ou link, com download da imagem.",
-      en: "Generates a QR code from any text or link, with image download.",
+      pt: "Gera QR Codes a partir de qualquer link, com cores personalizadas, logo no centro em tamanhos variados e download em PNG.",
+      en: "Generates QR codes from any link, with custom colors, a center logo in several sizes and PNG download.",
     },
-    tech: ["Next.js", "TypeScript", "qrcode.react"],
+    tech: ["Next.js", "TypeScript", "React", "qrcode.react"],
     repo: "Ennzzo/qrcode",
+    image: "/projects/qrcode.webp",
   },
   {
     slug: "acadus",
@@ -58,7 +60,7 @@ export const projects: Project[] = [
       { name: "Sofia Ferreira Costa", github: "costa-sofia" },
       { name: "Thiago Junio Oliveira da Silva", github: "ThiagoOliveiraJ" },
     ],
-    url: "https://plf-es-2026-1-ti2-1381100-acadus.vercel.app",
+    image: "/projects/acadus.webp",
     featured: true,
   },
   {
@@ -72,6 +74,7 @@ export const projects: Project[] = [
     tech: ["TypeScript", "Vite", "GitHub Actions", "GitHub Pages"],
     repo: "Ennzzo/grade-puc-es",
     url: "https://ennzzo.github.io/grade-puc-es/",
+    image: "/projects/grade-puc-es.webp",
     featured: true,
   },
 ];
