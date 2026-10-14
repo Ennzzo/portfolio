@@ -32,6 +32,7 @@ const pt = {
     stars: "estrelas",
     updated: "Último push",
     private: "Repositório privado",
+    team: "Equipe",
   },
   experience: {
     title: "Experiências",
@@ -105,6 +106,7 @@ const en: Dictionary = {
     stars: "stars",
     updated: "Last push",
     private: "Private repository",
+    team: "Team",
   },
   experience: {
     title: "Experience",
