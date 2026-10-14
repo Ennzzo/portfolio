@@ -4,7 +4,7 @@ export type BuckPose = "walk" | "idle" | "happy" | "run" | "held" | "air";
 
 /**
  * Buck desenhado em SVG (de perfil, olhando para a direita): pelo preto com reflexos
- * caramelo, focinho grisalho, orelha caída e felpuda, rabo peludo e a bandana azul.
+ * caramelo, focinho grisalho, orelha caída e felpuda e rabo peludo.
  */
 export function BuckSvg({ pose = "idle", className }: { pose?: BuckPose; className?: string }) {
   return (
@@ -109,19 +109,6 @@ export function BuckSvg({ pose = "idle", className }: { pose?: BuckPose; classNa
           </g>
           </g>
         </g>
-
-        {/* Bandana azul (por cima do pescoço, abaixo do focinho) */}
-        <g transform="translate(4 12)">
-        <path d="M140 74 C150 80 160 80 168 74 L160 98 Z" fill="#1e3a8a" />
-        <g fill="#c7d2fe" opacity=".9">
-          <circle cx="150" cy="80" r="1.4" />
-          <circle cx="158" cy="81" r="1.4" />
-          <circle cx="155" cy="88" r="1.4" />
-          <circle cx="159" cy="93" r="1.2" />
-        </g>
-
-        </g>
-
       </g>
     </svg>
   );
