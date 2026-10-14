@@ -46,6 +46,7 @@ export const projects: Project[] = [
       en: "Web app to organize academic team projects: Kanban board, task assignment, chat and a progress dashboard. PUC Minas interdisciplinary project.",
     },
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "Spring Boot", "MySQL"],
+    repo: "Ennzzo/acadus",
     team: [
       { name: "Enzo Bambirra Pinto", github: "Ennzzo" },
       { name: "Francisco Maycon Lima Castro", github: "franciscopuc" },
