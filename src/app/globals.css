@@ -67,3 +67,34 @@ body {
 [data-custom-cursor] * {
   cursor: none !important;
 }
+
+/* Jogo de mira (ver components/game/aim-trainer.tsx). */
+.aim-target {
+  animation-name: aim-shrink;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes aim-shrink {
+  0% {
+    scale: 0.2;
+  }
+  12% {
+    scale: 1;
+  }
+  100% {
+    scale: 0;
+  }
+}
+
+.aim-pop {
+  translate: -50% -50%;
+  animation: aim-pop 0.6s ease-out forwards;
+}
+
+@keyframes aim-pop {
+  to {
+    translate: -50% -180%;
+    opacity: 0;
+  }
+}
