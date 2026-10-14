@@ -21,8 +21,8 @@ describe("pontuação do jogo de mira", () => {
 
   it("converte pontos em ranks do Ferro ao Radiante", () => {
     expect(rankFor(0).id).toBe("iron");
-    expect(rankFor(14).id).toBe("silver");
-    expect(rankFor(43.9).id).toBe("immortal");
+    expect(rankFor(18).id).toBe("silver");
+    expect(rankFor(51.9).id).toBe("immortal");
     expect(rankFor(60).id).toBe("radiant");
   });
 });
