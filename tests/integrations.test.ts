@@ -1,45 +1,68 @@
 import { describe, expect, it } from "vitest";
-import { parseOverwatchSummary } from "@/lib/integrations/overwatch";
+import { parseLetterboxdRss, stars } from "@/lib/integrations/letterboxd";
 import { parseStravaActivity } from "@/lib/integrations/strava";
-import { parseValorantMmr } from "@/lib/integrations/valorant";
+import { parseValorantMmr, rankIcon } from "@/lib/integrations/valorant";
 
-describe("parseOverwatchSummary", () => {
-  it("lista só os papéis ranqueados no PC", () => {
-    const profile = parseOverwatchSummary({
-      username: "Enzo",
-      avatar: "a.png",
-      endorsement: { level: 3 },
-      competitive: {
-        pc: {
-          tank: null,
-          damage: { division: "gold", tier: 2, rank_icon: "gold.png", role_icon: "dps.svg" },
-          support: { division: "silver", tier: 4, rank_icon: "silver.png", role_icon: "sup.svg" },
-          open: null,
-        },
+describe("parseValorantMmr", () => {
+  const mmr = {
+    data: {
+      current_data: { currenttierpatched: "Unrated" },
+      highest_rank: { patched_tier: "Immortal 3" },
+      by_season: {
+        e10a2: { final_rank_patched: "Ascendant 3" },
+        e11a1: { error: "No data Available" },
+        e11a2: { final_rank_patched: "Ascendant 2" },
+        e11a5: { final_rank_patched: "Unrated" },
       },
+    },
+  };
+
+  it("trata Unrated como sem rank e pega o pico e a última temporada ranqueada", () => {
+    expect(parseValorantMmr(mmr, 219)).toEqual({
+      current: null,
+      peak: "Immortal 3",
+      peakIcon: expect.stringContaining("/26/largeicon.png"),
+      lastRanked: "Ascendant 2",
+      level: 219,
     });
-    expect(profile.endorsement).toBe(3);
-    expect(profile.ranks.map((r) => `${r.role}:${r.division}${r.tier}`)).toEqual(["damage:gold2", "support:silver4"]);
   });
 
-  it("aguenta perfil sem competitivo", () => {
-    expect(parseOverwatchSummary({ username: "X", avatar: null, competitive: null }).ranks).toEqual([]);
+  it("retorna null sem dados", () => {
+    expect(parseValorantMmr({})).toBeNull();
   });
 });
 
-describe("parseValorantMmr", () => {
-  it("extrai rank atual, RR e pico", () => {
-    const rank = parseValorantMmr({
-      data: {
-        current_data: { currenttierpatched: "Gold 2", images: { small: "s.png", large: "l.png" }, ranking_in_tier: 47 },
-        highest_rank: { patched_tier: "Platinum 1" },
-      },
-    });
-    expect(rank).toEqual({ tier: "Gold 2", icon: "l.png", rr: 47, peak: "Platinum 1" });
+describe("rankIcon", () => {
+  it("usa a numeração atual de tiers pelo nome do rank", () => {
+    expect(rankIcon("Iron 1")).toContain("/3/");
+    expect(rankIcon("Ascendant 2")).toContain("/22/");
+    expect(rankIcon("Radiant")).toContain("/27/");
+    expect(rankIcon("Unknown 1")).toBeNull();
+  });
+});
+
+describe("parseLetterboxdRss", () => {
+  const xml = `<rss><channel>
+    <item><title>Lista qualquer</title><link>https://letterboxd.com/x/list/a/</link></item>
+    <item><title>Interstellar, 2014 - ★★★★½</title><link>https://letterboxd.com/x/film/interstellar/</link>
+      <letterboxd:watchedDate>2026-10-12</letterboxd:watchedDate><letterboxd:filmTitle>Interstellar</letterboxd:filmTitle>
+      <letterboxd:filmYear>2014</letterboxd:filmYear><letterboxd:memberRating>4.5</letterboxd:memberRating>
+      <letterboxd:memberLike>Yes</letterboxd:memberLike>
+      <description><![CDATA[ <p><img src="https://a.ltrbxd.com/poster.jpg"/></p> ]]></description></item>
+    <item><title>Arrival, 2016</title><link>https://letterboxd.com/x/film/arrival/</link>
+      <letterboxd:filmTitle>Arrival &amp; Co</letterboxd:filmTitle><letterboxd:filmYear>2016</letterboxd:filmYear></item>
+  </channel></rss>`;
+
+  it("ignora itens que não são filmes e extrai nota, like e pôster", () => {
+    const films = parseLetterboxdRss(xml);
+    expect(films).toHaveLength(2);
+    expect(films[0]).toMatchObject({ title: "Interstellar", year: "2014", rating: 4.5, liked: true, poster: "https://a.ltrbxd.com/poster.jpg" });
+    expect(films[1]).toMatchObject({ title: "Arrival & Co", rating: null, liked: false, poster: null });
   });
 
-  it("retorna null sem rank (unranked)", () => {
-    expect(parseValorantMmr({ data: { current_data: { currenttierpatched: null } } })).toBeNull();
+  it("converte nota em estrelas", () => {
+    expect(stars(4.5)).toBe("★★★★½");
+    expect(stars(3)).toBe("★★★");
   });
 });
 
