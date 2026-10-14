@@ -13,6 +13,7 @@ import { BuckPhysics } from "@/components/buck/buck-physics";
 import { profile } from "@/data/profile";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { siteUrl } from "@/lib/site";
 import "../globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -26,14 +27,17 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   return {
+    metadataBase: new URL(siteUrl),
     title: { default: `${profile.name} — ${profile.role[lang]}`, template: `%s · ${profile.name}` },
     description: profile.bio[lang],
     alternates: { languages: { "pt-BR": "/pt", en: "/en" } },
+    twitter: { card: "summary_large_image" },
     openGraph: {
       title: profile.name,
       description: profile.bio[lang],
       locale: lang === "pt" ? "pt_BR" : "en_US",
       type: "website",
+      url: `/${lang}`,
     },
   };
 }
