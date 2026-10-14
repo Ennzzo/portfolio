@@ -44,6 +44,7 @@ const pt = {
       opensource: "Open source",
       event: "Evento",
       academic: "Acadêmico",
+      military: "Serviço militar",
     },
   },
   contact: {
@@ -116,6 +117,7 @@ const en: Dictionary = {
       opensource: "Open source",
       event: "Event",
       academic: "Academic",
+      military: "Military service",
     },
   },
   contact: {

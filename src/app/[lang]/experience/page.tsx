@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHeading } from "@/components/page-heading";
+import { ArrowUpRight } from "@/components/icons";
 import { Reveal } from "@/components/reveal";
 import { experiencesByDate } from "@/data/experiences";
 import { hasLocale } from "@/i18n/config";
@@ -45,6 +46,26 @@ export default async function ExperiencePage({ params }: PageProps<"/[lang]/expe
                   )}
                 </p>
                 <p className="mt-4 max-w-2xl leading-relaxed">{exp.description[lang]}</p>
+                {exp.highlights && (
+                  <ul className="mt-4 max-w-2xl space-y-1.5 text-muted">
+                    {exp.highlights[lang].map((h) => (
+                      <li key={h} className="flex gap-3">
+                        <span className="mt-2.5 size-1 shrink-0 rounded-full bg-accent" aria-hidden />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {exp.attachment && (
+                  <a
+                    href={exp.attachment.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 text-sm text-accent hover:underline"
+                  >
+                    {exp.attachment.label[lang]} <ArrowUpRight width={14} height={14} />
+                  </a>
+                )}
               </div>
             </Reveal>
           </li>
