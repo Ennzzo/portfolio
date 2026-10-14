@@ -7,6 +7,8 @@ import { Intro } from "@/components/intro";
 import { CustomCursor } from "@/components/fx/custom-cursor";
 import { GridBackground } from "@/components/fx/grid-background";
 import { GameModal } from "@/components/game/game-modal";
+import { CommandPalette } from "@/components/command-palette";
+import { BuckZoomies } from "@/components/buck/buck-zoomies";
 import { profile } from "@/data/profile";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -46,10 +48,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <Intro dict={dict.intro} />
         <GridBackground />
         <CustomCursor />
-        <Header lang={lang} dict={dict.nav} />
+        <Header lang={lang} dict={dict.nav} paletteLabel={dict.palette.open} />
         <main className="mx-auto w-full max-w-5xl flex-1 px-5 sm:px-8">{children}</main>
         <Footer lang={lang} dict={dict.footer} />
         <GameModal dict={dict.game} />
+        <CommandPalette lang={lang} nav={dict.nav} dict={dict.palette} />
+        <BuckZoomies label={dict.zoomies} />
       </body>
     </html>
   );

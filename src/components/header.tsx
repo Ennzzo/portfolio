@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { profile } from "@/data/profile";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { emit } from "@/lib/events";
 import { Close, Menu } from "./icons";
 
 const routes = ["", "/about", "/projects", "/experience", "/contact"] as const;
@@ -18,7 +19,7 @@ const labelKey = {
   "/contact": "contact",
 } as const;
 
-export function Header({ lang, dict }: { lang: Locale; dict: Dictionary["nav"] }) {
+export function Header({ lang, dict, paletteLabel }: { lang: Locale; dict: Dictionary["nav"]; paletteLabel: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const current = pathname.replace(/^\/(pt|en)/, "") || "";
@@ -50,6 +51,15 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary["nav"] }
         <nav className="hidden items-center gap-7 text-sm md:flex" aria-label="Principal">
           {links}
           <LangSwitch href={`/${otherLang}${current}`} label={otherLang} />
+          <button
+            type="button"
+            onClick={() => emit("palette:open")}
+            aria-label={paletteLabel}
+            title={paletteLabel}
+            className="rounded-md border border-border px-2 py-1 font-mono text-[11px] text-muted transition-colors hover:border-foreground hover:text-foreground"
+          >
+            Ctrl K
+          </button>
         </nav>
 
         <div className="flex items-center gap-3 md:hidden">
