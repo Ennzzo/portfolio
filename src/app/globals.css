@@ -61,3 +61,9 @@ body {
     display: none;
   }
 }
+
+/* Cursor customizado (ver components/fx/custom-cursor.tsx). */
+[data-custom-cursor],
+[data-custom-cursor] * {
+  cursor: none !important;
+}
