@@ -87,7 +87,7 @@
 ## ✨ Funcionalidades Principais
 
 - 🌐 **Internacionalização (i18n):** todo o site em português e inglês, com troca de idioma em qualquer página e detecção automática pelo idioma do navegador (`Accept-Language`).
-- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
+- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências, Design System e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
 - 👋 **Sobre mim:** apresentação, formação (com certificado), interesses, objetivos e habilidades.
 - 🗂️ **Linha do tempo de projetos:** do mais antigo ao mais recente, com descrição, tecnologias, link para o GitHub, equipe (em projetos em grupo) e **GIF do projeto em funcionamento**.
 - 🔄 **Integração com a API do GitHub:** estrelas e data do último push de cada repositório, com cache de 1 hora.
@@ -96,6 +96,8 @@
 - 📨 **Contato:** ícones para e-mail, WhatsApp, LinkedIn, GitHub e Instagram + **formulário que envia e-mail** pelo back-end (Resend).
 - 🛡️ **Validação e segurança do formulário:** validação com Zod no cliente e no servidor, honeypot anti-spam, limite de 5 envios por IP a cada 10 min e escape de HTML.
 - 📱 **Responsividade:** layout pensado para celular, tablet e desktop, com menu mobile animado.
+- 🌗 **Tema claro e escuro:** botão no cabeçalho (e no Ctrl+K); segue o tema do sistema na primeira visita, guarda a escolha e aplica antes da página aparecer, sem piscar.
+- 🎨 **Design System:** seção que documenta cores (com os valores dos dois temas), tipografia, componentes, formas, marca e movimento, com exemplos ao vivo.
 - 🐕 **Buck, o mascote com física:** meu cachorro desenhado em SVG anda sobre títulos, tags, cards e divisórias das seções. Dá para **agarrar, arrastar e arremessar**: ele voa com a velocidade do mouse, sofre gravidade, rebate nas paredes, quica em quedas fortes e "amassa" ao pousar. Se você rolar para longe, ele volta caindo do topo da tela.
 - 🎯 **Jogo AIM BUCK!:** clique no Buck para abrir um aim trainer com mira estilo Valorant, tempo de reação, precisão, ranks do Ferro ao Radiante e recorde salvo no navegador.
 - 🔠 **Título interativo:** as letras do hero ganham peso (fonte variável) e um marca-texto conforme o cursor se aproxima.
@@ -319,7 +321,7 @@ npm start
 │   │   └── icon.svg            # 🔖 Favicon
 │   ├── components/             # 🧱 Componentes reutilizáveis (header, cards, formulário…)
 │   │   ├── buck/               # 🐕 Mascote em SVG, motor de física, foto e easter egg
-│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, contato)
+│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, design system, contato)
 │   │   ├── fx/                 # ✨ Cursor, título interativo e fundo em grade
 │   │   ├── game/               # 🎯 Jogo AIM BUCK! e pontuação
 │   ├── data/                   # 🗃️ Conteúdo: perfil, projetos e experiências (PT/EN)
