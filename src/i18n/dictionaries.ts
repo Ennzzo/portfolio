@@ -146,7 +146,7 @@ const pt = {
     title: "Fora do código",
     subtitle: "Dados ao vivo das minhas outras paixões.",
     live: "ao vivo",
-    strava: { label: "Strava", last: "Último treino", recent: "Corrida · últimas 4 semanas", runs: "corridas", year: "Corrida no ano", profile: "Ver perfil no Strava", fallback: "Corrida e HYROX toda semana." },
+    strava: { label: "Strava", last: "Último treino", distance: "Distância", time: "Tempo", pace: "Pace", profile: "Ver perfil no Strava", fallback: "Corrida e HYROX toda semana." },
     letterboxd: {
       label: "Letterboxd",
       recent: "Assistidos recentemente",
@@ -314,7 +314,7 @@ const en: Dictionary = {
     title: "Off the clock",
     subtitle: "Live data from my other passions.",
     live: "live",
-    strava: { label: "Strava", last: "Latest workout", recent: "Running · last 4 weeks", runs: "runs", year: "Running this year", profile: "See profile on Strava", fallback: "Running and HYROX every week." },
+    strava: { label: "Strava", last: "Latest workout", distance: "Distance", time: "Time", pace: "Pace", profile: "See profile on Strava", fallback: "Running and HYROX every week." },
     letterboxd: {
       label: "Letterboxd",
       recent: "Recently watched",

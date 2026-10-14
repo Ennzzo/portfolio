@@ -55,44 +55,31 @@ const duration = (s: number) => {
 const pace = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}/km`;
 
 export async function StravaCard({ dict, lang }: { dict: Dict; lang: Locale }) {
-  const data = await getStravaSummary();
-  const last = data?.last;
-  const recent = data?.recent;
-  const num = (n: number) => n.toLocaleString(intl(lang));
+  const last = (await getStravaSummary())?.last;
   return (
-    <Card label={dict.strava.label} color="#fc4c02" icon={Strava} live={!!(last || recent)} liveLabel={dict.live}>
-      {last && (
-        <div className="mb-4">
+    <Card label={dict.strava.label} color="#fc4c02" icon={Strava} live={!!last} liveLabel={dict.live}>
+      {last ? (
+        <div>
           <p className="font-mono text-[11px] text-muted uppercase">
             {dict.strava.last} ·{" "}
             {new Intl.DateTimeFormat(intl(lang), { day: "2-digit", month: "short", timeZone: profile.timeZone }).format(new Date(last.date))}
           </p>
-          <p className="mt-1 text-xl font-medium">{last.name}</p>
-          <p className="mt-2 font-mono text-sm text-muted">
-            {last.distanceKm > 0 && `${num(last.distanceKm)} km · `}
-            {duration(last.movingSeconds)}
-            {last.paceSecondsPerKm && ` · ${pace(last.paceSecondsPerKm)}`}
-          </p>
-        </div>
-      )}
-      {recent ? (
-        <div className={last ? "border-t border-border pt-3" : ""}>
-          <p className="font-mono text-[11px] text-muted uppercase">{dict.strava.recent}</p>
-          <p className="mt-1 text-3xl font-medium tracking-tight">
-            {num(recent.km)} <span className="text-lg text-muted">km</span>
-          </p>
-          <p className="mt-1 font-mono text-sm text-muted">
-            {recent.count} {dict.strava.runs} · {duration(recent.seconds)}
-            {recent.km > 0 && ` · ${pace(Math.round(recent.seconds / recent.km))}`}
-          </p>
-          {data?.yearKm ? (
-            <p className="mt-4 border-t border-border pt-3 text-sm text-muted">
-              {dict.strava.year}: <span className="text-foreground">{num(data.yearKm)} km</span>
-            </p>
-          ) : null}
+          <p className="mt-2 text-2xl font-medium">{last.name}</p>
+          <dl className="mt-4 grid grid-cols-3 gap-3">
+            {[
+              [dict.strava.distance, last.distanceKm > 0 ? `${last.distanceKm.toLocaleString(intl(lang))} km` : "—"],
+              [dict.strava.time, duration(last.movingSeconds)],
+              [dict.strava.pace, last.paceSecondsPerKm ? pace(last.paceSecondsPerKm) : "—"],
+            ].map(([label, value]) => (
+              <div key={label}>
+                <dt className="font-mono text-[10px] text-muted uppercase">{label}</dt>
+                <dd className="mt-0.5 font-mono text-sm">{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       ) : (
-        !last && <p className="text-lg text-muted">{dict.strava.fallback}</p>
+        <p className="text-lg text-muted">{dict.strava.fallback}</p>
       )}
       <a
         href={profile.accounts.strava}
