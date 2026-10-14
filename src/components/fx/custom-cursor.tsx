@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
-type Mode = "default" | "hover" | "hidden";
+type Mode = "default" | "hover" | "play" | "hidden";
 
 /**
  * Cursor próprio: um ponto que segue o mouse e um anel que vem atrás com mola.
@@ -36,6 +36,7 @@ export function CustomCursor() {
       const el = e.target as Element | null;
       // Áreas com cursor próprio (ex.: mira do jogo) escondem o nosso.
       if (el?.closest("[data-cursor='none']")) setMode("hidden");
+      else if (el?.closest("[data-cursor='play']")) setMode("play");
       else if (el?.closest("a, button, [role='button'], input, textarea, select, label, [data-cursor='hover']")) setMode("hover");
       else setMode("default");
     };
@@ -56,19 +57,30 @@ export function CustomCursor() {
         className="absolute top-0 left-0 rounded-full border border-foreground/60"
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
         animate={{
-          width: mode === "hover" ? 52 : 34,
-          height: mode === "hover" ? 52 : 34,
+          width: mode === "hover" ? 52 : mode === "play" ? 40 : 34,
+          height: mode === "hover" ? 52 : mode === "play" ? 40 : 34,
           opacity: mode === "hidden" ? 0 : 1,
           backgroundColor: mode === "hover" ? "rgba(212,255,63,0.12)" : "rgba(0,0,0,0)",
-          borderColor: mode === "hover" ? "rgba(212,255,63,0.9)" : "rgba(237,237,239,0.5)",
+          borderColor: mode === "hover" || mode === "play" ? "rgba(212,255,63,0.9)" : "rgba(237,237,239,0.5)",
         }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
       />
       <motion.div
         className="absolute top-0 left-0 size-1.5 rounded-full bg-accent"
         style={{ x, y, translateX: "-50%", translateY: "-50%" }}
-        animate={{ opacity: mode === "hidden" ? 0 : 1, scale: mode === "hover" ? 0 : 1 }}
+        animate={{ opacity: mode === "hidden" ? 0 : 1, scale: mode === "hover" || mode === "play" ? 0 : 1 }}
       />
+      {/* Sobre o Buck o cursor vira uma bolinha de tênis. */}
+      <motion.span
+        className="absolute top-0 left-0 leading-none"
+        style={{ x, y, translateX: "-50%", translateY: "-50%" }}
+        animate={{ opacity: mode === "play" ? 1 : 0, scale: mode === "play" ? 1 : 0.4, rotate: mode === "play" ? 180 : 0 }}
+      >
+        <svg width="18" height="18" viewBox="0 0 20 20">
+          <circle cx="10" cy="10" r="9" fill="#d4ff3f" />
+          <path d="M3 4.5c3 2.5 3 8.5 0 11M17 4.5c-3 2.5-3 8.5 0 11" stroke="#fff" strokeWidth="1.4" fill="none" />
+        </svg>
+      </motion.span>
     </div>
   );
 }
