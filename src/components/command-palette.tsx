@@ -7,6 +7,7 @@ import { profile } from "@/data/profile";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { emit, useEvent } from "@/lib/events";
+import { toggleTheme } from "@/lib/theme";
 import { ArrowUpRight, Copy, GitHub, WhatsApp } from "./icons";
 
 type Item = { id: string; group: "navigation" | "actions"; label: string; icon?: ReactNode; run: () => void };
@@ -73,6 +74,7 @@ export function CommandPalette({ lang, nav, dict }: { lang: Locale; nav: Diction
         icon: <WhatsApp width={16} height={16} />,
         run: () => window.open(`https://wa.me/${profile.contact.whatsapp}`, "_blank", "noopener,noreferrer"),
       },
+      { id: "theme", group: "actions", label: dict.theme, icon: <span>◐</span>, run: toggleTheme },
       { id: "play", group: "actions", label: dict.play, icon: <span>🎯</span>, run: () => emit("game:open") },
       { id: "zoomies", group: "actions", label: dict.zoomies, icon: <span>🐕</span>, run: () => emit("buck:zoomies") },
       {

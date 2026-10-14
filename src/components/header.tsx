@@ -9,6 +9,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { emit } from "@/lib/events";
 import { Close, Menu } from "./icons";
 import { LogoMark } from "./logo-mark";
+import { ThemeToggle } from "./theme-toggle";
 
 const sections = ["home", "about", "projects", "github", "experience", "contact"] as const;
 type SectionId = (typeof sections)[number];
@@ -30,7 +31,17 @@ function useActiveSection() {
   return active;
 }
 
-export function Header({ lang, dict, paletteLabel }: { lang: Locale; dict: Dictionary["nav"]; paletteLabel: string }) {
+export function Header({
+  lang,
+  dict,
+  paletteLabel,
+  themeLabels,
+}: {
+  lang: Locale;
+  dict: Dictionary["nav"];
+  paletteLabel: string;
+  themeLabels: Dictionary["theme"];
+}) {
   const [open, setOpen] = useState(false);
   const active = useActiveSection();
   const otherLang: Locale = lang === "pt" ? "en" : "pt";
@@ -59,6 +70,7 @@ export function Header({ lang, dict, paletteLabel }: { lang: Locale; dict: Dicti
         <nav className="hidden items-center gap-7 text-sm md:flex" aria-label="Principal">
           {links}
           <LangSwitch href={`/${otherLang}${hash}`} label={otherLang} />
+          <ThemeToggle labels={themeLabels} />
           <button
             type="button"
             onClick={() => emit("palette:open")}
@@ -72,6 +84,7 @@ export function Header({ lang, dict, paletteLabel }: { lang: Locale; dict: Dicti
 
         <div className="flex items-center gap-3 md:hidden">
           <LangSwitch href={`/${otherLang}${hash}`} label={otherLang} />
+          <ThemeToggle labels={themeLabels} />
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}

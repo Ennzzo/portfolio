@@ -14,6 +14,7 @@ import { profile } from "@/data/profile";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { siteUrl } from "@/lib/site";
+import { themeScript } from "@/lib/theme";
 import "../globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -49,11 +50,14 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
 
   return (
     <html lang={lang === "pt" ? "pt-BR" : "en"} suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-dvh flex-col overflow-x-clip font-sans">
         <Intro dict={dict.intro} />
         <GridBackground />
         <CustomCursor />
-        <Header lang={lang} dict={dict.nav} paletteLabel={dict.palette.open} />
+        <Header lang={lang} dict={dict.nav} paletteLabel={dict.palette.open} themeLabels={dict.theme} />
         <main className="mx-auto w-full max-w-5xl flex-1 px-5 sm:px-8">{children}</main>
         <Footer lang={lang} dict={dict.footer} />
         <GameModal dict={dict.game} />

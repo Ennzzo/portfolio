@@ -1,6 +1,7 @@
 import type { Locale } from "./config";
 
 const pt = {
+  theme: { light: "Ativar tema claro", dark: "Ativar tema escuro" },
   nav: {
     home: "Início",
     about: "Sobre",
@@ -143,6 +144,7 @@ const pt = {
     source: "Ver o código no GitHub",
     hint: "Navegue com ↑ ↓ e abra com Enter",
     open: "Abrir menu de comandos",
+    theme: "Alternar tema claro/escuro",
   },
   zoomies: "Modo zoomies ativado!",
   github: {
@@ -168,6 +170,7 @@ const pt = {
 export type Dictionary = typeof pt;
 
 const en: Dictionary = {
+  theme: { light: "Switch to light theme", dark: "Switch to dark theme" },
   nav: {
     home: "Home",
     about: "About",
@@ -310,6 +313,7 @@ const en: Dictionary = {
     source: "View source on GitHub",
     hint: "Navigate with ↑ ↓ and open with Enter",
     open: "Open command menu",
+    theme: "Toggle light/dark theme",
   },
   zoomies: "Zoomies mode on!",
   github: {
