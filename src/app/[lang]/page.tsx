@@ -5,6 +5,7 @@ import { HeroTitle } from "@/components/fx/hero-title";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
 import { ArrowUpRight } from "@/components/icons";
+import { WhatsAppComposer } from "@/components/whatsapp-composer";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { hasLocale } from "@/i18n/config";
@@ -62,15 +63,17 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      <section className="py-24 text-center">
-        <Reveal>
-          <h2 className="mx-auto max-w-2xl text-4xl font-medium tracking-tight sm:text-5xl">{dict.home.ctaTitle}</h2>
-          <Link
-            href={`/${lang}/contact`}
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-medium text-accent-foreground transition-transform hover:scale-[1.03]"
-          >
-            {dict.home.ctaButton} <ArrowUpRight width={16} height={16} />
-          </Link>
+      <section className="py-24">
+        <Reveal className="mx-auto max-w-2xl">
+          <h2 className="text-center text-4xl font-medium tracking-tight sm:text-5xl">{dict.home.ctaTitle}</h2>
+          <p className="mt-4 mb-10 text-center text-lg text-muted">{dict.home.ctaSubtitle}</p>
+          <WhatsAppComposer dict={dict.whatsapp} />
+          <p className="mt-6 text-center text-sm text-muted">
+            {dict.home.ctaOther}{" "}
+            <Link href={`/${lang}/contact`} className="inline-flex items-center gap-1 text-foreground hover:text-accent">
+              {dict.home.ctaButton} <ArrowUpRight width={14} height={14} />
+            </Link>
+          </p>
         </Reveal>
       </section>
     </>
