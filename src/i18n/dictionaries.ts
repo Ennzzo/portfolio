@@ -142,6 +142,14 @@ const pt = {
     open: "Abrir menu de comandos",
   },
   zoomies: "Modo zoomies ativado!",
+  offClock: {
+    title: "Fora do código",
+    subtitle: "Dados ao vivo das minhas outras paixões.",
+    live: "ao vivo",
+    valorant: { label: "Valorant", rank: "Rank atual", peak: "Pico", rr: "RR", fallback: "Jogo ranqueada toda semana." },
+    overwatch: { label: "Overwatch", fallback: "Competitivo nas horas vagas.", roles: { tank: "Tanque", damage: "Dano", support: "Suporte", open: "Fila aberta" } },
+    strava: { label: "Strava", last: "Último treino", recent: "Corrida nas últimas 4 semanas", pace: "pace", fallback: "Corrida e HYROX toda semana." },
+  },
   footer: { built: "Feito com Next.js", localTime: "BH" },
   notFound: { title: "Página não encontrada", back: "Voltar ao início" },
 };
@@ -290,6 +298,14 @@ const en: Dictionary = {
     open: "Open command menu",
   },
   zoomies: "Zoomies mode on!",
+  offClock: {
+    title: "Off the clock",
+    subtitle: "Live data from my other passions.",
+    live: "live",
+    valorant: { label: "Valorant", rank: "Current rank", peak: "Peak", rr: "RR", fallback: "I play ranked every week." },
+    overwatch: { label: "Overwatch", fallback: "Competitive in my spare time.", roles: { tank: "Tank", damage: "Damage", support: "Support", open: "Open queue" } },
+    strava: { label: "Strava", last: "Latest workout", recent: "Running in the last 4 weeks", pace: "pace", fallback: "Running and HYROX every week." },
+  },
   footer: { built: "Built with Next.js", localTime: "BH" },
   notFound: { title: "Page not found", back: "Back home" },
 };

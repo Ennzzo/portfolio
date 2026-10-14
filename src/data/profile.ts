@@ -91,6 +91,12 @@ export const profile = {
       { pt: "Metodologias ágeis", en: "Agile methodologies" },
     ] satisfies (string | Localized)[],
   },
+  /** Contas usadas nos cards "Fora do código" (null = card sem dados ao vivo). */
+  games: {
+    // TODO(enzo): preencher com o Riot ID e a BattleTag.
+    valorant: null as { region: "br" | "na" | "eu" | "ap" | "kr" | "latam"; name: string; tag: string } | null,
+    overwatch: null as string | null, // BattleTag no formato "Nome-1234" (perfil público)
+  },
   contact: {
     email: "enzzobambirra@gmail.com",
     whatsapp: "5531984360707",
