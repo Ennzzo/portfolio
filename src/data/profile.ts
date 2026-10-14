@@ -22,14 +22,14 @@ export const profile = {
   about: {
     intro: {
       pt: [
-        "Salve! Sou o Enzo Bambirra, desenvolvedor full stack e estudante do 3º período de Engenharia de Software na PUC Minas, com formatura prevista para o fim de 2028. Antes disso, me formei técnico em Informática pelo CEFET-MG — hoje Universidade Federal de Ciência e Inovação de Minas Gerais (UFCIMG).",
-        "Sou apaixonado por tecnologia: pela forma como ela resolve grandes problemas do mundo atual e se reinventa a todo momento. Já trabalhei com desenvolvimento, redes e suporte na seção de TI do Exército Brasileiro e hoje desenvolvo soluções full stack na Abrasel.",
-        "Fora do código, sou viciado em jogos competitivos de FPS e treino toda semana corrida e HYROX — modalidade que mistura corrida com exercícios de força. E, em casa, divido a mesa com o Buck, meu supervisor de código.",
+        "Sou Enzo Bambirra, desenvolvedor full stack e estudante do 3º período de Engenharia de Software na PUC Minas, com conclusão prevista para o final de 2028. Sou técnico em Informática pelo CEFET-MG, atual Universidade Federal de Ciência e Inovação de Minas Gerais (UFCIMG).",
+        "Atualmente desenvolvo soluções web na Abrasel, participando de todo o ciclo de entrega — da definição de requisitos com o time à implementação —, com uso de metodologias ágeis. Anteriormente, atuei com otimização de SEO na Myth e na Seção de Tecnologia da Informação do Exército Brasileiro, com desenvolvimento em PHP/Laravel, infraestrutura de redes e suporte técnico.",
+        "Tenho interesse em desenvolvimento de software, segurança da informação e infraestrutura, e busco oportunidades para aplicar e aprofundar esses conhecimentos em projetos que gerem impacto real.",
       ],
       en: [
-        "Hey! I'm Enzo Bambirra, a full stack developer and 3rd-semester Software Engineering student at PUC Minas, graduating by the end of 2028. Before that, I earned an IT technician degree from CEFET-MG — now the Federal University of Science and Innovation of Minas Gerais (UFCIMG).",
-        "I'm passionate about technology: how it solves some of today's biggest problems and keeps reinventing itself. I've worked on development, networking and support on the Brazilian Army's IT team, and today I build full stack solutions at Abrasel.",
-        "Away from the keyboard, I'm hooked on competitive FPS games and train running and HYROX — a sport that mixes running with strength workouts — every week. At home, I share my desk with Buck, my code supervisor.",
+        "I'm Enzo Bambirra, a full stack developer and 3rd-semester Software Engineering student at PUC Minas, expected to graduate at the end of 2028. I hold an IT technician degree from CEFET-MG, now the Federal University of Science and Innovation of Minas Gerais (UFCIMG).",
+        "I currently build web solutions at Abrasel, taking part in the whole delivery cycle — from defining requirements with the team to implementation — using agile methodologies. Previously, I worked on SEO optimization at Myth and on the Brazilian Army's Information Technology Section, with PHP/Laravel development, network infrastructure and technical support.",
+        "I'm interested in software development, information security and infrastructure, and I'm looking for opportunities to apply and deepen this knowledge in projects with real impact.",
       ],
     } satisfies Localized<string[]>,
     education: [
@@ -56,15 +56,13 @@ export const profile = {
         "Desenvolvimento de software",
         "Segurança da informação",
         "Infraestrutura e redes",
-        "Jogos competitivos de FPS",
-        "Corrida e HYROX",
+        "Otimização para mecanismos de busca (SEO)",
       ],
       en: [
         "Software development",
         "Information security",
         "Infrastructure and networking",
-        "Competitive FPS games",
-        "Running and HYROX",
+        "Search engine optimization (SEO)",
       ],
     } satisfies Localized<string[]>,
     goals: {
@@ -86,16 +84,11 @@ export const profile = {
       "Tailwind CSS",
       "Git & GitHub",
       "Docker",
+      "SEO",
       { pt: "Redes (switches e roteadores)", en: "Networking (switches & routers)" },
       { pt: "Manutenção de hardware", en: "Hardware maintenance" },
       { pt: "Metodologias ágeis", en: "Agile methodologies" },
     ] satisfies (string | Localized)[],
-  },
-  /** Contas usadas nos cards "Fora do código" (null = card sem dados ao vivo). */
-  accounts: {
-    strava: "https://www.strava.com/athletes/151471201",
-    valorant: { region: "br", name: "Sparkyzz", tag: "11111" },
-    letterboxd: "enzzoz" as string | null,
   },
   contact: {
     email: "enzzobambirra@gmail.com",
