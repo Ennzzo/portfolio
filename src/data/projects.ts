@@ -14,7 +14,6 @@ export type Project = {
   url?: string;
   /** Imagem ou GIF em /public/projects. */
   image?: string;
-  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -29,7 +28,6 @@ export const projects: Project[] = [
     tech: ["PHP", "Laravel", "Blade", "SQLite", "Eloquent ORM"],
     repo: "Ennzzo/condingevents",
     image: "/projects/coding-events.webp",
-    featured: true,
   },
   {
     slug: "qrcode",
@@ -61,7 +59,6 @@ export const projects: Project[] = [
       { name: "Thiago Junio Oliveira da Silva", github: "ThiagoOliveiraJ" },
     ],
     image: "/projects/acadus.webp",
-    featured: true,
   },
   {
     slug: "grade-puc-es",
@@ -75,7 +72,6 @@ export const projects: Project[] = [
     repo: "Ennzzo/grade-puc-es",
     url: "https://ennzzo.github.io/grade-puc-es/",
     image: "/projects/grade-puc-es.webp",
-    featured: true,
   },
 ];
 

@@ -25,12 +25,7 @@ const pt = {
   },
   home: {
     eyebrow: "Aberto a novas oportunidades",
-    selectedWork: "Trabalhos selecionados",
-    allProjects: "Ver todos os projetos",
     ctaTitle: "Tem uma ideia que vale a pena construir?",
-    ctaSubtitle: "Me manda uma mensagem — ela cai direto no meu WhatsApp.",
-    ctaOther: "Prefere e-mail ou LinkedIn?",
-    ctaButton: "Ver todos os contatos",
   },
   about: {
     title: "Sobre mim",
@@ -38,7 +33,6 @@ const pt = {
     skills: "Habilidades",
     interests: "Interesses",
     goals: "Objetivos",
-    resume: "Baixar currículo",
     certificate: "Ver certificado",
     certificateAlt: "Certificado de conclusão do curso Técnico em Informática do CEFET-MG",
     buckAlt: "Foto do Buck, cachorro preto de pelo longo, com a língua de fora olhando para a câmera",
@@ -169,7 +163,6 @@ const pt = {
     fallback: "Ver contribuições no GitHub",
   },
   footer: { built: "Feito com Next.js", localTime: "BH" },
-  notFound: { title: "Página não encontrada", back: "Voltar ao início" },
 };
 
 export type Dictionary = typeof pt;
@@ -199,12 +192,7 @@ const en: Dictionary = {
   },
   home: {
     eyebrow: "Open to new opportunities",
-    selectedWork: "Selected work",
-    allProjects: "See all projects",
     ctaTitle: "Have an idea worth building?",
-    ctaSubtitle: "Send me a message — it lands straight in my WhatsApp.",
-    ctaOther: "Prefer e-mail or LinkedIn?",
-    ctaButton: "See all contacts",
   },
   about: {
     title: "About me",
@@ -212,7 +200,6 @@ const en: Dictionary = {
     skills: "Skills",
     interests: "Interests",
     goals: "Goals",
-    resume: "Download résumé",
     certificate: "View certificate",
     certificateAlt: "Certificate of completion of the IT Technician course at CEFET-MG",
     buckAlt: "Photo of Buck, a long-haired black dog, sticking his tongue out at the camera",
@@ -343,7 +330,6 @@ const en: Dictionary = {
     fallback: "See contributions on GitHub",
   },
   footer: { built: "Built with Next.js", localTime: "BH" },
-  notFound: { title: "Page not found", back: "Back home" },
 };
 
 const dictionaries: Record<Locale, Dictionary> = { pt, en };

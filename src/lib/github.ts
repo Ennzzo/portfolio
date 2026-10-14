@@ -1,18 +1,6 @@
 import { cacheLife } from "next/cache";
 
-export type RepoStats = {
-  stars: number;
-  forks: number;
-  pushedAt: string;
-  language: string | null;
-  topics: string[];
-};
-
-export type GithubProfile = {
-  publicRepos: number;
-  followers: number;
-  avatarUrl: string;
-};
+export type RepoStats = { stars: number; pushedAt: string };
 
 const API = "https://api.github.com";
 
@@ -35,31 +23,7 @@ export async function getRepoStats(repo: string): Promise<RepoStats | null> {
     const res = await fetch(`${API}/repos/${repo}`, { headers: headers() });
     if (!res.ok) return null;
     const data = await res.json();
-    return {
-      stars: data.stargazers_count,
-      forks: data.forks_count,
-      pushedAt: data.pushed_at,
-      language: data.language,
-      topics: data.topics ?? [],
-    };
-  } catch {
-    return null;
-  }
-}
-
-export async function getGithubProfile(user: string): Promise<GithubProfile | null> {
-  "use cache";
-  cacheLife("hours");
-
-  try {
-    const res = await fetch(`${API}/users/${user}`, { headers: headers() });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return {
-      publicRepos: data.public_repos,
-      followers: data.followers,
-      avatarUrl: data.avatar_url,
-    };
+    return { stars: data.stargazers_count, pushedAt: data.pushed_at };
   } catch {
     return null;
   }

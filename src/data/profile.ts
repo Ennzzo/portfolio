@@ -4,7 +4,6 @@ export const profile = {
   name: "Enzo Bambirra",
   shortName: "Enzo",
   githubUser: "Ennzzo",
-  location: "Belo Horizonte, MG",
   timeZone: "America/Sao_Paulo",
   role: {
     pt: "Desenvolvedor Full Stack",
