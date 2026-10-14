@@ -9,6 +9,7 @@ import { GridBackground } from "@/components/fx/grid-background";
 import { GameModal } from "@/components/game/game-modal";
 import { CommandPalette } from "@/components/command-palette";
 import { BuckZoomies } from "@/components/buck/buck-zoomies";
+import { BuckPhysics } from "@/components/buck/buck-physics";
 import { profile } from "@/data/profile";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -44,7 +45,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
 
   return (
     <html lang={lang === "pt" ? "pt-BR" : "en"} suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <body className="flex min-h-dvh flex-col font-sans">
+      <body className="flex min-h-dvh flex-col overflow-x-clip font-sans">
         <Intro dict={dict.intro} />
         <GridBackground />
         <CustomCursor />
@@ -54,6 +55,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <GameModal dict={dict.game} />
         <CommandPalette lang={lang} nav={dict.nav} dict={dict.palette} />
         <BuckZoomies label={dict.zoomies} />
+        <BuckPhysics dict={dict.buck} />
       </body>
     </html>
   );
