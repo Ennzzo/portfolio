@@ -90,7 +90,7 @@
 - 👋 **Sobre mim:** apresentação, formação, interesses, objetivos e habilidades.
 - 🗂️ **Linha do tempo de projetos:** do mais antigo ao mais recente, com descrição, tecnologias, link para o GitHub, equipe (em projetos em grupo) e **GIF do projeto em funcionamento**.
 - 🔄 **Integração com a API do GitHub:** estrelas e data do último push de cada repositório, com cache de 1 hora.
-- 💼 **Experiências:** empresa, cargo, período, descrição, destaques e documentos comprobatórios (ex.: referência elogiosa).
+- 💼 **Experiências:** empresa, cargo, período, descrição, destaques e documentos comprobatórios (ex.: Diploma de Honra ao Mérito e Referência Elogiosa do Exército).
 - 📨 **Contato:** ícones para e-mail, WhatsApp, LinkedIn, GitHub e Instagram + **formulário que envia e-mail** pelo back-end (Resend).
 - 🛡️ **Validação e segurança do formulário:** validação com Zod no cliente e no servidor, honeypot anti-spam, limite de 5 envios por IP a cada 10 min e escape de HTML.
 - 📱 **Responsividade:** layout pensado para celular, tablet e desktop, com menu mobile animado.
@@ -303,7 +303,7 @@ npm start
 │   ├── screenshots/            # 🖼️ Prints das páginas (desktop e mobile)
 │   └── wireframes/             # 🎨 Wireframes do Figma
 ├── public/
-│   ├── docs/                   # 📄 Documentos (referência elogiosa)
+│   ├── docs/                   # 📄 Documentos (Honra ao Mérito e Referência Elogiosa)
 │   ├── projects/               # 🎞️ GIFs/WebPs dos projetos em funcionamento
 │   └── logo.svg                # 🏷️ Logo
 ├── src/

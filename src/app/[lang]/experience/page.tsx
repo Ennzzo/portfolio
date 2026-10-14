@@ -56,15 +56,21 @@ export default async function ExperiencePage({ params }: PageProps<"/[lang]/expe
                     ))}
                   </ul>
                 )}
-                {exp.attachment && (
-                  <a
-                    href={exp.attachment.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-sm text-accent hover:underline"
-                  >
-                    {exp.attachment.label[lang]} <ArrowUpRight width={14} height={14} />
-                  </a>
+                {exp.attachments && (
+                  <ul className="mt-5 flex flex-wrap gap-3">
+                    {exp.attachments.map((doc) => (
+                      <li key={doc.href}>
+                        <a
+                          href={doc.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-accent transition-colors hover:border-accent"
+                        >
+                          {doc.label[lang]} <ArrowUpRight width={14} height={14} />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
             </Reveal>

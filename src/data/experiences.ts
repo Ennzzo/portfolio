@@ -20,8 +20,8 @@ export type Experience = {
   description: Localized;
   highlights?: Localized<string[]>;
   url?: string;
-  /** Documento comprobatório em /public/docs. */
-  attachment?: { label: Localized; href: string };
+  /** Documentos comprobatórios em /public/docs. */
+  attachments?: { label: Localized; href: string }[];
 };
 
 export const experiences: Experience[] = [
@@ -74,10 +74,16 @@ export const experiences: Experience[] = [
         "Support for the institution's 2024 video conferences",
       ],
     },
-    attachment: {
-      label: { pt: "Ver referência elogiosa", en: "View letter of commendation" },
-      href: "/docs/referencia-elogiosa-exercito.pdf",
-    },
+    attachments: [
+      {
+        label: { pt: "Diploma de Honra ao Mérito", en: "Certificate of Honor to Merit" },
+        href: "/docs/honra-ao-merito-414-bambirra.pdf",
+      },
+      {
+        label: { pt: "Referência Elogiosa — Seção de TI", en: "Letter of Commendation — IT Section" },
+        href: "/docs/referencia-elogiosa-enzo-bambirra-secao-de-ti.pdf",
+      },
+    ],
   },
 ];
 
