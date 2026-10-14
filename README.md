@@ -33,7 +33,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-007ec6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-007ec6?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-007ec6?style=for-the-badge&logo=docker&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-28_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-29_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ennzzo/portfolio?style=for-the-badge&logo=clockify)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Ennzzo/portfolio?style=for-the-badge&color=007ec6&logo=gitkraken)
 
@@ -101,7 +101,7 @@
 - 💬 **Mensagem direto no WhatsApp:** campo na home e no contato que abre a conversa já com o texto.
 - ⌨️ **Menu de comandos (Ctrl+K):** navegação, troca de idioma, copiar e-mail, abrir WhatsApp, jogar e mais.
 - 🕹️ **Easter egg:** o Konami code (↑↑↓↓←→←→BA) solta o Buck correndo pela tela.
-- 🎮 **Fora do código:** cards com dados ao vivo do Valorant (HenrikDev API), Overwatch (OverFast API) e Strava.
+- 🎮 **Fora do código:** cards com dados ao vivo do Strava (último treino), Letterboxd (filmes assistidos, via RSS) e Valorant (pico e nível, via HenrikDev API).
 - ✨ **Micro-interações:** intro de saudações (uma vez por sessão), animações de entrada, cópia de e-mail em um clique e relógio ao vivo de Belo Horizonte.
 - ♿ **Acessibilidade:** HTML semântico, `aria-*` no menu e no formulário, foco visível e respeito a `prefers-reduced-motion`.
 
@@ -122,7 +122,7 @@
 * **Runtime:** Node.js 22
 * **Framework:** Route Handlers do Next.js (`POST /api/contact`) e Proxy (antigo Middleware) para o roteamento de idiomas
 * **E-mail:** [Resend](https://resend.com/) (SDK `resend` 6)
-* **APIs externas:** [GitHub REST API](https://docs.github.com/rest) (repositórios), [OverFast API](https://overfast-api.tekrop.fr) (Overwatch), [HenrikDev API](https://docs.henrikdev.xyz) (Valorant), [Strava API](https://developers.strava.com) (treinos)
+* **APIs externas:** [GitHub REST API](https://docs.github.com/rest) (repositórios), RSS do [Letterboxd](https://letterboxd.com) (filmes), [HenrikDev API](https://docs.henrikdev.xyz) (Valorant), [Strava API](https://developers.strava.com) (treinos)
 * **Banco de Dados:** não se aplica — o conteúdo vive em arquivos TypeScript tipados em `src/data`
 
 ### ⚙️ Infraestrutura & DevOps
@@ -323,11 +323,11 @@ npm start
 │   │   ├── buck/               # 🐕 Mascote em SVG, passeio, foto e easter egg
 │   │   ├── fx/                 # ✨ Cursor, título interativo e fundo em grade
 │   │   ├── game/               # 🎯 Jogo AIM BUCK! e pontuação
-│   │   └── off-clock/          # 🎮 Cards de Valorant, Overwatch e Strava
+│   │   └── off-clock/          # 🎮 Cards de Strava, Letterboxd e Valorant
 │   ├── data/                   # 🗃️ Conteúdo: perfil, projetos e experiências (PT/EN)
 │   ├── i18n/                   # 🌎 Idiomas, dicionários e negociação de idioma
 │   ├── lib/                    # 🛠️ API do GitHub, schema do formulário, formatação
-│   │   └── integrations/       # 🔌 Clientes de Overwatch, Valorant e Strava
+│   │   └── integrations/       # 🔌 Clientes de Strava, Letterboxd e Valorant
 │   └── proxy.ts                # 🔀 Redireciona para o idioma do navegador
 └── tests/                      # 🧪 Testes unitários (Vitest)
 ```
@@ -387,7 +387,7 @@ Com dados inválidos (`HTTP 400`):
 npm test
 ```
 
-Testes unitários com **Vitest** (28 casos):
+Testes unitários com **Vitest** (29 casos):
 
 | Arquivo | O que cobre |
 | :--- | :--- |
@@ -396,7 +396,7 @@ Testes unitários com **Vitest** (28 casos):
 | `tests/contact-schema.test.ts` | Validação do formulário e honeypot |
 | `tests/contact-route.test.ts` | Rota `/api/contact`: envio, 400/500/502, escape de HTML e limite de 5 envios por IP |
 | `tests/scoring.test.ts` | Pontuação do jogo: precisão, reação média e ranks |
-| `tests/integrations.test.ts` | Conversão dos dados de Overwatch, Valorant e Strava |
+| `tests/integrations.test.ts` | Conversão dos dados de Valorant (ranks e ícones), Letterboxd e Strava |
 
 A CI do GitHub Actions roda lint, checagem de tipos, testes, build e build da imagem Docker a cada push.
 
