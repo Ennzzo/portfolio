@@ -11,15 +11,15 @@ type Props = { project: Project; lang: Locale; dict: Dictionary["projects"] };
 
 export function ProjectCard({ project, lang, dict }: Props) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:bg-surface-hover">
+    <article data-buck-floor className="group overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:bg-surface-hover md:grid md:grid-cols-[1.15fr_1fr]">
       {project.image && (
-        <div className="relative aspect-video overflow-hidden border-b border-border">
+        <div className="relative aspect-video overflow-hidden border-b border-border md:aspect-auto md:min-h-72 md:border-r md:border-b-0 md:bg-black/40">
           <Image
             src={project.image}
             alt={project.name}
             fill
-            sizes="(min-width: 768px) 640px, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            sizes="(min-width: 768px) 520px, 100vw"
+            className="object-cover transition-transform md:object-contain duration-500 group-hover:scale-[1.02]"
             // GIF/WebP animados vão sem otimização para manter a animação.
             unoptimized={/\.(gif|webp)$/.test(project.image)}
           />
