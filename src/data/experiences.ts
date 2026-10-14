@@ -24,13 +24,12 @@ export type Experience = {
   attachment?: { label: Localized; href: string };
 };
 
-// TODO(enzo): confirmar as datas de início/fim.
 export const experiences: Experience[] = [
   {
     organization: "Abrasel — Associação Brasileira de Bares e Restaurantes",
     role: { pt: "Desenvolvedor Full Stack", en: "Full Stack Developer" },
     type: "internship",
-    start: "2025-03",
+    start: "2025-07",
     url: "https://abrasel.com.br",
     description: {
       pt: "Desenvolvo soluções tecnológicas de ponta a ponta para a associação, do back-end à interface.",
@@ -53,8 +52,8 @@ export const experiences: Experience[] = [
     organization: "Exército Brasileiro — CPOR/CMBH",
     role: { pt: "Soldado — Seção de Tecnologia da Informação", en: "Private — IT Section" },
     type: "military",
-    start: "2024-03",
-    end: "2025-02",
+    start: "2024-02",
+    end: "2025-03",
     description: {
       pt: "Atuei na seção de TI do Centro de Preparação de Oficiais da Reserva / Colégio Militar de Belo Horizonte, além das atribuições militares de defesa da pátria e proteção do aquartelamento.",
       en: "Served on the IT section of the Reserve Officers' Training Center / Military School of Belo Horizonte, alongside military duties of national defense and barracks security.",

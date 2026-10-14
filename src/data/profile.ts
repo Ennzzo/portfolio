@@ -48,7 +48,7 @@ export const profile = {
           en: "IT Technician",
         } satisfies Localized,
         institution: "CEFET-MG (UFCIMG)",
-        period: "",
+        period: "2021 – 2023",
       },
     ],
     interests: {
