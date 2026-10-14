@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { HeroTitle } from "@/components/fx/hero-title";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
 import { ArrowUpRight } from "@/components/icons";
@@ -24,11 +25,12 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </p>
         </Reveal>
         <Reveal delay={0.1}>
-          <h1 className="max-w-4xl text-5xl font-medium leading-[1.05] tracking-tight sm:text-7xl">
-            {lang === "pt" ? "Oi, eu sou o " : "Hi, I'm "}
-            {profile.shortName}.<br />
-            <span className="text-muted">{profile.headline[lang]}</span>
-          </h1>
+          <HeroTitle
+            lines={[
+              { text: `${lang === "pt" ? "Oi, eu sou o" : "Hi, I'm"} ${profile.shortName}.` },
+              { text: profile.headline[lang], muted: true },
+            ]}
+          />
         </Reveal>
         <Reveal delay={0.2}>
           <p className="mt-8 max-w-xl text-lg text-muted">{profile.bio[lang]}</p>
