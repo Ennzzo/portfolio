@@ -34,6 +34,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-007ec6?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-007ec6?style=for-the-badge&logo=docker&logoColor=white)
 ![Vitest](https://img.shields.io/badge/Vitest-33_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
+[![Site](https://img.shields.io/badge/Site-enzobambirra.vercel.app-d4ff3f?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0a0a0b)](https://enzobambirra.vercel.app)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ennzzo/portfolio?style=for-the-badge&logo=clockify)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Ennzzo/portfolio?style=for-the-badge&color=007ec6&logo=gitkraken)
 
@@ -64,7 +65,7 @@
 ---
 
 ## 🔗 Links Úteis
-* 🌐 **Site publicado:** _link adicionado após o primeiro deploy na Vercel_
+* 🌐 **Site publicado:** [enzobambirra.vercel.app](https://enzobambirra.vercel.app)
   > 💻 Versão de produção, com deploy automático a cada push na branch `main`.
 * 📦 **Repositório:** [github.com/Ennzzo/portfolio](https://github.com/Ennzzo/portfolio)
 * 🎨 **Wireframes (Figma):** _em produção_
@@ -107,7 +108,7 @@
 - 🕹️ **Easter egg:** o Konami code (↑↑↓↓←→←→BA) solta o Buck correndo pela tela.
 - ✨ **Micro-interações:** intro de saudações (uma vez por sessão), animações de entrada, cópia de e-mail em um clique e relógio ao vivo de Belo Horizonte.
 - 🔎 **SEO e compartilhamento:** imagem de preview gerada para cada idioma (Open Graph, aparece ao colar o link no LinkedIn/WhatsApp), `sitemap.xml`, `robots.txt` e `hreflang` PT/EN.
-- ⚡ **Desempenho:** Lighthouse 100 em Performance, Acessibilidade, Boas Práticas e SEO no desktop (95 de performance no mobile).
+- ⚡ **Desempenho:** Lighthouse no site publicado: 97 de Performance no desktop (87 no mobile) e 100 em Acessibilidade, Boas Práticas e SEO.
 - ♿ **Acessibilidade:** HTML semântico, `aria-*` no menu e no formulário, foco visível e respeito a `prefers-reduced-motion`.
 
 ---
