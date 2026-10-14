@@ -57,28 +57,42 @@ const pace = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, 
 export async function StravaCard({ dict, lang }: { dict: Dict; lang: Locale }) {
   const data = await getStravaSummary();
   const last = data?.last;
+  const recent = data?.recent;
+  const num = (n: number) => n.toLocaleString(intl(lang));
   return (
-    <Card label={dict.strava.label} color="#fc4c02" icon={Strava} live={!!last} liveLabel={dict.live}>
-      {last ? (
-        <div>
+    <Card label={dict.strava.label} color="#fc4c02" icon={Strava} live={!!(last || recent)} liveLabel={dict.live}>
+      {last && (
+        <div className="mb-4">
           <p className="font-mono text-[11px] text-muted uppercase">
             {dict.strava.last} ·{" "}
             {new Intl.DateTimeFormat(intl(lang), { day: "2-digit", month: "short", timeZone: profile.timeZone }).format(new Date(last.date))}
           </p>
           <p className="mt-1 text-xl font-medium">{last.name}</p>
           <p className="mt-2 font-mono text-sm text-muted">
-            {last.distanceKm > 0 && `${last.distanceKm.toLocaleString(intl(lang))} km · `}
+            {last.distanceKm > 0 && `${num(last.distanceKm)} km · `}
             {duration(last.movingSeconds)}
             {last.paceSecondsPerKm && ` · ${pace(last.paceSecondsPerKm)}`}
           </p>
-          {data.recentRunKm !== null && (
+        </div>
+      )}
+      {recent ? (
+        <div className={last ? "border-t border-border pt-3" : ""}>
+          <p className="font-mono text-[11px] text-muted uppercase">{dict.strava.recent}</p>
+          <p className="mt-1 text-3xl font-medium tracking-tight">
+            {num(recent.km)} <span className="text-lg text-muted">km</span>
+          </p>
+          <p className="mt-1 font-mono text-sm text-muted">
+            {recent.count} {dict.strava.runs} · {duration(recent.seconds)}
+            {recent.km > 0 && ` · ${pace(Math.round(recent.seconds / recent.km))}`}
+          </p>
+          {data?.yearKm ? (
             <p className="mt-4 border-t border-border pt-3 text-sm text-muted">
-              {dict.strava.recent}: <span className="text-foreground">{data.recentRunKm} km</span>
+              {dict.strava.year}: <span className="text-foreground">{num(data.yearKm)} km</span>
             </p>
-          )}
+          ) : null}
         </div>
       ) : (
-        <p className="text-lg text-muted">{dict.strava.fallback}</p>
+        !last && <p className="text-lg text-muted">{dict.strava.fallback}</p>
       )}
     </Card>
   );
