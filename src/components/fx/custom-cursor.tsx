@@ -49,11 +49,10 @@ export function CustomCursor() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-[100]">
       <motion.div
-        className="absolute top-0 left-0 rounded-full border border-foreground/60"
+        className="absolute top-0 left-0 size-[34px] rounded-full border border-foreground/60"
         style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
         animate={{
-          width: mode === "hover" ? 52 : mode === "play" ? 40 : 34,
-          height: mode === "hover" ? 52 : mode === "play" ? 40 : 34,
+          scale: mode === "hover" ? 52 / 34 : mode === "play" ? 40 / 34 : 1,
           opacity: mode === "hidden" ? 0 : 1,
           backgroundColor: mode === "hover" ? "rgba(212,255,63,0.12)" : "rgba(0,0,0,0)",
           borderColor: mode === "hover" || mode === "play" ? "rgba(212,255,63,0.9)" : "rgba(237,237,239,0.5)",

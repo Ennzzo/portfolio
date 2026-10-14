@@ -179,14 +179,6 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       }
     };
 
-    refresh();
-    const start = visiblePlatforms()[0] ?? platforms[0];
-    if (start) {
-      plat = start;
-      body.y = start.y;
-      body.x = clamp(start.x1 + 12, 4, innerWidth - W - 4);
-    }
-    el.style.opacity = "1";
 
     let last = performance.now();
     let raf = 0;
@@ -311,15 +303,27 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", refresh);
-    const interval = setInterval(refresh, 1500);
-    document.fonts?.ready.then(refresh);
+    let interval: ReturnType<typeof setInterval> | undefined;
 
-    if (!reduced) raf = requestAnimationFrame(loop);
-    else {
+    // Medir as plataformas durante a hidratação força layout; espera o navegador ficar ocioso.
+    const init = () => {
+      refresh();
+      const start = visiblePlatforms()[0] ?? platforms[0];
+      if (start) {
+        plat = start;
+        body.y = start.y;
+        body.x = clamp(start.x1 + 12, 4, innerWidth - W - 4);
+      }
       el.style.transform = `translate3d(${body.x}px, ${body.y - H}px, 0)`;
-    }
+      el.style.opacity = "1";
+      interval = setInterval(() => document.visibilityState === "visible" && refresh(), 2000);
+      if (!reduced) raf = requestAnimationFrame(loop);
+    };
+    const idle = "requestIdleCallback" in window ? requestIdleCallback(init, { timeout: 1500 }) : setTimeout(init, 300);
 
     return () => {
+      if ("cancelIdleCallback" in window) cancelIdleCallback(idle as number);
+      clearTimeout(idle as ReturnType<typeof setTimeout>);
       cancelAnimationFrame(raf);
       clearInterval(interval);
       clearTimeout(bubbleTimer);
