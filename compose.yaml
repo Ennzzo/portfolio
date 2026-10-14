@@ -1,0 +1,12 @@
+services:
+  portfolio:
+    build: .
+    image: portfolio:latest
+    container_name: portfolio
+    ports:
+      - "${PORT:-3000}:3000"
+    # Variáveis do formulário de contato e da API do GitHub (ver .env.example)
+    env_file:
+      - path: .env.local
+        required: false
+    restart: unless-stopped
