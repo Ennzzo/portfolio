@@ -20,7 +20,8 @@ export function ProjectCard({ project, lang, dict }: Props) {
             fill
             sizes="(min-width: 768px) 640px, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            unoptimized={project.image.endsWith(".gif")}
+            // GIF/WebP animados vão sem otimização para manter a animação.
+            unoptimized={/\.(gif|webp)$/.test(project.image)}
           />
         </div>
       )}
