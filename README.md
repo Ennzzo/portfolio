@@ -87,7 +87,7 @@
 ## ✨ Funcionalidades Principais
 
 - 🌐 **Internacionalização (i18n):** todo o site em português e inglês, com troca de idioma em qualquer página e detecção automática pelo idioma do navegador (`Accept-Language`).
-- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
+- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências, Fora do código e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
 - 👋 **Sobre mim:** apresentação, formação (com certificado), interesses, objetivos e habilidades.
 - 🗂️ **Linha do tempo de projetos:** do mais antigo ao mais recente, com descrição, tecnologias, link para o GitHub, equipe (em projetos em grupo) e **GIF do projeto em funcionamento**.
 - 🔄 **Integração com a API do GitHub:** estrelas e data do último push de cada repositório, com cache de 1 hora.
@@ -319,7 +319,7 @@ npm start
 │   │   └── icon.svg            # 🔖 Favicon
 │   ├── components/             # 🧱 Componentes reutilizáveis (header, cards, formulário…)
 │   │   ├── buck/               # 🐕 Mascote em SVG, motor de física, foto e easter egg
-│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, contato)
+│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, fora do código, contato)
 │   │   ├── fx/                 # ✨ Cursor, título interativo e fundo em grade
 │   │   ├── game/               # 🎯 Jogo AIM BUCK! e pontuação
 │   │   └── off-clock/          # 🎮 Cards de Strava, Letterboxd e Valorant
