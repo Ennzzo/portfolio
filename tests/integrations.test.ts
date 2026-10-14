@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { parseLetterboxdRss, stars } from "@/lib/integrations/letterboxd";
-import { parseStravaActivity, toRunTotals } from "@/lib/integrations/strava";
+import { isPublic, parseStravaActivity, toRunTotals } from "@/lib/integrations/strava";
 import { parseValorantMmr, rankIcon } from "@/lib/integrations/valorant";
 
 describe("parseValorantMmr", () => {
@@ -83,5 +83,14 @@ describe("toRunTotals", () => {
   it("converte metros em km com uma casa decimal", () => {
     expect(toRunTotals({ count: 4, distance: 25632, moving_time: 7490 })).toEqual({ count: 4, km: 25.6, seconds: 7490 });
     expect(toRunTotals(undefined)).toBeNull();
+  });
+});
+
+describe("isPublic", () => {
+  const base = { name: "x", distance: 1, moving_time: 1, start_date: "2026-10-01T00:00:00Z" };
+  it("só aceita atividades visíveis para todos", () => {
+    expect(isPublic({ ...base, private: false, visibility: "everyone" })).toBe(true);
+    expect(isPublic({ ...base, private: true, visibility: "only_me" })).toBe(false);
+    expect(isPublic({ ...base, private: false, visibility: "followers_only" })).toBe(false);
   });
 });

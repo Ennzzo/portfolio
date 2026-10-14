@@ -26,7 +26,19 @@ type RawTotals = { count: number; distance: number; moving_time: number };
 export const toRunTotals = (t?: RawTotals | null): RunTotals | null =>
   t ? { count: t.count, km: Math.round(t.distance / 100) / 10, seconds: t.moving_time } : null;
 
-type RawActivity = { name: string; sport_type?: string; type?: string; distance: number; moving_time: number; start_date: string };
+type RawActivity = {
+  name: string;
+  sport_type?: string;
+  type?: string;
+  distance: number;
+  moving_time: number;
+  start_date: string;
+  private?: boolean;
+  visibility?: string;
+};
+
+/** O token lê também atividades privadas; no site só aparecem as públicas. */
+export const isPublic = (a: RawActivity) => !a.private && (a.visibility === undefined || a.visibility === "everyone");
 
 const RUN_TYPES = new Set(["Run", "TrailRun", "VirtualRun"]);
 
@@ -76,12 +88,12 @@ export async function getStravaSummary(): Promise<StravaSummary | null> {
 
     const [stats, activities] = await Promise.all([
       fetch(`${api}/athletes/${id}/stats`, { headers }),
-      fetch(`${api}/athlete/activities?per_page=1`, { headers }),
+      fetch(`${api}/athlete/activities?per_page=10`, { headers }),
     ]);
     const totals = stats.ok
       ? ((await stats.json()) as { recent_run_totals?: RawTotals; ytd_run_totals?: RawTotals })
       : {};
-    const [raw] = activities.ok ? ((await activities.json()) as RawActivity[]) : [];
+    const raw = activities.ok ? ((await activities.json()) as RawActivity[]).find(isPublic) : undefined;
 
     return {
       last: raw ? parseStravaActivity(raw) : null,
