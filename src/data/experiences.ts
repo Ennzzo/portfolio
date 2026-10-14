@@ -85,6 +85,18 @@ export const experiences: Experience[] = [
       },
     ],
   },
+  {
+    organization: "Myth",
+    role: { pt: "Otimização de SEO", en: "SEO Optimization" },
+    type: "work",
+    start: "2023-07",
+    end: "2024-01",
+    url: "https://www.linkedin.com/company/myth-dev/home/",
+    description: {
+      pt: "Atuei na otimização de SEO de sites, com foco em melhorar o posicionamento e a visibilidade nos mecanismos de busca.",
+      en: "Worked on SEO optimization for websites, focused on improving their ranking and visibility in search engines.",
+    },
+  },
 ];
 
 export const experiencesByDate = [...experiences].sort((a, b) =>
