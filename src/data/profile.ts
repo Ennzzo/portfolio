@@ -94,8 +94,7 @@ export const profile = {
   /** Contas usadas nos cards "Fora do código" (null = card sem dados ao vivo). */
   accounts: {
     valorant: { region: "br", name: "Sparkyzz", tag: "11111" },
-    // TODO(enzo): usuário do Letterboxd (letterboxd.com/<usuario>).
-    letterboxd: null as string | null,
+    letterboxd: "enzzoz" as string | null,
   },
   contact: {
     email: "enzzobambirra@gmail.com",
