@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Intro } from "@/components/intro";
 import { CustomCursor } from "@/components/fx/custom-cursor";
 import { GridBackground } from "@/components/fx/grid-background";
+import { GameModal } from "@/components/game/game-modal";
 import { profile } from "@/data/profile";
 import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -48,6 +49,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <Header lang={lang} dict={dict.nav} />
         <main className="mx-auto w-full max-w-5xl flex-1 px-5 sm:px-8">{children}</main>
         <Footer lang={lang} dict={dict.footer} />
+        <GameModal dict={dict.game} />
       </body>
     </html>
   );
