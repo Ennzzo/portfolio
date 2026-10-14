@@ -1,7 +1,7 @@
 .buck {
   overflow: visible;
   /* Luz de contorno para o pelo preto não sumir no fundo escuro. */
-  filter: drop-shadow(0 0 0.8px rgba(200, 190, 175, 0.75)) drop-shadow(0 0 6px rgba(212, 255, 63, 0.08));
+  filter: var(--buck-rim);
 }
 
 .buck .buck-shadow {
@@ -178,7 +178,7 @@
   width: 8px;
   height: 8px;
   border-radius: 9999px;
-  background: rgba(237, 237, 239, 0.35);
+  background: color-mix(in oklab, var(--foreground) 35%, transparent);
   pointer-events: none;
   animation: buck-puff 0.55s ease-out forwards;
 }

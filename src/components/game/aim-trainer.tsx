@@ -184,7 +184,7 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
               className="relative flex-1 cursor-none touch-none overflow-hidden select-none"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, rgba(237,237,239,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(237,237,239,0.05) 1px, transparent 1px)",
+                  "linear-gradient(to right, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px)",
                 backgroundSize: "48px 48px",
               }}
             >
