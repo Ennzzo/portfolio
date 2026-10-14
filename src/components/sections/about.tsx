@@ -16,16 +16,20 @@ export function AboutSection({ lang, dict, index }: { lang: Locale; dict: Dictio
     <Section id="about">
       <SectionHeading index={index} label={dict.nav.about} title={t.title} />
 
-      <div className="grid items-start gap-12 md:grid-cols-[1fr_auto]">
-        <Reveal className="max-w-3xl space-y-5 text-xl leading-relaxed sm:text-2xl">
-          {about.intro[lang].map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </Reveal>
-        <Reveal delay={0.15}>
-          <BuckPhoto alt={t.buckAlt} caption={t.buckCaption} play={t.buckPlay} />
-        </Reveal>
-      </div>
+      <Reveal className="max-w-3xl space-y-5 text-xl leading-relaxed sm:text-2xl">
+        {about.intro[lang].map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+      </Reveal>
+
+      <Reveal className="mt-10 flex max-w-xl items-center gap-5 rounded-2xl border border-border bg-surface/60 p-4 sm:gap-6 sm:p-5">
+        <BuckPhoto alt={t.buckAlt} play={t.buckPlay} />
+        <div>
+          <p className="font-mono text-xs tracking-widest text-muted uppercase">{t.buckTitle}</p>
+          <p className="mt-1.5 text-lg leading-snug">{t.buckText}</p>
+          <p className="mt-2 text-sm text-muted">{t.buckHint}</p>
+        </div>
+      </Reveal>
 
       <div className="mt-20 grid gap-12 md:grid-cols-2">
         <Block title={t.education}>

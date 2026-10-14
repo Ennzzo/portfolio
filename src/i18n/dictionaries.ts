@@ -42,7 +42,9 @@ const pt = {
     certificate: "Ver certificado",
     certificateAlt: "Certificado de conclusão do curso Técnico em Informática do CEFET-MG",
     buckAlt: "Foto do Buck, cachorro preto de pelo longo, com a língua de fora olhando para a câmera",
-    buckCaption: "Buck · supervisor de código",
+    buckTitle: "Buck",
+    buckText: "Este é o Buck, meu cachorro e companheiro de todos os dias: ele trabalha e estuda ao meu lado.",
+    buckHint: "Clique na foto para jogar com ele.",
     buckPlay: "Jogar com o Buck",
   },
   projects: {
@@ -214,7 +216,9 @@ const en: Dictionary = {
     certificate: "View certificate",
     certificateAlt: "Certificate of completion of the IT Technician course at CEFET-MG",
     buckAlt: "Photo of Buck, a long-haired black dog, sticking his tongue out at the camera",
-    buckCaption: "Buck · code supervisor",
+    buckTitle: "Buck",
+    buckText: "This is Buck, my dog and everyday companion: he works and studies right beside me.",
+    buckHint: "Click the photo to play with him.",
     buckPlay: "Play with Buck",
   },
   projects: {
