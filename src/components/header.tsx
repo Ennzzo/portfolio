@@ -11,15 +11,13 @@ import { Close, Menu } from "./icons";
 import { LogoMark } from "./logo-mark";
 
 const sections = ["home", "about", "projects", "github", "experience", "contact"] as const;
-// Seções observadas pelo destaque do menu (inclui as que não têm link próprio).
-const observed = ["home", "about", "projects", "github", "experience", "off-clock", "contact"] as const;
-type SectionId = (typeof observed)[number];
+type SectionId = (typeof sections)[number];
 
 /** Seção visível agora (a que cruza a faixa de 35% do topo da tela). */
 function useActiveSection() {
   const [active, setActive] = useState<SectionId>("home");
   useEffect(() => {
-    const els = observed.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const els = sections.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
     if (!els.length) return;
     const io = new IntersectionObserver(
       (entries) => {

@@ -4,7 +4,6 @@ import { ContactSection } from "@/components/sections/contact";
 import { ExperienceSection } from "@/components/sections/experience";
 import { GithubSection } from "@/components/sections/github";
 import { HeroSection } from "@/components/sections/hero";
-import { OffClockSection } from "@/components/sections/off-clock";
 import { ProjectsSection } from "@/components/sections/projects";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -22,8 +21,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <ProjectsSection lang={lang} dict={dict} index="02" />
       <GithubSection lang={lang} dict={dict} index="03" />
       <ExperienceSection lang={lang} dict={dict} index="04" />
-      <OffClockSection lang={lang} dict={dict} index="05" />
-      <ContactSection dict={dict} index="06" />
+      <ContactSection dict={dict} index="05" />
     </>
   );
 }
