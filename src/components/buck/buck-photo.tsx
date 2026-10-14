@@ -16,7 +16,7 @@ export function BuckPhoto({ alt, caption, play }: { alt: string; caption: string
         className="block w-full overflow-hidden rounded-xl"
       >
         <Image
-          src="/buck.webp"
+          src="/buck-lingua.webp"
           alt={alt}
           width={800}
           height={1000}
