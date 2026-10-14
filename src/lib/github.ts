@@ -14,15 +14,20 @@ function headers(): HeadersInit {
   return h;
 }
 
-export async function getRepoStats(repo: string): Promise<RepoStats | null> {
+// 404 (repositório privado) é uma resposta válida e fica em cache; falhas de rede não.
+async function fetchRepoStats(repo: string): Promise<RepoStats | null> {
   "use cache";
   cacheLife("hours");
+  const res = await fetch(`${API}/repos/${repo}`, { headers: headers() });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`github ${res.status}`);
+  const data = await res.json();
+  return { stars: data.stargazers_count, pushedAt: data.pushed_at };
+}
 
+export async function getRepoStats(repo: string): Promise<RepoStats | null> {
   try {
-    const res = await fetch(`${API}/repos/${repo}`, { headers: headers() });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return { stars: data.stargazers_count, pushedAt: data.pushed_at };
+    return await fetchRepoStats(repo);
   } catch {
     return null;
   }

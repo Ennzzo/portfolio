@@ -67,14 +67,20 @@ export function buildCalendar(days: ContributionDay[]): ContributionCalendar {
   };
 }
 
-export async function getContributions(user: string): Promise<ContributionCalendar | null> {
+// Erros são lançados (e não cacheados); só uma resposta válida fica 1h em cache.
+async function fetchContributions(user: string): Promise<ContributionCalendar> {
   "use cache";
   cacheLife("hours");
+  const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(user)}?y=last`);
+  if (!res.ok) throw new Error(`contributions ${res.status}`);
+  const json = (await res.json()) as { contributions?: ContributionDay[] };
+  if (!json.contributions?.length) throw new Error("contributions vazio");
+  return buildCalendar(json.contributions);
+}
+
+export async function getContributions(user: string): Promise<ContributionCalendar | null> {
   try {
-    const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(user)}?y=last`);
-    if (!res.ok) return null;
-    const json = (await res.json()) as { contributions?: ContributionDay[] };
-    return json.contributions?.length ? buildCalendar(json.contributions) : null;
+    return await fetchContributions(user);
   } catch {
     return null;
   }
