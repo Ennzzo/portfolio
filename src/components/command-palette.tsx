@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { profile } from "@/data/profile";
 import type { Locale } from "@/i18n/config";
@@ -18,7 +18,6 @@ export function CommandPalette({ lang, nav, dict }: { lang: Locale; nav: Diction
   const [active, setActive] = useState(0);
   const [toast, setToast] = useState("");
   const router = useRouter();
-  const pathname = usePathname();
   const listRef = useRef<HTMLUListElement>(null);
 
   const close = useCallback(() => {
@@ -42,20 +41,20 @@ export function CommandPalette({ lang, nav, dict }: { lang: Locale; nav: Diction
 
   const items = useMemo<Item[]>(() => {
     const other: Locale = lang === "pt" ? "en" : "pt";
-    const current = pathname.replace(/^\/(pt|en)/, "");
-    const go = (path: string) => () => router.push(`/${lang}${path}`);
+    const go = (hash: string) => () => router.push(`/${lang}${hash}`);
     return [
       { id: "home", group: "navigation", label: nav.home, run: go("") },
-      { id: "about", group: "navigation", label: nav.about, run: go("/about") },
-      { id: "projects", group: "navigation", label: nav.projects, run: go("/projects") },
-      { id: "experience", group: "navigation", label: nav.experience, run: go("/experience") },
-      { id: "contact", group: "navigation", label: nav.contact, run: go("/contact") },
+      { id: "about", group: "navigation", label: nav.about, run: go("#about") },
+      { id: "projects", group: "navigation", label: nav.projects, run: go("#projects") },
+      { id: "github", group: "navigation", label: "GitHub", run: go("#github") },
+      { id: "experience", group: "navigation", label: nav.experience, run: go("#experience") },
+      { id: "contact", group: "navigation", label: nav.contact, run: go("#contact") },
       {
         id: "lang",
         group: "actions",
         label: dict.switchLang,
         icon: <span className="font-mono text-[11px] uppercase">{other}</span>,
-        run: () => router.push(`/${other}${current}`),
+        run: () => router.push(`/${other}${window.location.hash}`),
       },
       {
         id: "copy",
@@ -85,7 +84,7 @@ export function CommandPalette({ lang, nav, dict }: { lang: Locale; nav: Diction
         run: () => window.open("https://github.com/Ennzzo/portfolio", "_blank", "noopener,noreferrer"),
       },
     ];
-  }, [dict, lang, nav, pathname, router]);
+  }, [dict, lang, nav, router]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
