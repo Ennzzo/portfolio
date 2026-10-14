@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { BuckPhoto } from "@/components/buck/buck-photo";
+import { ArrowUpRight } from "@/components/icons";
 import { PageHeading } from "@/components/page-heading";
 import { CardSkeleton, LetterboxdCard, StravaCard, ValorantCard } from "@/components/off-clock/cards";
 import { Reveal } from "@/components/reveal";
@@ -46,6 +48,25 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
                   {e.institution}
                   {e.period && <span className="font-mono text-sm"> · {e.period}</span>}
                 </p>
+                {"certificate" in e && e.certificate && (
+                  <a
+                    href={e.certificate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mt-3 flex w-fit items-center gap-3 rounded-xl border border-border bg-surface p-2 pr-4 transition-colors hover:border-accent"
+                  >
+                    <Image
+                      src={e.certificate}
+                      alt={dict.certificateAlt}
+                      width={96}
+                      height={65}
+                      className="rounded-md transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <span className="inline-flex items-center gap-1 text-sm text-accent">
+                      {dict.certificate} <ArrowUpRight width={14} height={14} />
+                    </span>
+                  </a>
+                )}
               </li>
             ))}
           </ul>

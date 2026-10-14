@@ -49,6 +49,7 @@ export const profile = {
         } satisfies Localized,
         institution: "CEFET-MG (UFCIMG)",
         period: "2021 – 2023",
+        certificate: "/docs/certificado-tecnico-informatica-cefet-mg.webp",
       },
     ],
     interests: {
