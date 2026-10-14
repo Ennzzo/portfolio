@@ -150,6 +150,7 @@ const pt = {
   },
   zoomies: "Modo zoomies ativado!",
   offClock: {
+    label: "Hobbies",
     title: "Fora do código",
     subtitle: "Dados ao vivo das minhas outras paixões.",
     live: "ao vivo",
@@ -342,6 +343,7 @@ const en: Dictionary = {
   },
   zoomies: "Zoomies mode on!",
   offClock: {
+    label: "Hobbies",
     title: "Off the clock",
     subtitle: "Live data from my other passions.",
     live: "live",

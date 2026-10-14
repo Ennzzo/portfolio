@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { Suspense, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { BuckPhoto } from "../buck/buck-photo";
 import { ArrowUpRight } from "../icons";
-import { CardSkeleton, LetterboxdCard, StravaCard, ValorantCard } from "../off-clock/cards";
 import { Reveal } from "../reveal";
 import { Section, SectionHeading } from "./section-heading";
 import { profile } from "@/data/profile";
@@ -88,25 +87,6 @@ export function AboutSection({ lang, dict, index }: { lang: Locale; dict: Dictio
         </Block>
       </div>
 
-      <div className="mt-24">
-        <Reveal>
-          <h3 data-buck-floor className="w-fit text-3xl font-medium tracking-tight sm:text-4xl">
-            {dict.offClock.title}
-          </h3>
-          <p className="mt-2 mb-8 text-muted">{dict.offClock.subtitle}</p>
-        </Reveal>
-        <div className="grid gap-4 md:grid-cols-3">
-          <Suspense fallback={<CardSkeleton />}>
-            <StravaCard dict={dict.offClock} lang={lang} />
-          </Suspense>
-          <Suspense fallback={<CardSkeleton />}>
-            <LetterboxdCard dict={dict.offClock} />
-          </Suspense>
-          <Suspense fallback={<CardSkeleton />}>
-            <ValorantCard dict={dict.offClock} ranks={dict.game.ranks} />
-          </Suspense>
-        </div>
-      </div>
     </Section>
   );
 }
