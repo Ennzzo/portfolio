@@ -33,7 +33,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-007ec6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-007ec6?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-007ec6?style=for-the-badge&logo=docker&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-30_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-41_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ennzzo/portfolio?style=for-the-badge&logo=clockify)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Ennzzo/portfolio?style=for-the-badge&color=007ec6&logo=gitkraken)
 
@@ -87,14 +87,16 @@
 ## ✨ Funcionalidades Principais
 
 - 🌐 **Internacionalização (i18n):** todo o site em português e inglês, com troca de idioma em qualquer página e detecção automática pelo idioma do navegador (`Accept-Language`).
-- 👋 **Sobre mim:** apresentação, formação, interesses, objetivos e habilidades.
+- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
+- 👋 **Sobre mim:** apresentação, formação (com certificado), interesses, objetivos e habilidades.
 - 🗂️ **Linha do tempo de projetos:** do mais antigo ao mais recente, com descrição, tecnologias, link para o GitHub, equipe (em projetos em grupo) e **GIF do projeto em funcionamento**.
 - 🔄 **Integração com a API do GitHub:** estrelas e data do último push de cada repositório, com cache de 1 hora.
+- 🟩 **Contribuições no GitHub:** calendário dos últimos 12 meses (estilo GitHub) com total, dias ativos, maior sequência e recorde em um dia.
 - 💼 **Experiências:** empresa, cargo, período, descrição, destaques e documentos comprobatórios (ex.: Diploma de Honra ao Mérito e Referência Elogiosa do Exército).
 - 📨 **Contato:** ícones para e-mail, WhatsApp, LinkedIn, GitHub e Instagram + **formulário que envia e-mail** pelo back-end (Resend).
 - 🛡️ **Validação e segurança do formulário:** validação com Zod no cliente e no servidor, honeypot anti-spam, limite de 5 envios por IP a cada 10 min e escape de HTML.
 - 📱 **Responsividade:** layout pensado para celular, tablet e desktop, com menu mobile animado.
-- 🐕 **Buck, o mascote:** meu cachorro desenhado em SVG passeia pelo topo da home, abana o rabo, pisca e fala quando você passa o mouse.
+- 🐕 **Buck, o mascote com física:** meu cachorro desenhado em SVG anda sobre títulos, tags, cards e divisórias das seções. Dá para **agarrar, arrastar e arremessar**: ele voa com a velocidade do mouse, sofre gravidade, rebate nas paredes, quica em quedas fortes e "amassa" ao pousar. Se você rolar para longe, ele volta caindo do topo da tela.
 - 🎯 **Jogo AIM BUCK!:** clique no Buck para abrir um aim trainer com mira estilo Valorant, tempo de reação, precisão, ranks do Ferro ao Radiante e recorde salvo no navegador.
 - 🔠 **Título interativo:** as letras do hero ganham peso (fonte variável) e um marca-texto conforme o cursor se aproxima.
 - 🖱️ **Cursor customizado:** ponto + anel com mola, que reage a links e vira bolinha de tênis sobre o Buck.
@@ -152,7 +154,7 @@
 
 O projeto é um **monólito Next.js** com renderização no servidor: front-end e back-end vivem no mesmo repositório e no mesmo deploy.
 
-- **Rotas por idioma (`app/[lang]`)** — todas as páginas ficam sob o segmento `[lang]` (`/pt`, `/en`). `generateStaticParams` gera as duas versões no build, então as páginas são **pré-renderizadas como HTML estático**.
+- **Página única por idioma (`app/[lang]/page.tsx`)** — cada seção é um componente em `components/sections` com um `id` usado pelo menu; um `IntersectionObserver` destaca a seção visível. O site fica sob o segmento `[lang]` (`/pt`, `/en`). `generateStaticParams` gera as duas versões no build, então as páginas são **pré-renderizadas como HTML estático**.
 - **Proxy (`src/proxy.ts`)** — quem acessa `/` ou uma rota sem idioma é redirecionado para `/pt` ou `/en` conforme o navegador.
 - **Conteúdo como dados (`src/data`)** — perfil, projetos e experiências são objetos TypeScript com textos `{ pt, en }`. Adicionar um projeto é editar um arquivo, com checagem de tipos.
 - **Dicionários (`src/i18n`)** — textos da interface nos dois idiomas; o dicionário em inglês é tipado a partir do português, então faltar uma chave quebra o build.
@@ -308,26 +310,23 @@ npm start
 │   └── logo.svg                # 🏷️ Logo
 ├── src/
 │   ├── app/
-│   │   ├── [lang]/             # 🌐 Páginas por idioma (/pt, /en)
-│   │   │   ├── layout.tsx      # 🧱 Layout raiz: cabeçalho, conteúdo e rodapé
-│   │   │   ├── page.tsx        # 🏠 Home
-│   │   │   ├── about/          # 👋 Sobre mim
-│   │   │   ├── projects/       # 🗂️ Linha do tempo de projetos
-│   │   │   ├── experience/     # 💼 Experiências
-│   │   │   ├── contact/        # 📨 Contato
+│   │   ├── [lang]/             # 🌐 Página única por idioma (/pt, /en)
+│   │   │   ├── layout.tsx      # 🧱 Layout raiz: cabeçalho, conteúdo, rodapé, Buck e modais
+│   │   │   ├── page.tsx        # 🏠 Junta as seções
 │   │   │   └── not-found.tsx   # 🚫 Página 404
 │   │   ├── api/contact/        # 🔌 Rota de API que envia o e-mail
 │   │   ├── globals.css         # 🎨 Tokens de cor e estilos globais
 │   │   └── icon.svg            # 🔖 Favicon
 │   ├── components/             # 🧱 Componentes reutilizáveis (header, cards, formulário…)
-│   │   ├── buck/               # 🐕 Mascote em SVG, passeio, foto e easter egg
+│   │   ├── buck/               # 🐕 Mascote em SVG, motor de física, foto e easter egg
+│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, contato)
 │   │   ├── fx/                 # ✨ Cursor, título interativo e fundo em grade
 │   │   ├── game/               # 🎯 Jogo AIM BUCK! e pontuação
 │   │   └── off-clock/          # 🎮 Cards de Strava, Letterboxd e Valorant
 │   ├── data/                   # 🗃️ Conteúdo: perfil, projetos e experiências (PT/EN)
 │   ├── i18n/                   # 🌎 Idiomas, dicionários e negociação de idioma
 │   ├── lib/                    # 🛠️ API do GitHub, schema do formulário, formatação
-│   │   └── integrations/       # 🔌 Clientes de Strava, Letterboxd e Valorant
+│   │   └── integrations/       # 🔌 Clientes de Strava, Letterboxd, Valorant e contribuições do GitHub
 │   └── proxy.ts                # 🔀 Redireciona para o idioma do navegador
 └── tests/                      # 🧪 Testes unitários (Vitest)
 ```
@@ -344,6 +343,7 @@ npm start
 | **Sobre mim** | <img src="docs/screenshots/desktop-pt-about.webp" alt="Sobre mim" width="600"> |
 | **Projetos (linha do tempo)** | <img src="docs/screenshots/desktop-pt-projects.webp" alt="Projetos" width="600"> |
 | **Experiências** | <img src="docs/screenshots/desktop-pt-experience.webp" alt="Experiências" width="600"> |
+| **GitHub** | <img src="docs/screenshots/desktop-pt-github.webp" alt="Contribuições no GitHub" width="600"> |
 | **Contato** | <img src="docs/screenshots/desktop-pt-contact.webp" alt="Contato" width="600"> |
 | **Home em inglês** | <img src="docs/screenshots/desktop-en-home.webp" alt="Home em inglês" width="600"> |
 
@@ -387,7 +387,7 @@ Com dados inválidos (`HTTP 400`):
 npm test
 ```
 
-Testes unitários com **Vitest** (30 casos):
+Testes unitários com **Vitest** (41 casos):
 
 | Arquivo | O que cobre |
 | :--- | :--- |
@@ -396,6 +396,8 @@ Testes unitários com **Vitest** (30 casos):
 | `tests/contact-schema.test.ts` | Validação do formulário e honeypot |
 | `tests/contact-route.test.ts` | Rota `/api/contact`: envio, 400/500/502, escape de HTML e limite de 5 envios por IP |
 | `tests/scoring.test.ts` | Pontuação do jogo: precisão, reação média e ranks |
+| `tests/buck-physics.test.ts` | Física do Buck: queda, pouso, quique, paredes e velocidade de arremesso |
+| `tests/github-contributions.test.ts` | Calendário de contribuições: semanas, meses e sequências |
 | `tests/integrations.test.ts` | Conversão dos dados de Valorant (ranks e ícones), Letterboxd e Strava |
 
 A CI do GitHub Actions roda lint, checagem de tipos, testes, build e build da imagem Docker a cada push.
