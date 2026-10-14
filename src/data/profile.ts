@@ -93,6 +93,7 @@ export const profile = {
   },
   /** Contas usadas nos cards "Fora do código" (null = card sem dados ao vivo). */
   accounts: {
+    strava: "https://www.strava.com/athletes/151471201",
     valorant: { region: "br", name: "Sparkyzz", tag: "11111" },
     letterboxd: "enzzoz" as string | null,
   },

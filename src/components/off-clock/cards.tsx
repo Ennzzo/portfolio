@@ -94,6 +94,14 @@ export async function StravaCard({ dict, lang }: { dict: Dict; lang: Locale }) {
       ) : (
         !last && <p className="text-lg text-muted">{dict.strava.fallback}</p>
       )}
+      <a
+        href={profile.accounts.strava}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-auto inline-flex items-center gap-1 pt-4 text-sm text-muted hover:text-foreground"
+      >
+        {dict.strava.profile} <ArrowUpRight width={14} height={14} />
+      </a>
     </Card>
   );
 }
