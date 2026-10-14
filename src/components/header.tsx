@@ -9,6 +9,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { emit } from "@/lib/events";
 import { Close, Menu } from "./icons";
+import { LogoMark } from "./logo-mark";
 
 const routes = ["", "/about", "/projects", "/experience", "/contact"] as const;
 const labelKey = {
@@ -43,9 +44,9 @@ export function Header({ lang, dict, paletteLabel }: { lang: Locale; dict: Dicti
   return (
     <header className="sticky top-0 z-40 border-b border-transparent bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8">
-        <Link href={`/${lang}`} className="font-mono text-lg font-semibold tracking-tight" aria-label={profile.name}>
+        <Link href={`/${lang}`} className="group inline-flex items-center gap-2 font-mono text-lg font-semibold tracking-tight" aria-label={profile.name}>
+          <LogoMark className="size-7" />
           {profile.monogram}
-          <sup className="text-accent">®</sup>
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm md:flex" aria-label="Principal">

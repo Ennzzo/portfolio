@@ -1,0 +1,13 @@
+/** Marca do Enzo: raio + estrelinhas (mesmo desenho do favicon, sem o fundo). */
+export function LogoMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={`logo-mark ${className ?? ""}`} aria-hidden>
+      <path className="logo-bolt" fill="var(--accent)" d="M34 5 12 35h14l-5 24 25-33H32l7-21z" />
+      <g fill="var(--foreground)" className="logo-sparks">
+        <path d="M50 5C51.8 12.2 51.8 12.2 59 14C51.8 15.8 51.8 15.8 50 23C48.2 15.8 48.2 15.8 41 14C48.2 12.2 48.2 12.2 50 5Z" />
+        <path d="M12 45C13 49 13 49 17 50C13 51 13 51 12 55C11 51 11 51 7 50C11 49 11 49 12 45Z" />
+        <path d="M54 36.5C54.7 39.3 54.7 39.3 57.5 40C54.7 40.7 54.7 40.7 54 43.5C53.3 40.7 53.3 40.7 50.5 40C53.3 39.3 53.3 39.3 54 36.5Z" />
+      </g>
+    </svg>
+  );
+}
