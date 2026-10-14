@@ -10,7 +10,7 @@ const pt = {
   },
   intro: { hello: "Olá", skip: "Clique para pular" },
   home: {
-    eyebrow: "Disponível para estágio",
+    eyebrow: "Aberto a novas oportunidades",
     selectedWork: "Trabalhos selecionados",
     allProjects: "Ver todos os projetos",
     ctaTitle: "Tem uma ideia que vale a pena construir?",
@@ -82,7 +82,7 @@ const en: Dictionary = {
   },
   intro: { hello: "Hello", skip: "Click to skip" },
   home: {
-    eyebrow: "Open to internships",
+    eyebrow: "Open to new opportunities",
     selectedWork: "Selected work",
     allProjects: "See all projects",
     ctaTitle: "Have an idea worth building?",
