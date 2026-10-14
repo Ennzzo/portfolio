@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { BuckPhoto } from "@/components/buck/buck-photo";
 import { PageHeading } from "@/components/page-heading";
+import { CardSkeleton, OverwatchCard, StravaCard, ValorantCard } from "@/components/off-clock/cards";
 import { Reveal } from "@/components/reveal";
 import { profile } from "@/data/profile";
 import { hasLocale } from "@/i18n/config";
@@ -16,6 +18,7 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = getDictionary(lang).about;
+  const offClock = getDictionary(lang).offClock;
   const { about } = profile;
 
   return (
@@ -73,6 +76,24 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
           </ul>
         </Block>
       </div>
+
+      <section className="mt-24">
+        <Reveal>
+          <h2 className="text-3xl font-medium tracking-tight sm:text-4xl">{offClock.title}</h2>
+          <p className="mt-2 mb-8 text-muted">{offClock.subtitle}</p>
+        </Reveal>
+        <div className="grid gap-4 md:grid-cols-3">
+          <Suspense fallback={<CardSkeleton />}>
+            <ValorantCard dict={offClock} />
+          </Suspense>
+          <Suspense fallback={<CardSkeleton />}>
+            <OverwatchCard dict={offClock} />
+          </Suspense>
+          <Suspense fallback={<CardSkeleton />}>
+            <StravaCard dict={offClock} lang={lang} />
+          </Suspense>
+        </div>
+      </section>
     </>
   );
 }
