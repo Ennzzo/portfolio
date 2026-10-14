@@ -34,6 +34,9 @@ const pt = {
     interests: "Interesses",
     goals: "Objetivos",
     resume: "Baixar currículo",
+    buckAlt: "Foto do Buck, cachorro preto de pelo longo, olhando para a câmera",
+    buckCaption: "Buck · supervisor de código",
+    buckPlay: "Jogar com o Buck",
   },
   projects: {
     title: "Projetos",
@@ -163,6 +166,9 @@ const en: Dictionary = {
     interests: "Interests",
     goals: "Goals",
     resume: "Download résumé",
+    buckAlt: "Photo of Buck, a long-haired black dog, looking at the camera",
+    buckCaption: "Buck · code supervisor",
+    buckPlay: "Play with Buck",
   },
   projects: {
     title: "Projects",

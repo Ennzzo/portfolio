@@ -25,12 +25,12 @@ export const profile = {
       pt: [
         "Salve! Sou o Enzo Bambirra, desenvolvedor full stack e estudante do 3º período de Engenharia de Software na PUC Minas, com formatura prevista para o fim de 2028. Antes disso, me formei técnico em Informática pelo CEFET-MG — hoje Universidade Federal de Ciência e Inovação de Minas Gerais (UFCIMG).",
         "Sou apaixonado por tecnologia: pela forma como ela resolve grandes problemas do mundo atual e se reinventa a todo momento. Já trabalhei com desenvolvimento, redes e suporte na seção de TI do Exército Brasileiro e hoje desenvolvo soluções full stack na Abrasel.",
-        "Fora do código, sou viciado em jogos competitivos de FPS e treino toda semana corrida e HYROX — modalidade que mistura corrida com exercícios de força.",
+        "Fora do código, sou viciado em jogos competitivos de FPS e treino toda semana corrida e HYROX — modalidade que mistura corrida com exercícios de força. E, em casa, divido a mesa com o Buck, meu supervisor de código.",
       ],
       en: [
         "Hey! I'm Enzo Bambirra, a full stack developer and 3rd-semester Software Engineering student at PUC Minas, graduating by the end of 2028. Before that, I earned an IT technician degree from CEFET-MG — now the Federal University of Science and Innovation of Minas Gerais (UFCIMG).",
         "I'm passionate about technology: how it solves some of today's biggest problems and keeps reinventing itself. I've worked on development, networking and support on the Brazilian Army's IT team, and today I build full stack solutions at Abrasel.",
-        "Away from the keyboard, I'm hooked on competitive FPS games and train running and HYROX — a sport that mixes running with strength workouts — every week.",
+        "Away from the keyboard, I'm hooked on competitive FPS games and train running and HYROX — a sport that mixes running with strength workouts — every week. At home, I share my desk with Buck, my code supervisor.",
       ],
     } satisfies Localized<string[]>,
     education: [

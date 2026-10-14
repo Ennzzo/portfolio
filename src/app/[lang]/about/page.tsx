@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BuckPhoto } from "@/components/buck/buck-photo";
 import { PageHeading } from "@/components/page-heading";
 import { Reveal } from "@/components/reveal";
 import { profile } from "@/data/profile";
@@ -21,11 +22,16 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
     <>
       <PageHeading title={dict.title} />
 
-      <Reveal className="max-w-3xl space-y-5 text-xl leading-relaxed sm:text-2xl">
-        {about.intro[lang].map((p) => (
-          <p key={p}>{p}</p>
-        ))}
-      </Reveal>
+      <div className="grid items-start gap-12 md:grid-cols-[1fr_auto]">
+        <Reveal className="max-w-3xl space-y-5 text-xl leading-relaxed sm:text-2xl">
+          {about.intro[lang].map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </Reveal>
+        <Reveal delay={0.15}>
+          <BuckPhoto alt={dict.buckAlt} caption={dict.buckCaption} play={dict.buckPlay} />
+        </Reveal>
+      </div>
 
       <div className="mt-20 grid gap-12 md:grid-cols-2">
         <Block title={dict.education}>
