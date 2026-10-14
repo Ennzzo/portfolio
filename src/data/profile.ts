@@ -1,6 +1,5 @@
 import type { Localized } from "@/i18n/config";
 
-// TODO(enzo): revisar todos os textos e preencher os contatos.
 export const profile = {
   name: "Enzo Bambirra",
   shortName: "Enzo",
@@ -9,27 +8,29 @@ export const profile = {
   location: "Belo Horizonte, MG",
   timeZone: "America/Sao_Paulo",
   role: {
-    pt: "Estudante de Engenharia de Software",
-    en: "Software Engineering student",
+    pt: "Desenvolvedor Full Stack",
+    en: "Full Stack Developer",
   } satisfies Localized,
   headline: {
-    pt: "Eu construo software que resolve problemas reais.",
-    en: "I build software that solves real problems.",
+    pt: "Eu uso tecnologia para resolver problemas reais.",
+    en: "I use technology to solve real problems.",
   } satisfies Localized,
   bio: {
-    pt: "Estudante de Engenharia de Software na PUC Minas, focado em desenvolvimento web full stack com TypeScript, React e Node.js.",
-    en: "Software Engineering student at PUC Minas, focused on full-stack web development with TypeScript, React and Node.js.",
+    pt: "Desenvolvedor full stack na Abrasel e estudante de Engenharia de Software na PUC Minas. Técnico em Informática pelo CEFET-MG, com passagem pela seção de TI do Exército Brasileiro.",
+    en: "Full stack developer at Abrasel and Software Engineering student at PUC Minas. IT technician from CEFET-MG, formerly on the Brazilian Army's IT team.",
   } satisfies Localized,
-  tags: ["Belo Horizonte", "Full Stack", "TypeScript"],
+  tags: ["Belo Horizonte", "Full Stack", "PHP · Laravel", "TypeScript"],
   about: {
     intro: {
       pt: [
-        "Sou estudante de Engenharia de Software na PUC Minas e trabalho com desenvolvimento web.",
-        "Gosto de transformar problemas do dia a dia em ferramentas simples e úteis.",
+        "Salve! Sou o Enzo Bambirra, desenvolvedor full stack e estudante do 3º período de Engenharia de Software na PUC Minas, com formatura prevista para o fim de 2028. Antes disso, me formei técnico em Informática pelo CEFET-MG — hoje Universidade Federal de Ciência e Inovação de Minas Gerais (UFCIMG).",
+        "Sou apaixonado por tecnologia: pela forma como ela resolve grandes problemas do mundo atual e se reinventa a todo momento. Já trabalhei com desenvolvimento, redes e suporte na seção de TI do Exército Brasileiro e hoje desenvolvo soluções full stack na Abrasel.",
+        "Fora do código, sou viciado em jogos competitivos de FPS e treino toda semana corrida e HYROX — modalidade que mistura corrida com exercícios de força.",
       ],
       en: [
-        "I'm a Software Engineering student at PUC Minas working with web development.",
-        "I enjoy turning everyday problems into simple, useful tools.",
+        "Hey! I'm Enzo Bambirra, a full stack developer and 3rd-semester Software Engineering student at PUC Minas, graduating by the end of 2028. Before that, I earned an IT technician degree from CEFET-MG — now the Federal University of Science and Innovation of Minas Gerais (UFCIMG).",
+        "I'm passionate about technology: how it solves some of today's biggest problems and keeps reinventing itself. I've worked on development, networking and support on the Brazilian Army's IT team, and today I build full stack solutions at Abrasel.",
+        "Away from the keyboard, I'm hooked on competitive FPS games and train running and HYROX — a sport that mixes running with strength workouts — every week.",
       ],
     } satisfies Localized<string[]>,
     education: [
@@ -39,37 +40,62 @@ export const profile = {
           en: "B.Sc. in Software Engineering",
         } satisfies Localized,
         institution: "PUC Minas",
-        period: "2026 – 2029",
+        period: "2025 – 2028",
+      },
+      {
+        course: {
+          pt: "Técnico em Informática",
+          en: "IT Technician",
+        } satisfies Localized,
+        institution: "CEFET-MG (UFCIMG)",
+        period: "",
       },
     ],
     interests: {
-      pt: ["Desenvolvimento web", "Automação", "Inteligência artificial aplicada"],
-      en: ["Web development", "Automation", "Applied AI"],
+      pt: [
+        "Desenvolvimento de software",
+        "Segurança da informação",
+        "Infraestrutura e redes",
+        "Jogos competitivos de FPS",
+        "Corrida e HYROX",
+      ],
+      en: [
+        "Software development",
+        "Information security",
+        "Infrastructure and networking",
+        "Competitive FPS games",
+        "Running and HYROX",
+      ],
     } satisfies Localized<string[]>,
     goals: {
-      pt: "Conseguir um estágio em desenvolvimento e evoluir como engenheiro full stack.",
-      en: "Land a software development internship and grow as a full-stack engineer.",
+      pt: "Estou finalizando meu estágio e busco minha próxima oportunidade em tecnologia — seja em desenvolvimento, segurança, infraestrutura ou redes.",
+      en: "I'm wrapping up my internship and looking for my next opportunity in tech — whether in development, security, infrastructure or networking.",
     } satisfies Localized,
     skills: [
+      "PHP",
+      "Laravel",
       "TypeScript",
       "JavaScript",
       "React",
       "Next.js",
-      "Node.js",
       "Java",
+      "Spring Boot",
       "Python",
-      "PHP / Laravel",
+      "MySQL",
       "HTML & CSS",
       "Tailwind CSS",
       "Git & GitHub",
       "Docker",
-    ],
+      { pt: "Redes (switches e roteadores)", en: "Networking (switches & routers)" },
+      { pt: "Manutenção de hardware", en: "Hardware maintenance" },
+      { pt: "Metodologias ágeis", en: "Agile methodologies" },
+    ] satisfies (string | Localized)[],
   },
   contact: {
-    email: "seu-email@exemplo.com",
-    whatsapp: "5531900000000",
-    linkedin: "https://www.linkedin.com/in/seu-perfil",
+    email: "enzzobambirra@gmail.com",
+    whatsapp: "5531984360707",
+    linkedin: "https://www.linkedin.com/in/enzobambirra",
     github: "https://github.com/Ennzzo",
-    instagram: "",
+    instagram: "https://www.instagram.com/enzzofn__",
   },
 };

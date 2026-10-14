@@ -34,7 +34,8 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
               <li key={e.institution + e.period}>
                 <p className="text-lg">{e.course[lang]}</p>
                 <p className="text-muted">
-                  {e.institution} · <span className="font-mono text-sm">{e.period}</span>
+                  {e.institution}
+                  {e.period && <span className="font-mono text-sm"> · {e.period}</span>}
                 </p>
               </li>
             ))}
@@ -55,11 +56,14 @@ export default async function About({ params }: PageProps<"/[lang]/about">) {
 
         <Block title={dict.skills}>
           <ul className="flex flex-wrap gap-2">
-            {about.skills.map((s) => (
-              <li key={s} className="rounded-full border border-border px-3 py-1 font-mono text-sm text-muted">
-                {s}
-              </li>
-            ))}
+            {about.skills.map((s) => {
+              const label = typeof s === "string" ? s : s[lang];
+              return (
+                <li key={label} className="rounded-full border border-border px-3 py-1 font-mono text-sm text-muted">
+                  {label}
+                </li>
+              );
+            })}
           </ul>
         </Block>
       </div>
