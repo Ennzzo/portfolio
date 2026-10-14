@@ -9,6 +9,15 @@ const pt = {
     contact: "Contato",
   },
   intro: { hello: "Olá", skip: "Clique para pular" },
+  buck: {
+    aria: "Buck, o cachorro do Enzo. Clique para jogar.",
+    lines: [
+      { pre: "au au… quer dizer,", hi: "olá." },
+      { pre: "quer jogar?", hi: "me clica." },
+      { pre: "sou o Buck,", hi: "supervisor de código." },
+      { pre: "o Enzo programa,", hi: "eu fiscalizo." },
+    ],
+  },
   home: {
     eyebrow: "Aberto a novas oportunidades",
     selectedWork: "Trabalhos selecionados",
@@ -83,6 +92,15 @@ const en: Dictionary = {
     contact: "Contact",
   },
   intro: { hello: "Hello", skip: "Click to skip" },
+  buck: {
+    aria: "Buck, Enzo's dog. Click to play.",
+    lines: [
+      { pre: "woof… i mean,", hi: "hello." },
+      { pre: "wanna play?", hi: "click me." },
+      { pre: "i'm Buck,", hi: "code supervisor." },
+      { pre: "Enzo codes,", hi: "i review." },
+    ],
+  },
   home: {
     eyebrow: "Open to new opportunities",
     selectedWork: "Selected work",

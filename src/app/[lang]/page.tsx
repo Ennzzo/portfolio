@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BuckWalker } from "@/components/buck/buck-walker";
 import { HeroTitle } from "@/components/fx/hero-title";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
@@ -17,7 +18,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      <section className="flex min-h-[70dvh] flex-col justify-center py-20">
+      <section className="flex min-h-[70dvh] flex-col justify-center py-16">
+        <BuckWalker dict={dict.buck} />
         <Reveal>
           <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-xs text-muted">
             <span className="size-1.5 rounded-full bg-accent" />
