@@ -19,7 +19,7 @@ export function Intro({ dict }: { dict: Dictionary["intro"] }) {
     const last = i >= GREETINGS.length - 1;
     const t = setTimeout(
       () => (last ? setShow(false) : setI((n) => n + 1)),
-      last ? 500 : i === 0 ? 700 : 220,
+      last ? 350 : i === 0 ? 500 : 150,
     );
     return () => clearTimeout(t);
   }, [show, i]);

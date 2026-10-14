@@ -134,3 +134,20 @@ body {
 .group:hover .logo-mark .logo-sparks path {
   transform: rotate(90deg) scale(1.15);
 }
+
+.hero-in {
+  animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-in {
+    animation: none;
+  }
+}
