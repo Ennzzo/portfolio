@@ -6,6 +6,7 @@ import { useEffect } from "react";
 type Events = {
   "game:open": undefined;
   "buck:zoomies": undefined;
+  "palette:open": undefined;
 };
 
 export function emit<K extends keyof Events>(name: K) {
