@@ -104,6 +104,8 @@
 - ⌨️ **Menu de comandos (Ctrl+K):** navegação, troca de idioma, copiar e-mail, abrir WhatsApp, jogar e mais.
 - 🕹️ **Easter egg:** o Konami code (↑↑↓↓←→←→BA) solta o Buck correndo pela tela.
 - ✨ **Micro-interações:** intro de saudações (uma vez por sessão), animações de entrada, cópia de e-mail em um clique e relógio ao vivo de Belo Horizonte.
+- 🔎 **SEO e compartilhamento:** imagem de preview gerada para cada idioma (Open Graph, aparece ao colar o link no LinkedIn/WhatsApp), `sitemap.xml`, `robots.txt` e `hreflang` PT/EN.
+- ⚡ **Desempenho:** Lighthouse 100 em Performance, Acessibilidade, Boas Práticas e SEO no desktop (95 de performance no mobile).
 - ♿ **Acessibilidade:** HTML semântico, `aria-*` no menu e no formulário, foco visível e respeito a `prefers-reduced-motion`.
 
 ---
@@ -200,6 +202,7 @@ cp .env.example .env.local
 | `RESEND_API_KEY` | Para o formulário | Chave da API do Resend | `re_xxxxxxxx` |
 | `CONTACT_TO_EMAIL` | Para o formulário | E-mail que recebe as mensagens | `voce@exemplo.com` |
 | `CONTACT_FROM_EMAIL` | Não | Remetente. Sem domínio verificado no Resend, use o padrão | `Portfolio <onboarding@resend.dev>` |
+| `NEXT_PUBLIC_SITE_URL` | Não | URL pública usada no sitemap, robots e imagem de preview (na Vercel é detectada sozinha) | `https://enzobambirra.vercel.app` |
 | `GITHUB_TOKEN` | Não | Token do GitHub para subir o limite da API de 60 para 5.000 req/h | `ghp_xxxxxxxx` |
 
 > [!NOTE]
