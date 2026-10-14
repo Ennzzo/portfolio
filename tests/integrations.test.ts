@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { parseLetterboxdRss, stars } from "@/lib/integrations/letterboxd";
-import { parseStravaActivity } from "@/lib/integrations/strava";
+import { parseStravaActivity, toRunTotals } from "@/lib/integrations/strava";
 import { parseValorantMmr, rankIcon } from "@/lib/integrations/valorant";
 
 describe("parseValorantMmr", () => {
@@ -76,5 +76,12 @@ describe("parseStravaActivity", () => {
   it("não calcula pace para treinos que não são corrida", () => {
     const a = parseStravaActivity({ name: "HYROX", sport_type: "Crossfit", distance: 0, moving_time: 3600, start_date: "2026-10-13T10:00:00Z" });
     expect(a.paceSecondsPerKm).toBeNull();
+  });
+});
+
+describe("toRunTotals", () => {
+  it("converte metros em km com uma casa decimal", () => {
+    expect(toRunTotals({ count: 4, distance: 25632, moving_time: 7490 })).toEqual({ count: 4, km: 25.6, seconds: 7490 });
+    expect(toRunTotals(undefined)).toBeNull();
   });
 });

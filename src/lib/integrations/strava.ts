@@ -10,7 +10,21 @@ export type StravaActivity = {
   date: string;
 };
 
-export type StravaSummary = { last: StravaActivity | null; recentRunKm: number | null };
+export type RunTotals = { count: number; km: number; seconds: number };
+
+export type StravaSummary = {
+  /** Precisa do escopo activity:read; null se o token só tiver "read". */
+  last: StravaActivity | null;
+  /** Corridas nas últimas 4 semanas */
+  recent: RunTotals | null;
+  /** Km corridos no ano */
+  yearKm: number | null;
+};
+
+type RawTotals = { count: number; distance: number; moving_time: number };
+
+export const toRunTotals = (t?: RawTotals | null): RunTotals | null =>
+  t ? { count: t.count, km: Math.round(t.distance / 100) / 10, seconds: t.moving_time } : null;
 
 type RawActivity = { name: string; sport_type?: string; type?: string; distance: number; moving_time: number; start_date: string };
 
@@ -46,7 +60,7 @@ async function accessToken() {
   return ((await res.json()) as { access_token: string }).access_token;
 }
 
-/** Último treino e km corridos nas últimas 4 semanas (Strava API, OAuth com refresh token). */
+/** Estatísticas de corrida (escopo "read") e, se permitido, o último treino (escopo activity:read). */
 export async function getStravaSummary(): Promise<StravaSummary | null> {
   "use cache";
   cacheLife("minutes");
@@ -54,19 +68,26 @@ export async function getStravaSummary(): Promise<StravaSummary | null> {
     const token = await accessToken();
     if (!token) return null;
     const headers = { Authorization: `Bearer ${token}` };
-    const res = await fetch("https://www.strava.com/api/v3/athlete/activities?per_page=1", { headers });
-    if (!res.ok) return null;
-    const [raw] = (await res.json()) as (RawActivity & { athlete?: { id: number } })[];
+    const api = "https://www.strava.com/api/v3";
 
-    let recentRunKm: number | null = null;
-    if (raw?.athlete?.id) {
-      const stats = await fetch(`https://www.strava.com/api/v3/athletes/${raw.athlete.id}/stats`, { headers });
-      if (stats.ok) {
-        const json = (await stats.json()) as { recent_run_totals?: { distance: number } };
-        if (json.recent_run_totals) recentRunKm = Math.round(json.recent_run_totals.distance / 100) / 10;
-      }
-    }
-    return { last: raw ? parseStravaActivity(raw) : null, recentRunKm };
+    const athlete = await fetch(`${api}/athlete`, { headers });
+    if (!athlete.ok) return null;
+    const { id } = (await athlete.json()) as { id: number };
+
+    const [stats, activities] = await Promise.all([
+      fetch(`${api}/athletes/${id}/stats`, { headers }),
+      fetch(`${api}/athlete/activities?per_page=1`, { headers }),
+    ]);
+    const totals = stats.ok
+      ? ((await stats.json()) as { recent_run_totals?: RawTotals; ytd_run_totals?: RawTotals })
+      : {};
+    const [raw] = activities.ok ? ((await activities.json()) as RawActivity[]) : [];
+
+    return {
+      last: raw ? parseStravaActivity(raw) : null,
+      recent: toRunTotals(totals.recent_run_totals),
+      yearKm: toRunTotals(totals.ytd_run_totals)?.km ?? null,
+    };
   } catch {
     return null;
   }
