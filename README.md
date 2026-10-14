@@ -33,7 +33,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-007ec6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-007ec6?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-007ec6?style=for-the-badge&logo=docker&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-41_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-33_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ennzzo/portfolio?style=for-the-badge&logo=clockify)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Ennzzo/portfolio?style=for-the-badge&color=007ec6&logo=gitkraken)
 
@@ -87,7 +87,7 @@
 ## ✨ Funcionalidades Principais
 
 - 🌐 **Internacionalização (i18n):** todo o site em português e inglês, com troca de idioma em qualquer página e detecção automática pelo idioma do navegador (`Accept-Language`).
-- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências, Fora do código e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
+- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
 - 👋 **Sobre mim:** apresentação, formação (com certificado), interesses, objetivos e habilidades.
 - 🗂️ **Linha do tempo de projetos:** do mais antigo ao mais recente, com descrição, tecnologias, link para o GitHub, equipe (em projetos em grupo) e **GIF do projeto em funcionamento**.
 - 🔄 **Integração com a API do GitHub:** estrelas e data do último push de cada repositório, com cache de 1 hora.
@@ -103,7 +103,6 @@
 - 💬 **Mensagem direto no WhatsApp:** campo na home e no contato que abre a conversa já com o texto.
 - ⌨️ **Menu de comandos (Ctrl+K):** navegação, troca de idioma, copiar e-mail, abrir WhatsApp, jogar e mais.
 - 🕹️ **Easter egg:** o Konami code (↑↑↓↓←→←→BA) solta o Buck correndo pela tela.
-- 🎮 **Fora do código:** cards com dados ao vivo do Strava (último treino), Letterboxd (filmes assistidos, via RSS) e Valorant (pico e nível, via HenrikDev API).
 - ✨ **Micro-interações:** intro de saudações (uma vez por sessão), animações de entrada, cópia de e-mail em um clique e relógio ao vivo de Belo Horizonte.
 - ♿ **Acessibilidade:** HTML semântico, `aria-*` no menu e no formulário, foco visível e respeito a `prefers-reduced-motion`.
 
@@ -124,7 +123,7 @@
 * **Runtime:** Node.js 22
 * **Framework:** Route Handlers do Next.js (`POST /api/contact`) e Proxy (antigo Middleware) para o roteamento de idiomas
 * **E-mail:** [Resend](https://resend.com/) (SDK `resend` 6)
-* **APIs externas:** [GitHub REST API](https://docs.github.com/rest) (repositórios), RSS do [Letterboxd](https://letterboxd.com) (filmes), [HenrikDev API](https://docs.henrikdev.xyz) (Valorant), [Strava API](https://developers.strava.com) (treinos)
+* **APIs externas:** [GitHub REST API](https://docs.github.com/rest) (repositórios), [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api) (calendário de contribuições)
 * **Banco de Dados:** não se aplica — o conteúdo vive em arquivos TypeScript tipados em `src/data`
 
 ### ⚙️ Infraestrutura & DevOps
@@ -202,8 +201,6 @@ cp .env.example .env.local
 | `CONTACT_TO_EMAIL` | Para o formulário | E-mail que recebe as mensagens | `voce@exemplo.com` |
 | `CONTACT_FROM_EMAIL` | Não | Remetente. Sem domínio verificado no Resend, use o padrão | `Portfolio <onboarding@resend.dev>` |
 | `GITHUB_TOKEN` | Não | Token do GitHub para subir o limite da API de 60 para 5.000 req/h | `ghp_xxxxxxxx` |
-| `HENRIK_API_KEY` | Não | Chave da HenrikDev API para o rank do Valorant | `HDEV-xxxx` |
-| `STRAVA_CLIENT_ID` / `STRAVA_CLIENT_SECRET` / `STRAVA_REFRESH_TOKEN` | Não | App do Strava + refresh token (escopo `activity:read`) para o card de treinos | — |
 
 > [!NOTE]
 > Sem as variáveis do Resend o site funciona normalmente; apenas o envio do formulário retorna erro e o visitante é orientado a usar o e-mail direto.
@@ -319,14 +316,13 @@ npm start
 │   │   └── icon.svg            # 🔖 Favicon
 │   ├── components/             # 🧱 Componentes reutilizáveis (header, cards, formulário…)
 │   │   ├── buck/               # 🐕 Mascote em SVG, motor de física, foto e easter egg
-│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, fora do código, contato)
+│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, contato)
 │   │   ├── fx/                 # ✨ Cursor, título interativo e fundo em grade
 │   │   ├── game/               # 🎯 Jogo AIM BUCK! e pontuação
-│   │   └── off-clock/          # 🎮 Cards de Strava, Letterboxd e Valorant
 │   ├── data/                   # 🗃️ Conteúdo: perfil, projetos e experiências (PT/EN)
 │   ├── i18n/                   # 🌎 Idiomas, dicionários e negociação de idioma
-│   ├── lib/                    # 🛠️ API do GitHub, schema do formulário, formatação
-│   │   └── integrations/       # 🔌 Clientes de Strava, Letterboxd, Valorant e contribuições do GitHub
+│   ├── lib/                    # 🛠️ API do GitHub, contribuições, schema do formulário, formatação
+│   │   └── integrations/       # 🔌 Calendário de contribuições do GitHub
 │   └── proxy.ts                # 🔀 Redireciona para o idioma do navegador
 └── tests/                      # 🧪 Testes unitários (Vitest)
 ```
@@ -387,7 +383,7 @@ Com dados inválidos (`HTTP 400`):
 npm test
 ```
 
-Testes unitários com **Vitest** (41 casos):
+Testes unitários com **Vitest** (33 casos):
 
 | Arquivo | O que cobre |
 | :--- | :--- |
@@ -398,7 +394,6 @@ Testes unitários com **Vitest** (41 casos):
 | `tests/scoring.test.ts` | Pontuação do jogo: precisão, reação média e ranks |
 | `tests/buck-physics.test.ts` | Física do Buck: queda, pouso, quique, paredes e velocidade de arremesso |
 | `tests/github-contributions.test.ts` | Calendário de contribuições: semanas, meses e sequências |
-| `tests/integrations.test.ts` | Conversão dos dados de Valorant (ranks e ícones), Letterboxd e Strava |
 
 A CI do GitHub Actions roda lint, checagem de tipos, testes, build e build da imagem Docker a cada push.
 
