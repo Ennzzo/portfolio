@@ -37,11 +37,13 @@ export const experiences: Experience[] = [
     },
     highlights: {
       pt: [
+        "Desenvolvimento de interfaces e aplicações com React, Next.js e TypeScript",
         "Desenvolvimento e manutenção de sistemas web full stack",
         "Participação nas reuniões de definição e planejamento do time",
         "Aplicação de metodologias ágeis no dia a dia",
       ],
       en: [
+        "Building interfaces and applications with React, Next.js and TypeScript",
         "Building and maintaining full stack web systems",
         "Taking part in the team's definition and planning meetings",
         "Applying agile methodologies day to day",

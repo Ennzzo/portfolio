@@ -23,12 +23,12 @@ export const profile = {
     intro: {
       pt: [
         "Sou Enzo Bambirra, desenvolvedor full stack e estudante do 3º período de Engenharia de Software na PUC Minas, com conclusão prevista para o final de 2028. Sou técnico em Informática pelo CEFET-MG, atual Universidade Federal de Ciência e Inovação de Minas Gerais (UFCIMG).",
-        "Atualmente desenvolvo soluções web na Abrasel, participando de todo o ciclo de entrega — da definição de requisitos com o time à implementação —, com uso de metodologias ágeis. Anteriormente, atuei com otimização de SEO na Myth e na Seção de Tecnologia da Informação do Exército Brasileiro, com desenvolvimento em PHP/Laravel, infraestrutura de redes e suporte técnico.",
+        "Atualmente desenvolvo soluções web na Abrasel com React, Next.js e TypeScript, participando de todo o ciclo de entrega — da definição de requisitos com o time à implementação —, com uso de metodologias ágeis. Anteriormente, atuei com otimização de SEO na Myth e na Seção de Tecnologia da Informação do Exército Brasileiro, com desenvolvimento em PHP/Laravel, infraestrutura de redes e suporte técnico.",
         "Tenho interesse em desenvolvimento de software, segurança da informação e infraestrutura, e busco oportunidades para aplicar e aprofundar esses conhecimentos em projetos que gerem impacto real.",
       ],
       en: [
         "I'm Enzo Bambirra, a full stack developer and 3rd-semester Software Engineering student at PUC Minas, expected to graduate at the end of 2028. I hold an IT technician degree from CEFET-MG, now the Federal University of Science and Innovation of Minas Gerais (UFCIMG).",
-        "I currently build web solutions at Abrasel, taking part in the whole delivery cycle — from defining requirements with the team to implementation — using agile methodologies. Previously, I worked on SEO optimization at Myth and on the Brazilian Army's Information Technology Section, with PHP/Laravel development, network infrastructure and technical support.",
+        "I currently build web solutions at Abrasel with React, Next.js and TypeScript, taking part in the whole delivery cycle — from defining requirements with the team to implementation — using agile methodologies. Previously, I worked on SEO optimization at Myth and on the Brazilian Army's Information Technology Section, with PHP/Laravel development, network infrastructure and technical support.",
         "I'm interested in software development, information security and infrastructure, and I'm looking for opportunities to apply and deepen this knowledge in projects with real impact.",
       ],
     } satisfies Localized<string[]>,
