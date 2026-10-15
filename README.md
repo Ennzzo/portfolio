@@ -1,22 +1,22 @@
-<!-- README baseado no template do Prof. Dr. João Paulo Aramuni (DIAW — PUC Minas) -->
+<!-- README baseado no template do Prof. Dr. João Paulo Aramuni (DIAW, PUC Minas) -->
 
 ---
 
-# 🏷️ Portfolio — Enzo Bambirra 👨‍💻
+# 🏷️ Portfolio - Enzo Bambirra 👨‍💻
 
 > [!NOTE]
-> Portfolio profissional bilíngue (PT/EN) que apresenta minha trajetória, projetos, experiências e formas de contato — com dados ao vivo da API do GitHub e formulário que envia e-mail de verdade.
+> Meu portfolio profissional, em português e inglês, com projetos, experiências, contribuições do GitHub e formulário de contato que envia e-mail.
 
 <table>
   <tr>
     <td width="800px">
       <div align="justify">
-        Este repositório contém o meu <b>portfolio profissional</b>, desenvolvido como o <b>Laboratório 01</b> da disciplina <i>Desenvolvimento e Integração de Aplicações Web (DIAW)</i> do curso de Engenharia de Software da <b>PUC Minas</b>, e que também uso no dia a dia da minha carreira. O site reúne <i>Sobre mim</i>, uma <i>linha do tempo de projetos</i> com GIFs de cada projeto em funcionamento, <i>experiências profissionais</i> e uma página de <i>contato</i> com formulário. Foi construído com <b>Next.js 16</b>, <b>TypeScript</b> e <b>Tailwind CSS</b>, possui <b>back-end próprio</b> (rota de API para envio de e-mails), é <b>dockerizado</b>, tem <b>testes automatizados</b> e <b>CI</b> no GitHub Actions, e está hospedado na <b>Vercel</b>.
+        Este é o meu portfolio. Comecei como o Laboratório 01 da disciplina de Desenvolvimento e Integração de Aplicações Web (DIAW), em Engenharia de Software na PUC Minas, mas fiz pensando em usar de verdade para procurar vaga. O site é uma página única com sobre mim, linha do tempo de projetos (cada um com um GIF dele funcionando), contribuições do GitHub, experiências, um design system e contato. Usei Next.js, TypeScript e Tailwind, o formulário tem back-end próprio, o projeto roda em Docker, tem testes e CI, e está publicado na Vercel.
       </div>
     </td>
     <td>
       <div>
-        <img src="public/logo.svg" alt="Logo EB" width="120px"/>
+        <img src="public/logo.svg" alt="Logo" width="120px"/>
       </div>
     </td>
   </tr>
@@ -27,16 +27,14 @@
 ## 🚧 Status do Projeto
 
 [![CI](https://img.shields.io/github/actions/workflow/status/Ennzzo/portfolio/ci.yml?branch=main&style=for-the-badge&label=CI)](https://github.com/Ennzzo/portfolio/actions/workflows/ci.yml)
+[![Site](https://img.shields.io/badge/Site-enzobambirra.vercel.app-d4ff3f?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0a0a0b)](https://enzobambirra.vercel.app)
 ![Versão](https://img.shields.io/badge/Versão-v1.0.0-d4ff3f?style=for-the-badge&labelColor=0a0a0b)
 ![Next.js](https://img.shields.io/badge/Next.js-16.4-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19.3-007ec6?style=for-the-badge&logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-007ec6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-007ec6?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-ready-007ec6?style=for-the-badge&logo=docker&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-33_testes-007ec6?style=for-the-badge&logo=vitest&logoColor=white)
-[![Site](https://img.shields.io/badge/Site-enzobambirra.vercel.app-d4ff3f?style=for-the-badge&logo=vercel&logoColor=white&labelColor=0a0a0b)](https://enzobambirra.vercel.app)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ennzzo/portfolio?style=for-the-badge&logo=clockify)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Ennzzo/portfolio?style=for-the-badge&color=007ec6&logo=gitkraken)
 
 ---
 
@@ -47,13 +45,9 @@
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Arquitetura](#-arquitetura)
 - [Instalação e Execução](#-instalação-e-execução)
-  - [Pré-requisitos](#pré-requisitos)
-  - [Variáveis de Ambiente](#-variáveis-de-ambiente)
-  - [Instalação de Dependências](#-instalação-de-dependências)
-  - [Como Executar a Aplicação](#-como-executar-a-aplicação)
-  - [Execução com Docker Compose](#-execução-com-docker-compose)
 - [Deploy](#-deploy)
 - [Estrutura de Pastas](#-estrutura-de-pastas)
+- [Protótipos](#-protótipos)
 - [Demonstração](#-demonstração)
 - [Testes](#-testes)
 - [Documentações utilizadas](#-documentações-utilizadas)
@@ -65,119 +59,105 @@
 ---
 
 ## 🔗 Links Úteis
-* 🌐 **Site publicado:** [enzobambirra.vercel.app](https://enzobambirra.vercel.app)
-  > 💻 Versão de produção, com deploy automático a cada push na branch `main`.
+* 🌐 **Site:** [enzobambirra.vercel.app](https://enzobambirra.vercel.app) (atualiza sozinho a cada push na `main`)
 * 📦 **Repositório:** [github.com/Ennzzo/portfolio](https://github.com/Ennzzo/portfolio)
-* 🎨 **Wireframes (Figma):** _em produção_
-* 📄 **Enunciado:** Laboratório 01 — Portfólio Profissional (DIAW, Prof. João Paulo Aramuni)
+* 📐 **Protótipos:** [docs/wireframes](docs/wireframes)
 
 ---
 
 ## 📝 Sobre o Projeto
 
-**Por que existe.** O projeto nasceu como atividade da disciplina de DIAW, mas a ideia desde o início foi construir um portfolio que eu realmente usasse para buscar oportunidades na área de tecnologia — e não só um trabalho para entregar.
+A atividade pedia um site de portfolio com sobre mim em dois idiomas, projetos em linha do tempo, experiências e contato. Resolvi aproveitar e fazer um que eu realmente fosse usar no LinkedIn e em processos seletivos, em vez de só cumprir a lista.
 
-**Que problema resolve.** Recrutadores e colegas precisam entender rapidamente quem eu sou, o que já construí e como falar comigo. O site centraliza isso em um só lugar, em **português e inglês**, com projetos mostrados **em funcionamento** (GIFs) e informações que se atualizam sozinhas (estrelas e último push de cada repositório vêm da API do GitHub).
+A ideia é que quem abrir o site entenda rápido quem eu sou, veja os projetos funcionando (por isso os GIFs) e consiga falar comigo sem sair da página. Algumas informações se atualizam sozinhas, como as estrelas e o último push de cada repositório e o calendário de contribuições do GitHub.
 
-**Contexto.** Acadêmico e profissional: atende a todos os requisitos do Lab01 (seções, timeline, formulário com envio de e-mail, responsividade, deploy gratuito e README) e serve como meu cartão de visitas.
-
-**Referências visuais.** A identidade (escura, tipografia grande, micro-interações como a intro de saudações, e-mail com cópia em um clique e relógio ao vivo) foi inspirada em portfolios como [munim.io](https://www.munim.io/) e [product.inc](https://www.product.inc/), além dos exemplos indicados no enunciado.
+Para o visual me inspirei em portfolios como o [munim.io](https://www.munim.io/) e o [product.inc](https://www.product.inc/), além dos exemplos do enunciado. O Buck, que anda pela página e pode ser arremessado, é o meu cachorro.
 
 ---
 
 ## ✨ Funcionalidades Principais
 
-- 🌐 **Internacionalização (i18n):** todo o site em português e inglês, com troca de idioma em qualquer página e detecção automática pelo idioma do navegador (`Accept-Language`).
-- 📄 **Página única com seções:** Início, Sobre, Projetos, GitHub, Experiências, Design System e Contato, com o cabeçalho fixo destacando a seção visível (as URLs antigas `/pt/about` etc. redirecionam para `/pt#about`).
-- 👋 **Sobre mim:** apresentação, formação (com certificado), interesses, objetivos e habilidades.
-- 🗂️ **Linha do tempo de projetos:** do mais antigo ao mais recente, com descrição, tecnologias, link para o GitHub, equipe (em projetos em grupo) e **GIF do projeto em funcionamento**.
-- 🔄 **Integração com a API do GitHub:** estrelas e data do último push de cada repositório, com cache de 1 hora.
-- 🟩 **Contribuições no GitHub:** calendário dos últimos 12 meses (estilo GitHub) com total, dias ativos, maior sequência e recorde em um dia.
-- 💼 **Experiências:** empresa, cargo, período, descrição, destaques e documentos comprobatórios (ex.: Diploma de Honra ao Mérito e Referência Elogiosa do Exército).
-- 📨 **Contato:** ícones para e-mail, WhatsApp, LinkedIn, GitHub e Instagram + **formulário que envia e-mail** pelo back-end (Resend).
-- 🛡️ **Validação e segurança do formulário:** validação com Zod no cliente e no servidor, honeypot anti-spam, limite de 5 envios por IP a cada 10 min e escape de HTML.
-- 📱 **Responsividade:** layout pensado para celular, tablet e desktop, com menu mobile animado.
-- 🌗 **Tema claro e escuro:** botão no cabeçalho (e no Ctrl+K); segue o tema do sistema na primeira visita, guarda a escolha e aplica antes da página aparecer, sem piscar.
-- 🎨 **Design System:** seção que documenta cores (com os valores dos dois temas), tipografia, componentes, formas, marca e movimento, com exemplos ao vivo.
-- 🐕 **Buck, o mascote com física:** meu cachorro desenhado em SVG anda sobre títulos, tags, cards e divisórias das seções. Dá para **agarrar, arrastar e arremessar**: ele voa com a velocidade do mouse, sofre gravidade, rebate nas paredes, quica em quedas fortes e "amassa" ao pousar. Se você rolar para longe, ele volta caindo do topo da tela.
-- 🎯 **Jogo AIM BUCK!:** clique no Buck para abrir um aim trainer com mira estilo Valorant, tempo de reação, precisão, ranks do Ferro ao Radiante e recorde salvo no navegador.
-- 🔠 **Título interativo:** as letras do hero ganham peso (fonte variável) e um marca-texto conforme o cursor se aproxima.
-- 🖱️ **Cursor customizado:** ponto + anel com mola, que reage a links e vira bolinha de tênis sobre o Buck.
-- 💬 **Mensagem direto no WhatsApp:** campo na home e no contato que abre a conversa já com o texto.
-- ⌨️ **Menu de comandos (Ctrl+K):** navegação, troca de idioma, copiar e-mail, abrir WhatsApp, jogar e mais.
-- 🕹️ **Easter egg:** o Konami code (↑↑↓↓←→←→BA) solta o Buck correndo pela tela.
-- ✨ **Micro-interações:** intro de saudações (uma vez por sessão), animações de entrada, cópia de e-mail em um clique e relógio ao vivo de Belo Horizonte.
-- 🔎 **SEO e compartilhamento:** imagem de preview gerada para cada idioma (Open Graph, aparece ao colar o link no LinkedIn/WhatsApp), `sitemap.xml`, `robots.txt` e `hreflang` PT/EN.
-- ⚡ **Desempenho:** Lighthouse no site publicado: 97 de Performance no desktop (87 no mobile) e 100 em Acessibilidade, Boas Práticas e SEO.
-- ♿ **Acessibilidade:** HTML semântico, `aria-*` no menu e no formulário, foco visível e respeito a `prefers-reduced-motion`.
+- Site em português e inglês, com troca de idioma em qualquer seção. Na primeira visita o idioma vem do navegador.
+- Página única com as seções Início, Sobre, Projetos, GitHub, Experiências, Design System e Contato. O menu marca a seção em que você está. As URLs antigas (`/pt/about` etc.) redirecionam para a seção certa.
+- Tema claro e escuro, com botão no cabeçalho. Segue o tema do sistema na primeira visita e lembra a escolha.
+- Linha do tempo de projetos com descrição, tecnologias, link do repositório, equipe (no projeto em grupo) e GIF do projeto rodando.
+- Estrelas e último push de cada repositório, buscados na API do GitHub.
+- Calendário de contribuições do GitHub dos últimos 12 meses, com total, dias ativos, maior sequência e melhor dia.
+- Experiências com empresa, cargo, período, descrição e documentos (diploma e referência elogiosa do Exército).
+- Contato por WhatsApp (abre a conversa com a mensagem já escrita), e-mail com cópia em um clique, redes sociais e formulário que envia e-mail pelo back-end.
+- Formulário validado com Zod no navegador e no servidor, com honeypot contra spam, limite de envios por IP e escape de HTML.
+- Seção de Design System com cores dos dois temas, tipografia, componentes, formas e animações.
+- O Buck: anda sobre títulos, cards e divisórias, dá para arrastar e arremessar (com gravidade, quique e colisão nas paredes) e, clicando nele, abre o jogo AIM BUCK!, um treino de mira com ranks do Ferro ao Radiante.
+- Detalhes de interação: letras do título que acendem com o mouse, cursor próprio, intro com "olá" em vários idiomas, menu Ctrl+K e o Konami code como easter egg.
+- Imagem de preview para compartilhar o link, `sitemap.xml`, `robots.txt` e `hreflang`.
+- Layout responsivo, foco visível, `aria-*` nos componentes interativos e respeito a quem prefere menos animação.
 
 ---
 
 ## 🛠 Tecnologias Utilizadas
 
 ### 💻 Front-end
-* **Framework/Biblioteca:** [Next.js 16.4](https://nextjs.org/) (App Router, Cache Components) com [React 19.3](https://react.dev/)
-* **Linguagem:** [TypeScript 5.9](https://www.typescriptlang.org/)
-* **Estilização:** [Tailwind CSS 4.3](https://tailwindcss.com/) com tokens de cor próprios
-* **Animações:** [Motion 14](https://motion.dev/) (antigo Framer Motion)
-* **Validação:** [Zod 4](https://zod.dev/) (compartilhado entre cliente e servidor)
-* **Fontes:** Geist e Geist Mono via `next/font`
-* **Build Tool:** Turbopack (embutido no Next.js)
+* **Framework:** [Next.js 16](https://nextjs.org/) (App Router) com [React 19](https://react.dev/)
+* **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
+* **Estilo:** [Tailwind CSS 4](https://tailwindcss.com/) com variáveis CSS para os dois temas
+* **Animações:** [Motion](https://motion.dev/) e CSS
+* **Validação:** [Zod](https://zod.dev/)
+* **Fontes:** Geist e Geist Mono (`next/font`)
 
 ### 🖥️ Back-end
 * **Runtime:** Node.js 22
-* **Framework:** Route Handlers do Next.js (`POST /api/contact`) e Proxy (antigo Middleware) para o roteamento de idiomas
-* **E-mail:** [Resend](https://resend.com/) (SDK `resend` 6)
-* **APIs externas:** [GitHub REST API](https://docs.github.com/rest) (repositórios), [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api) (calendário de contribuições)
-* **Banco de Dados:** não se aplica — o conteúdo vive em arquivos TypeScript tipados em `src/data`
+* **API:** Route Handler do Next.js em `POST /api/contact`, e o `proxy.ts` para o roteamento por idioma
+* **E-mail:** [Resend](https://resend.com/)
+* **APIs externas:** [GitHub REST API](https://docs.github.com/rest) e [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api)
+* **Banco de dados:** não usa. O conteúdo fica em arquivos TypeScript em `src/data`.
 
 ### ⚙️ Infraestrutura & DevOps
-* **Containerização:** Docker (build multi-stage, saída `standalone`) e Docker Compose
-* **Cloud:** [Vercel](https://vercel.com/) (produção + previews por branch)
-* **CI/CD:** GitHub Actions (lint, tipos, testes, build e imagem Docker)
-* **Qualidade:** ESLint 9 (`eslint-config-next`), Vitest 5
+* **Containers:** Docker (multi-stage, saída `standalone`) e Docker Compose
+* **Hospedagem:** [Vercel](https://vercel.com/)
+* **CI:** GitHub Actions (lint, tipos, testes, build e imagem Docker)
+* **Qualidade:** ESLint e Vitest
 
 ### 📦 Dependências
 
 | Pacote | Versão | Uso |
 | :--- | :--- | :--- |
-| `next` | 16.4.0 | Framework full stack (páginas, rotas de API, proxy, imagens) |
-| `react` / `react-dom` | 19.3.0 | Biblioteca de interface |
-| `motion` | ^14.2.0 | Animações e transições |
+| `next` | 16.4.0 | Framework (páginas, API, proxy, imagens) |
+| `react` / `react-dom` | 19.3.0 | Interface |
+| `motion` | ^14.2.0 | Animações |
 | `resend` | ^6.32.1 | Envio dos e-mails do formulário |
 | `zod` | ^4.6.7 | Validação do formulário |
-| `tailwindcss` + `@tailwindcss/turbopack` | ^4 | Estilização |
-| `typescript` | ^5 | Tipagem estática |
+| `tailwindcss` + `@tailwindcss/turbopack` | ^4 | Estilo |
+| `typescript` | ^5 | Tipagem |
 | `eslint` + `eslint-config-next` | ^9 / 16.4.0 | Lint |
-| `vitest` | ^5.0.4 | Testes unitários |
-| `@types/node`, `@types/react`, `@types/react-dom` | — | Tipos |
+| `vitest` | ^5.0.4 | Testes |
+| `playwright` | 1.64.0 | Gerar os wireframes a partir do site |
 
 ---
 
 ## 🏗 Arquitetura
 
-O projeto é um **monólito Next.js** com renderização no servidor: front-end e back-end vivem no mesmo repositório e no mesmo deploy.
+É um projeto Next.js só, com front e back no mesmo repositório e no mesmo deploy.
 
-- **Página única por idioma (`app/[lang]/page.tsx`)** — cada seção é um componente em `components/sections` com um `id` usado pelo menu; um `IntersectionObserver` destaca a seção visível. O site fica sob o segmento `[lang]` (`/pt`, `/en`). `generateStaticParams` gera as duas versões no build, então as páginas são **pré-renderizadas como HTML estático**.
-- **Proxy (`src/proxy.ts`)** — quem acessa `/` ou uma rota sem idioma é redirecionado para `/pt` ou `/en` conforme o navegador.
-- **Conteúdo como dados (`src/data`)** — perfil, projetos e experiências são objetos TypeScript com textos `{ pt, en }`. Adicionar um projeto é editar um arquivo, com checagem de tipos.
-- **Dicionários (`src/i18n`)** — textos da interface nos dois idiomas; o dicionário em inglês é tipado a partir do português, então faltar uma chave quebra o build.
-- **Server Components por padrão** — só viram Client Components o que precisa de interação (menu, formulário, intro, relógio, cópia de e-mail).
-- **Dados do GitHub com cache** — `getRepoStats` usa `"use cache"` + `cacheLife("hours")`; os números são transmitidos dentro de `<Suspense>` sem bloquear o resto da página (Partial Prerendering).
-- **API de contato (`/api/contact`)** — valida com o mesmo schema Zod do cliente, aplica honeypot e limite por IP, escapa o HTML e envia pelo Resend com `replyTo` do visitante.
+- `app/[lang]/page.tsx` monta a página com as seções de `components/sections`. Cada seção tem um `id` que o menu usa. As versões `/pt` e `/en` são geradas no build como HTML estático.
+- `proxy.ts` manda quem entra em `/` para `/pt` ou `/en`, olhando o idioma do navegador.
+- O conteúdo (perfil, projetos, experiências) fica em `src/data` com os textos em `{ pt, en }`. Para adicionar um projeto basta editar um arquivo.
+- Os textos da interface ficam em `src/i18n`. O dicionário em inglês usa o tipo do português, então se faltar uma chave o build quebra.
+- Quase tudo é Server Component. Só vira Client Component o que tem interação (menu, formulário, cursor, Buck, jogo).
+- As chamadas ao GitHub usam `"use cache"` com validade de 1 hora e aparecem dentro de `<Suspense>`, sem travar o resto da página. Se a API falhar, a falha não fica no cache.
+- `/api/contact` valida com o mesmo schema do formulário, checa o honeypot e o limite por IP, escapa o HTML e envia pelo Resend com o e-mail do visitante no `replyTo`.
 
-**Trade-offs:** o limite por IP fica em memória (suficiente para um portfolio; em várias instâncias o ideal seria Redis/Upstash). Sem banco de dados, o conteúdo muda por commit — o que também deixa o histórico do portfolio versionado.
+O limite por IP fica em memória. Para um portfolio é suficiente; com várias instâncias eu usaria Redis.
 
 ```mermaid
 flowchart LR
     V[Visitante] -->|GET /| P[Proxy<br/>detecta idioma]
-    P -->|307 /pt ou /en| R[Páginas app/lang<br/>HTML pré-renderizado]
-    R --> D[(src/data<br/>perfil, projetos,<br/>experiências)]
-    R --> I[(src/i18n<br/>dicionários PT/EN)]
-    R -.->|Suspense + use cache 1h| GH[GitHub REST API]
-    V -->|POST formulário| A[/api/contact<br/>Zod + honeypot + rate limit/]
-    A -->|emails.send| RS[Resend]
-    RS -->|e-mail| E[Caixa de entrada do Enzo]
+    P -->|307 /pt ou /en| R[app/lang<br/>HTML pré-renderizado]
+    R --> D[(src/data)]
+    R --> I[(src/i18n)]
+    R -.->|cache 1h| GH[APIs do GitHub]
+    V -->|POST formulário| A[/api/contact/]
+    A --> RS[Resend]
+    RS --> E[Meu e-mail]
 ```
 
 ---
@@ -185,35 +165,25 @@ flowchart LR
 ## 🔧 Instalação e Execução
 
 ### Pré-requisitos
-* **Node.js** 22 ou superior (LTS)
-* **npm** 10+
-* **Docker** e **Docker Compose** (opcional, para rodar em container)
-* Uma conta gratuita no **[Resend](https://resend.com/)** (opcional — só para o formulário enviar e-mails)
-
----
+* Node.js 22 ou mais novo e npm 10+
+* Docker e Docker Compose, se quiser rodar em container
+* Conta gratuita no [Resend](https://resend.com/), só se quiser que o formulário envie e-mail
 
 ### 🔑 Variáveis de Ambiente
-
-Copie o arquivo de exemplo e preencha:
 
 ```bash
 cp .env.example .env.local
 ```
 
-| Variável | Obrigatória | Descrição | Exemplo |
+| Variável | Obrigatória | Para que serve | Exemplo |
 | :--- | :---: | :--- | :--- |
-| `RESEND_API_KEY` | Para o formulário | Chave da API do Resend | `re_xxxxxxxx` |
+| `RESEND_API_KEY` | Para o formulário | Chave do Resend | `re_xxxxxxxx` |
 | `CONTACT_TO_EMAIL` | Para o formulário | E-mail que recebe as mensagens | `voce@exemplo.com` |
-| `CONTACT_FROM_EMAIL` | Não | Remetente. Sem domínio verificado no Resend, use o padrão | `Portfolio <onboarding@resend.dev>` |
-| `NEXT_PUBLIC_SITE_URL` | Não | URL pública usada no sitemap, robots e imagem de preview (na Vercel é detectada sozinha) | `https://enzobambirra.vercel.app` |
-| `GITHUB_TOKEN` | Não | Token do GitHub para subir o limite da API de 60 para 5.000 req/h | `ghp_xxxxxxxx` |
+| `CONTACT_FROM_EMAIL` | Não | Remetente (sem domínio próprio, use o padrão) | `Portfolio <onboarding@resend.dev>` |
+| `NEXT_PUBLIC_SITE_URL` | Não | URL usada no sitemap e na imagem de preview | `https://enzobambirra.vercel.app` |
+| `GITHUB_TOKEN` | Não | Aumenta o limite da API do GitHub de 60 para 5.000 req/h | `ghp_xxxxxxxx` |
 
-> [!NOTE]
-> Sem as variáveis do Resend o site funciona normalmente; apenas o envio do formulário retorna erro e o visitante é orientado a usar o e-mail direto.
-
-Na **Vercel**, cadastre as mesmas variáveis em *Project Settings → Environment Variables*.
-
----
+Sem as variáveis do Resend o site funciona normal, só o formulário mostra erro e sugere o e-mail direto.
 
 ### 📦 Instalação de Dependências
 
@@ -223,52 +193,38 @@ cd portfolio
 npm install
 ```
 
----
-
 ### ⚡ Como Executar a Aplicação
 
 ```bash
 npm run dev
 ```
 
-🚀 *O site estará disponível em **http://localhost:3000** (redireciona para `/pt` ou `/en`).*
-
-Outros scripts:
+O site abre em http://localhost:3000.
 
 | Comando | O que faz |
 | :--- | :--- |
 | `npm run dev` | Servidor de desenvolvimento |
 | `npm run build` | Build de produção |
-| `npm start` | Servidor de produção (após o build) |
+| `npm start` | Roda o build de produção |
 | `npm run lint` | ESLint |
-| `npm run typecheck` | Gera os tipos das rotas e checa o TypeScript |
-| `npm test` | Testes unitários (Vitest) |
-
----
+| `npm run typecheck` | Gera os tipos das rotas e roda o TypeScript |
+| `npm test` | Testes (Vitest) |
+| `npm run wireframes` | Gera os wireframes de `docs/wireframes` a partir do site rodando |
 
 ### 🐳 Execução com Docker Compose
 
-Com o Docker em execução (Docker Desktop no Mac/Windows ou `sudo systemctl start docker` no Linux):
+Com o Docker rodando:
 
-1. Na raiz do projeto, gere a imagem e suba o container:
 ```bash
-docker compose up --build -d
-```
-2. Verifique se está rodando:
-```bash
-docker ps
-```
-3. Acesse **http://localhost:3000**. Para usar outra porta: `PORT=8080 docker compose up -d`.
-
-4. Para parar e remover:
-```bash
-docker compose down
+docker compose up --build -d   # sobe em http://localhost:3000
+docker ps                      # confere o container
+docker compose down            # para e remove
 ```
 
-> [!NOTE]
-> O `compose.yaml` lê o `.env.local` automaticamente (se existir). A imagem usa build **multi-stage** e a saída `standalone` do Next.js: a imagem final contém só o servidor mínimo, roda com usuário sem privilégios e não precisa de `node_modules` completo.
+Para outra porta: `PORT=8080 docker compose up -d`. O `compose.yaml` lê o `.env.local` se ele existir. A imagem final tem só o servidor `standalone` do Next e roda com um usuário sem privilégios.
 
-Sem Compose:
+Sem o Compose:
+
 ```bash
 docker build -t portfolio .
 docker run -p 3000:3000 --env-file .env.local portfolio
@@ -278,18 +234,13 @@ docker run -p 3000:3000 --env-file .env.local portfolio
 
 ## 🚀 Deploy
 
-O deploy é feito na **Vercel**, integrada ao repositório do GitHub:
+O site está na Vercel, ligada a este repositório:
 
-1. Em [vercel.com/new](https://vercel.com/new), importe o repositório `Ennzzo/portfolio` (framework detectado: Next.js).
-2. Cadastre as variáveis `RESEND_API_KEY` e `CONTACT_TO_EMAIL` (e opcionalmente `GITHUB_TOKEN`).
-3. Clique em **Deploy**.
+1. Importar o repositório em [vercel.com/new](https://vercel.com/new) (o Next.js é detectado sozinho).
+2. Cadastrar `RESEND_API_KEY` e `CONTACT_TO_EMAIL` em Environment Variables.
+3. Deploy.
 
-A partir daí, **cada push na `main` gera um deploy de produção** e cada branch/PR ganha uma **URL de preview**. Para rodar a versão de produção em qualquer servidor, use a imagem Docker acima ou:
-
-```bash
-npm run build
-npm start
-```
+Cada push na `main` publica uma nova versão, e cada branch ganha uma URL de preview. Fora da Vercel dá para usar a imagem Docker ou `npm run build && npm start`.
 
 ---
 
@@ -297,41 +248,51 @@ npm start
 
 ```
 .
-├── .github/workflows/ci.yml    # 🤖 CI: lint, tipos, testes, build e imagem Docker
-├── .env.example                # 🧩 Variáveis necessárias (sem valores sensíveis)
-├── .env.local                  # 🔒 Variáveis locais (não versionado)
-├── Dockerfile                  # 🐳 Build multi-stage com saída standalone
-├── compose.yaml                # 🐳 Sobe o site com um comando
-├── next.config.ts              # ⚙️ Config do Next (standalone, imagens, Cache Components)
-├── vitest.config.mts           # 🧪 Config dos testes
+├── .github/workflows/ci.yml   # CI: lint, tipos, testes, build e Docker
+├── .env.example               # variáveis necessárias, sem valores
+├── Dockerfile / compose.yaml  # container
 ├── docs/
-│   ├── screenshots/            # 🖼️ Prints das páginas (desktop e mobile)
-│   └── wireframes/             # 🎨 Wireframes do Figma
+│   ├── screenshots/           # prints das seções
+│   └── wireframes/            # protótipos (SVG) de cada seção, desktop e mobile
 ├── public/
-│   ├── docs/                   # 📄 Documentos (Honra ao Mérito e Referência Elogiosa)
-│   ├── projects/               # 🎞️ GIFs/WebPs dos projetos em funcionamento
-│   └── logo.svg                # 🏷️ Logo
+│   ├── docs/                  # diploma, referência elogiosa e certificado
+│   ├── projects/              # GIFs dos projetos
+│   └── logo.svg
+├── scripts/
+│   └── wireframes.mjs         # gera os wireframes a partir do layout real
 ├── src/
 │   ├── app/
-│   │   ├── [lang]/             # 🌐 Página única por idioma (/pt, /en)
-│   │   │   ├── layout.tsx      # 🧱 Layout raiz: cabeçalho, conteúdo, rodapé, Buck e modais
-│   │   │   ├── page.tsx        # 🏠 Junta as seções
-│   │   │   └── not-found.tsx   # 🚫 Página 404
-│   │   ├── api/contact/        # 🔌 Rota de API que envia o e-mail
-│   │   ├── globals.css         # 🎨 Tokens de cor e estilos globais
-│   │   └── icon.svg            # 🔖 Favicon
-│   ├── components/             # 🧱 Componentes reutilizáveis (header, cards, formulário…)
-│   │   ├── buck/               # 🐕 Mascote em SVG, motor de física, foto e easter egg
-│   │   ├── sections/           # 📄 Seções da página (hero, sobre, projetos, GitHub, experiências, design system, contato)
-│   │   ├── fx/                 # ✨ Cursor, título interativo e fundo em grade
-│   │   ├── game/               # 🎯 Jogo AIM BUCK! e pontuação
-│   ├── data/                   # 🗃️ Conteúdo: perfil, projetos e experiências (PT/EN)
-│   ├── i18n/                   # 🌎 Idiomas, dicionários e negociação de idioma
-│   ├── lib/                    # 🛠️ API do GitHub, contribuições, schema do formulário, formatação
-│   │   └── integrations/       # 🔌 Calendário de contribuições do GitHub
-│   └── proxy.ts                # 🔀 Redireciona para o idioma do navegador
-└── tests/                      # 🧪 Testes unitários (Vitest)
+│   │   ├── [lang]/            # layout, página e 404 por idioma
+│   │   ├── api/contact/       # envio de e-mail
+│   │   ├── sitemap.ts / robots.ts
+│   │   └── globals.css        # variáveis dos temas e estilos globais
+│   ├── components/
+│   │   ├── sections/          # seções da página
+│   │   ├── buck/              # desenho, física, foto e easter egg do Buck
+│   │   ├── game/              # jogo AIM BUCK!
+│   │   └── fx/                # cursor, título e fundo
+│   ├── data/                  # perfil, projetos, experiências e design system
+│   ├── i18n/                  # idiomas e textos
+│   ├── lib/                   # GitHub, tema, formulário, formatação
+│   └── proxy.ts               # redireciona pelo idioma
+└── tests/                     # testes (Vitest)
 ```
+
+---
+
+## 📐 Protótipos
+
+Os protótipos (wireframes de média fidelidade) de cada seção, em desktop e mobile, estão em [`docs/wireframes`](docs/wireframes) como SVG. Títulos aparecem com o texto real, parágrafos viram barras, imagens viram caixas com X e botões e campos aparecem só com o contorno. Eles são gerados a partir do layout do próprio site com `npm run wireframes`, então ficam sempre iguais ao que está publicado.
+
+| Seção | Desktop | Mobile |
+| :---: | :---: | :---: |
+| Início | <img src="docs/wireframes/desktop-home.svg" width="420"> | <img src="docs/wireframes/mobile-home.svg" width="130"> |
+| Sobre | <img src="docs/wireframes/desktop-about.svg" width="420"> | <img src="docs/wireframes/mobile-about.svg" width="130"> |
+| Projetos | <img src="docs/wireframes/desktop-projects.svg" width="420"> | <img src="docs/wireframes/mobile-projects.svg" width="130"> |
+| GitHub | <img src="docs/wireframes/desktop-github.svg" width="420"> | <img src="docs/wireframes/mobile-github.svg" width="130"> |
+| Experiências | <img src="docs/wireframes/desktop-experience.svg" width="420"> | <img src="docs/wireframes/mobile-experience.svg" width="130"> |
+| Design System | <img src="docs/wireframes/desktop-design.svg" width="420"> | <img src="docs/wireframes/mobile-design.svg" width="130"> |
+| Contato | <img src="docs/wireframes/desktop-contact.svg" width="420"> | <img src="docs/wireframes/mobile-contact.svg" width="130"> |
 
 ---
 
@@ -339,23 +300,23 @@ npm start
 
 ### 🌐 Aplicação Web
 
-| Página | Desktop |
+| Seção | Desktop |
 | :---: | :---: |
-| **Home** | <img src="docs/screenshots/desktop-pt-home.webp" alt="Home" width="600"> |
-| **Sobre mim** | <img src="docs/screenshots/desktop-pt-about.webp" alt="Sobre mim" width="600"> |
-| **Projetos (linha do tempo)** | <img src="docs/screenshots/desktop-pt-projects.webp" alt="Projetos" width="600"> |
-| **Experiências** | <img src="docs/screenshots/desktop-pt-experience.webp" alt="Experiências" width="600"> |
-| **GitHub** | <img src="docs/screenshots/desktop-pt-github.webp" alt="Contribuições no GitHub" width="600"> |
-| **Contato** | <img src="docs/screenshots/desktop-pt-contact.webp" alt="Contato" width="600"> |
-| **Home em inglês** | <img src="docs/screenshots/desktop-en-home.webp" alt="Home em inglês" width="600"> |
+| Início | <img src="docs/screenshots/desktop-pt-home.webp" alt="Início" width="600"> |
+| Sobre | <img src="docs/screenshots/desktop-pt-about.webp" alt="Sobre" width="600"> |
+| Projetos | <img src="docs/screenshots/desktop-pt-projects.webp" alt="Projetos" width="600"> |
+| GitHub | <img src="docs/screenshots/desktop-pt-github.webp" alt="GitHub" width="600"> |
+| Experiências | <img src="docs/screenshots/desktop-pt-experience.webp" alt="Experiências" width="600"> |
+| Contato | <img src="docs/screenshots/desktop-pt-contact.webp" alt="Contato" width="600"> |
+| Início em inglês | <img src="docs/screenshots/desktop-en-home.webp" alt="Início em inglês" width="600"> |
 
 ### 📱 Mobile
 
-| Home | Sobre | Projetos | Experiências | Contato |
+| Início | Sobre | Projetos | Experiências | Contato |
 | :---: | :---: | :---: | :---: | :---: |
-| <img src="docs/screenshots/mobile-pt-home.webp" alt="Home mobile" width="160"> | <img src="docs/screenshots/mobile-pt-about.webp" alt="Sobre mobile" width="160"> | <img src="docs/screenshots/mobile-pt-projects.webp" alt="Projetos mobile" width="160"> | <img src="docs/screenshots/mobile-pt-experience.webp" alt="Experiências mobile" width="160"> | <img src="docs/screenshots/mobile-pt-contact.webp" alt="Contato mobile" width="160"> |
+| <img src="docs/screenshots/mobile-pt-home.webp" width="160"> | <img src="docs/screenshots/mobile-pt-about.webp" width="160"> | <img src="docs/screenshots/mobile-pt-projects.webp" width="160"> | <img src="docs/screenshots/mobile-pt-experience.webp" width="160"> | <img src="docs/screenshots/mobile-pt-contact.webp" width="160"> |
 
-### 🎞️ Projetos em funcionamento (exibidos no site)
+### 🎞️ Projetos que aparecem no site
 
 | Grade PUC ES | Acadus |
 | :---: | :---: |
@@ -363,7 +324,7 @@ npm start
 | **QR Code Generator** | **Coding Events** |
 | <img src="public/projects/qrcode.webp" alt="QR Code Generator" width="420"> | <img src="public/projects/coding-events.webp" alt="Coding Events" width="420"> |
 
-### 💻 Exemplo de saída no terminal (API de contato)
+### 💻 API de contato pelo terminal
 
 ```bash
 curl -X POST http://localhost:3000/api/contact \
@@ -371,12 +332,12 @@ curl -X POST http://localhost:3000/api/contact \
      -d '{"name":"Maria","email":"maria@example.com","message":"Olá, vi seu portfolio!"}'
 ```
 
-**Saída esperada:**
+Resposta:
 ```json
 { "ok": true }
 ```
 
-Com dados inválidos (`HTTP 400`):
+Com dados inválidos (`400`):
 ```json
 { "error": "invalid", "fields": ["name", "email", "message"] }
 ```
@@ -389,34 +350,35 @@ Com dados inválidos (`HTTP 400`):
 npm test
 ```
 
-Testes unitários com **Vitest** (33 casos):
-
-| Arquivo | O que cobre |
+| Arquivo | O que testa |
 | :--- | :--- |
-| `tests/negotiate.test.ts` | Escolha do idioma pelo `Accept-Language` (pesos `q`, idiomas não suportados) |
-| `tests/format.test.ts` | Formatação de datas em PT e EN |
+| `tests/negotiate.test.ts` | Escolha do idioma pelo `Accept-Language` |
+| `tests/format.test.ts` | Datas em PT e EN |
 | `tests/contact-schema.test.ts` | Validação do formulário e honeypot |
-| `tests/contact-route.test.ts` | Rota `/api/contact`: envio, 400/500/502, escape de HTML e limite de 5 envios por IP |
-| `tests/scoring.test.ts` | Pontuação do jogo: precisão, reação média e ranks |
-| `tests/buck-physics.test.ts` | Física do Buck: queda, pouso, quique, paredes e velocidade de arremesso |
-| `tests/github-contributions.test.ts` | Calendário de contribuições: semanas, meses e sequências |
+| `tests/contact-route.test.ts` | `/api/contact`: envio, erros, escape de HTML e limite por IP |
+| `tests/scoring.test.ts` | Pontos e ranks do jogo |
+| `tests/buck-physics.test.ts` | Queda, pouso, quique, paredes e arremesso do Buck |
+| `tests/github-contributions.test.ts` | Calendário de contribuições e sequências |
 
-A CI do GitHub Actions roda lint, checagem de tipos, testes, build e build da imagem Docker a cada push.
+A CI roda lint, tipos, testes, build e build da imagem Docker em todo push.
+
+No Lighthouse do site publicado: 97 de performance no desktop e 87 no mobile, e 100 em acessibilidade, boas práticas e SEO.
 
 ---
 
 ## 🔗 Documentações utilizadas
 
-* [Next.js — documentação](https://nextjs.org/docs) (App Router, Internationalization, Proxy, Route Handlers, Cache Components, `output: standalone`)
+* [Next.js](https://nextjs.org/docs) (App Router, internacionalização, Proxy, Route Handlers, cache, `output: standalone`)
 * [React](https://react.dev/)
 * [Tailwind CSS](https://tailwindcss.com/docs)
 * [Motion](https://motion.dev/docs/react)
 * [Zod](https://zod.dev/)
-* [Resend — Node.js SDK](https://resend.com/docs/send-with-nodejs)
-* [GitHub REST API — Repositories](https://docs.github.com/rest/repos/repos)
-* [Docker — Next.js guide](https://docs.docker.com/guides/nextjs/)
+* [Resend (Node.js)](https://resend.com/docs/send-with-nodejs)
+* [GitHub REST API](https://docs.github.com/rest/repos/repos)
+* [Docker: guia de Next.js](https://docs.docker.com/guides/nextjs/)
 * [Vitest](https://vitest.dev/)
-* [Vercel — Deploy Next.js](https://vercel.com/docs/frameworks/nextjs)
+* [Playwright](https://playwright.dev/)
+* [Vercel: Next.js](https://vercel.com/docs/frameworks/nextjs)
 
 ---
 
@@ -431,24 +393,18 @@ A CI do GitHub Actions roda lint, checagem de tipos, testes, build e build da im
 
 ## 🤝 Contribuição
 
-Encontrou um erro de digitação ou bug? Fique à vontade para abrir uma issue ou PR:
-
-1. Faça um fork do projeto
-2. Crie uma branch: `git checkout -b fix/descricao`
-3. Faça commits seguindo o [Conventional Commits](https://www.conventionalcommits.org/) ou mensagens descritivas
-4. Envie a branch: `git push origin fix/descricao`
-5. Abra um Pull Request
+Achou um erro ou tem uma sugestão? Pode abrir uma issue ou mandar um PR: faça um fork, crie uma branch (`git checkout -b fix/descricao`), faça os commits e abra o Pull Request.
 
 ---
 
 ## 🙏 Agradecimentos
 
-* Ao **Prof. Dr. João Paulo Aramuni**, pela proposta do laboratório e pelo template deste README.
-* À **PUC Minas** e ao **CEFET-MG (UFCIMG)**, pela formação.
-* Aos colegas do **Acadus** — Francisco, Rafael, Sofia e Thiago — pelo projeto em equipe exibido aqui.
+* Ao Prof. Dr. João Paulo Aramuni, pela proposta do laboratório e pelo template deste README.
+* À PUC Minas e ao CEFET-MG (UFCIMG), pela formação.
+* À equipe do Acadus (Francisco, Rafael, Sofia e Thiago), por deixar o projeto aparecer aqui.
 
 ---
 
 ## 📄 Licença
 
-O **código** deste projeto está sob a licença MIT. O **conteúdo pessoal** (textos, imagens, documentos e GIFs dos projetos) pertence ao autor e não deve ser reutilizado sem autorização.
+O código está sob a licença MIT. O conteúdo pessoal (textos, fotos, documentos e GIFs dos projetos) é meu e não deve ser reutilizado sem autorização.
