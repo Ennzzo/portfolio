@@ -138,11 +138,22 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       body.bounced = false;
       setP("air");
     }
+    // Só cai do topo se houver um chão visível; senão ficava caindo pela tela sem parar.
     const dropIn = () => {
-      const target = pick(visiblePlatforms().filter((p) => p.x2 - p.x1 > W)) ?? platforms.at(-1);
+      const target = pick(visiblePlatforms().filter((p) => p.x2 - p.x1 > W));
+      if (!target) return false;
       body.y = scrollY - 40;
-      body.x = target ? clamp(rand(target.x1, target.x2 - W), 4, innerWidth - W - 4) : innerWidth / 2;
+      body.x = clamp(rand(target.x1, target.x2 - W), 4, innerWidth - W - 4);
       startFall(0, 0);
+      return true;
+    };
+    const park = () => {
+      const p = platforms.at(-1);
+      if (!p) return;
+      plat = p;
+      body.y = p.y;
+      body.x = clamp(body.x, p.x1, p.x2 - W);
+      startIdle();
     };
     const jumpTo = (p: Platform) => {
       const tx = clamp(rand(p.x1, p.x2 - W), p.x1 - W * 0.3, p.x2 - W * 0.7);
@@ -206,7 +217,7 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
           fx.rotV *= Math.max(0, 1 - dt * 6);
         }
         if (res) land(res.landed, res.impactVy, res.bounce);
-        else if (body.y > document.documentElement.scrollHeight + 400) dropIn();
+        else if (body.y > document.documentElement.scrollHeight + 400 && !dropIn()) park();
         fx.tilt += (0 - fx.tilt) * Math.min(1, dt * 10);
       } else {
         fx.tilt += (0 - fx.tilt) * Math.min(1, dt * 10);
@@ -235,8 +246,7 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
       offT = onScreen || mode === "held" ? 0 : offT + dt;
       if (offT > 1.2 && now - lastScroll > 400) {
         offT = 0;
-        dropIn();
-        setTimeout(() => say.current(dictRef.current.back, undefined, 2200), 700);
+        if (dropIn()) setTimeout(() => say.current(dictRef.current.back, undefined, 2200), 700);
       }
 
       stepSquash(fx, dt);
