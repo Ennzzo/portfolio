@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { accuracy, avgReaction, lifeAt, rankFor, spawnEvery } from "@/components/game/scoring";
+import { accuracy, avgReaction, lifeAt, points, rankFor, spawnEvery } from "@/components/game/scoring";
 
 const stats = (hits: number, misses: number, reactions: number[] = []) => ({ hits, misses, expired: 0, reactions });
 
@@ -22,10 +22,15 @@ describe("pontuação do jogo de mira", () => {
     expect(lifeAt(600)).toBe(1150);
   });
 
-  it("converte acertos em ranks do Ferro ao Radiante", () => {
+  it("pondera os acertos pela precisão", () => {
+    expect(points(stats(20, 0))).toBe(20);
+    expect(points(stats(20, 20))).toBe(10);
+  });
+
+  it("converte pontos em ranks do Ferro ao Radiante", () => {
     expect(rankFor(0).id).toBe("iron");
-    expect(rankFor(20).id).toBe("silver");
-    expect(rankFor(99).id).toBe("immortal");
-    expect(rankFor(120).id).toBe("radiant");
+    expect(rankFor(15).id).toBe("silver");
+    expect(rankFor(42.9).id).toBe("immortal");
+    expect(rankFor(50).id).toBe("radiant");
   });
 });
