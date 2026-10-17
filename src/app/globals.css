@@ -85,6 +85,8 @@ body {
 }
 
 .aim-target {
+  box-shadow: 0 0 18px rgb(212 255 63 / 0.4);
+  will-change: scale;
   animation-name: aim-shrink;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
