@@ -40,7 +40,7 @@ export function DesignSystemSection({ lang, dict, index }: { lang: Locale; dict:
         </Group>
 
         <Group title={t.typography} note={t.typographyNote}>
-          <ul className="divide-y divide-border rounded-2xl border border-border bg-surface">
+          <ul data-buck-floor className="divide-y divide-border rounded-2xl border border-border bg-surface">
             {typeScale.map((s) => (
               <li key={s.name} className="grid items-baseline gap-2 px-5 py-4 sm:grid-cols-[140px_1fr_auto] sm:gap-6">
                 <span className="font-mono text-xs text-muted uppercase">{s.name}</span>
@@ -116,7 +116,7 @@ export function DesignSystemSection({ lang, dict, index }: { lang: Locale; dict:
         </div>
 
         <Group title={t.motion} note={t.motionNote}>
-          <ul className="divide-y divide-border rounded-2xl border border-border bg-surface">
+          <ul data-buck-floor className="divide-y divide-border rounded-2xl border border-border bg-surface">
             {motion.map((m) => (
               <li key={m.name} className="grid gap-1 px-5 py-4 sm:grid-cols-[140px_1fr_auto] sm:gap-6">
                 <span className="font-mono text-xs text-muted uppercase">{m.name}</span>
@@ -155,7 +155,7 @@ function Group({ title, note, children }: { title: string; note?: string; childr
 
 function Specimen({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5">
+    <div data-buck-floor className="rounded-2xl border border-border bg-surface p-5">
       <p className="mb-4 font-mono text-[11px] text-muted uppercase">{label}</p>
       {children}
     </div>
