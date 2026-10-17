@@ -25,10 +25,10 @@ export function AboutSection({ lang, dict, index }: { lang: Locale; dict: Dictio
         <Reveal className="w-44 shrink-0 sm:w-56 md:w-64">
           <figure className="overflow-hidden rounded-2xl border border-border bg-surface p-1.5">
             <Image
-              src="/enzo.webp"
+              src="/enzo-bambirra.webp"
               alt={t.photoAlt}
-              width={601}
-              height={601}
+              width={960}
+              height={1200}
               sizes="(min-width: 768px) 256px, 224px"
               className="aspect-[4/5] w-full rounded-xl object-cover object-top"
             />
