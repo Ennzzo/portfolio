@@ -196,6 +196,10 @@ export function BuckPhysics({ dict }: { dict: Dictionary["buck"] }) {
     const loop = (now: number) => {
       const dt = Math.min(1 / 30, (now - last) / 1000);
       last = now;
+      if (document.documentElement.hasAttribute("data-game")) {
+        raf = requestAnimationFrame(loop);
+        return;
+      }
       modeT -= dt;
 
       if (mode === "held") {

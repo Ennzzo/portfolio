@@ -16,9 +16,12 @@ export function GameModal({ dict }: { dict: Dictionary["game"] }) {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    // Avisa o Buck e o cursor para pausarem enquanto o jogo roda.
+    document.documentElement.toggleAttribute("data-game", true);
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      document.documentElement.removeAttribute("data-game");
     };
   }, [open]);
 
@@ -29,7 +32,7 @@ export function GameModal({ dict }: { dict: Dictionary["game"] }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 p-3 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-3 sm:p-6"
           onClick={(e) => e.target === e.currentTarget && setOpen(false)}
         >
           <motion.div
