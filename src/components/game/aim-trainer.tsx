@@ -4,9 +4,9 @@ import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPoi
 import { AnimatePresence, motion } from "motion/react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { BuckSvg } from "../buck/buck-svg";
-import { accuracy, avgReaction, lifeAt, rankFor, spawnEvery, type Stats } from "./scoring";
+import { accuracy, avgReaction, lifeAt, points, rankFor, spawnEvery, type Stats } from "./scoring";
 
-const LIVES = 3;
+const DURATION = 30_000;
 const MAX_TARGETS = 5;
 const BEST_KEY = "portfolio:aim-best-v2";
 
@@ -36,8 +36,6 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
   const [phase, setPhase] = useState<Phase>("intro");
   const [targets, setTargets] = useState<Target[]>([]);
   const [stats, setStats] = useState<Stats>(emptyStats);
-  const [lives, setLives] = useState(LIVES);
-  const [elapsed, setElapsed] = useState(0);
   // Só monta depois de um clique, nunca no servidor.
   const [best, setBest] = useState(readBest);
   const [newBest, setNewBest] = useState(false);
@@ -45,33 +43,32 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
   const arenaRef = useRef<HTMLDivElement>(null);
   const crosshairRef = useRef<HTMLDivElement>(null);
   const clockRef = useRef<HTMLSpanElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
   const arenaRect = useRef<DOMRect | null>(null);
   const nextId = useRef(0);
   const startedAt = useRef(0);
-  const livesRef = useRef(LIVES);
-  const hitsRef = useRef(0);
+  const statsRef = useRef(stats);
+  useEffect(() => {
+    statsRef.current = stats;
+  }, [stats]);
 
   const start = () => {
     setStats(emptyStats());
     setTargets([]);
     setPops([]);
-    setLives(LIVES);
     setNewBest(false);
-    livesRef.current = LIVES;
-    hitsRef.current = 0;
     startedAt.current = performance.now();
     setPhase("playing");
   };
 
   const finish = useCallback(() => {
-    setElapsed(performance.now() - startedAt.current);
     setTargets([]);
-    const score = hitsRef.current;
-    if (score > readBest()) {
+    const pts = points(statsRef.current);
+    if (pts > readBest()) {
       try {
-        localStorage.setItem(BEST_KEY, String(score));
+        localStorage.setItem(BEST_KEY, String(pts));
       } catch {}
-      setBest(score);
+      setBest(pts);
       setNewBest(true);
     }
     setPhase("result");
@@ -82,12 +79,15 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
     if (phase !== "playing") return;
     let raf = 0;
     const tick = () => {
-      if (clockRef.current) clockRef.current.textContent = `${((performance.now() - startedAt.current) / 1000).toFixed(1)}s`;
+      const left = Math.max(0, DURATION - (performance.now() - startedAt.current));
+      if (clockRef.current) clockRef.current.textContent = `${(left / 1000).toFixed(1)}s`;
+      if (barRef.current) barRef.current.style.transform = `scaleX(${left / DURATION})`;
+      if (left === 0) return finish();
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [phase]);
+  }, [phase, finish]);
 
   useEffect(() => {
     if (phase !== "playing") return;
@@ -109,23 +109,15 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
 
   const hit = useCallback((t: Target, e: ReactPointerEvent) => {
     e.stopPropagation();
-    hitsRef.current++;
     setTargets((ts) => ts.filter((x) => x.id !== t.id));
     setStats((s) => ({ ...s, hits: s.hits + 1, reactions: [...s.reactions, performance.now() - t.born] }));
     setPops((p) => [...p.slice(-5), { id: t.id, x: t.x, y: t.y }]);
   }, []);
 
-  const expire = useCallback(
-    (id: number) => {
-      if (livesRef.current <= 0) return;
-      livesRef.current--;
-      setLives(livesRef.current);
-      setTargets((ts) => ts.filter((t) => t.id !== id));
-      setStats((s) => ({ ...s, expired: s.expired + 1 }));
-      if (livesRef.current === 0) finish();
-    },
-    [finish],
-  );
+  const expire = useCallback((id: number) => {
+    setTargets((ts) => ts.filter((t) => t.id !== id));
+    setStats((s) => ({ ...s, expired: s.expired + 1 }));
+  }, []);
 
   const moveCrosshair = (e: ReactPointerEvent) => {
     const cross = crosshairRef.current;
@@ -140,9 +132,8 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
     return () => window.removeEventListener("resize", reset);
   }, []);
 
-  const score = stats.hits;
-  const rank = rankFor(score);
-  const seconds = (elapsed / 1000).toFixed(1);
+  const pts = points(stats);
+  const rank = rankFor(pts);
 
   return (
     <div className="relative flex h-full w-full flex-col">
@@ -188,17 +179,18 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
           <motion.div key="playing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex h-full flex-col">
             <div className="flex items-center justify-between gap-4 border-b border-border py-3 pr-14 pl-5 font-mono text-sm">
               <span>
-                <span className="text-muted">{dict.time}</span> <span ref={clockRef} className="tabular-nums">0.0s</span>
+                <span className="text-muted">{dict.time}</span> <span ref={clockRef} className="tabular-nums">30.0s</span>
               </span>
               <span>
                 <span className="text-muted">{dict.hits}</span> <span className="tabular-nums text-accent">{stats.hits}</span>
               </span>
-              <span className="flex items-center gap-1.5" aria-label={`${dict.lives}: ${lives}`}>
-                <span className="mr-1 text-muted">{dict.lives}</span>
-                {Array.from({ length: LIVES }, (_, i) => (
-                  <Ball key={i} className={`size-4 transition-opacity ${i < lives ? "" : "opacity-20 grayscale"}`} />
-                ))}
+              <span>
+                <span className="text-muted">{dict.accuracy}</span>{" "}
+                <span className="tabular-nums">{Math.round(accuracy(stats) * 100)}%</span>
               </span>
+            </div>
+            <div className="h-0.5 bg-border">
+              <div ref={barRef} className="h-full origin-left bg-accent" />
             </div>
             <div
               ref={arenaRef}
@@ -259,18 +251,18 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
             exit={{ opacity: 0 }}
             className="m-auto w-full max-w-lg p-8 text-center sm:p-10"
           >
-            <BuckSvg pose={score >= 30 ? "happy" : "idle"} className="mx-auto w-32" />
+            <BuckSvg pose={pts >= 21 ? "happy" : "idle"} className="mx-auto w-32" />
             <p className="mt-4 font-mono text-xs tracking-[0.2em] text-muted uppercase">Rank</p>
             <h2 className="mt-1 text-5xl font-semibold tracking-tight sm:text-6xl" style={{ color: rank.color }}>
               {dict.ranks[rank.id]}
             </h2>
             <p className="mt-2 font-mono text-sm text-muted">
-              {score} {dict.points}
+              {pts} {dict.points}
               {newBest && <span className="ml-2 text-accent">· {dict.newBest}</span>}
             </p>
             <dl className="mt-8 grid grid-cols-2 gap-3 text-left sm:grid-cols-4">
               {[
-                [dict.time, `${seconds}s`],
+                [dict.hits, String(stats.hits)],
                 [dict.accuracy, `${Math.round(accuracy(stats) * 100)}%`],
                 [dict.reaction, `${avgReaction(stats)} ms`],
                 [dict.best, String(best)],
@@ -281,7 +273,7 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
                 </div>
               ))}
             </dl>
-            <p className="mt-6 text-muted">{score < 20 ? dict.verdictLow : score < 55 ? dict.verdictMid : dict.verdictHigh}</p>
+            <p className="mt-6 text-muted">{pts < 15 ? dict.verdictLow : pts < 31 ? dict.verdictMid : dict.verdictHigh}</p>
             <div className="mt-8 flex gap-3">
               <button
                 type="button"
