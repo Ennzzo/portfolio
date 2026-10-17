@@ -4,11 +4,11 @@ import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPoi
 import { AnimatePresence, motion } from "motion/react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { BuckSvg } from "../buck/buck-svg";
-import { accuracy, avgReaction, points, rankFor, type Stats } from "./scoring";
+import { accuracy, avgReaction, lifeAt, rankFor, spawnEvery, type Stats } from "./scoring";
 
-const DURATION = 30_000;
-const BEST_KEY = "portfolio:aim-best";
-const MAX_TARGETS = 3;
+const LIVES = 3;
+const MAX_TARGETS = 5;
+const BEST_KEY = "portfolio:aim-best-v2";
 
 type Target = { id: number; x: number; y: number; born: number; life: number };
 type Phase = "intro" | "playing" | "result";
@@ -23,101 +23,126 @@ function readBest() {
   }
 }
 
+function Ball({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" className={className}>
+      <circle cx="10" cy="10" r="9.5" fill="#d4ff3f" />
+      <path d="M2.6 4.2c3.2 2.7 3.2 8.9 0 11.6M17.4 4.2c-3.2 2.7-3.2 8.9 0 11.6" stroke="#fff" strokeWidth="1.2" fill="none" />
+    </svg>
+  );
+}
+
 export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClose: () => void }) {
   const [phase, setPhase] = useState<Phase>("intro");
   const [targets, setTargets] = useState<Target[]>([]);
   const [stats, setStats] = useState<Stats>(emptyStats);
-  const [remaining, setRemaining] = useState(DURATION);
+  const [lives, setLives] = useState(LIVES);
+  const [elapsed, setElapsed] = useState(0);
   // Só monta depois de um clique, nunca no servidor.
   const [best, setBest] = useState(readBest);
   const [newBest, setNewBest] = useState(false);
   const [pops, setPops] = useState<{ id: number; x: number; y: number }[]>([]);
   const arenaRef = useRef<HTMLDivElement>(null);
   const crosshairRef = useRef<HTMLDivElement>(null);
+  const clockRef = useRef<HTMLSpanElement>(null);
+  const arenaRect = useRef<DOMRect | null>(null);
   const nextId = useRef(0);
   const startedAt = useRef(0);
+  const livesRef = useRef(LIVES);
+  const hitsRef = useRef(0);
 
   const start = () => {
     setStats(emptyStats());
     setTargets([]);
     setPops([]);
-    setRemaining(DURATION);
+    setLives(LIVES);
     setNewBest(false);
+    livesRef.current = LIVES;
+    hitsRef.current = 0;
     startedAt.current = performance.now();
     setPhase("playing");
   };
 
-  const statsRef = useRef(stats);
-  useEffect(() => {
-    statsRef.current = stats;
-  }, [stats]);
+  const finish = useCallback(() => {
+    setElapsed(performance.now() - startedAt.current);
+    setTargets([]);
+    const score = hitsRef.current;
+    if (score > readBest()) {
+      try {
+        localStorage.setItem(BEST_KEY, String(score));
+      } catch {}
+      setBest(score);
+      setNewBest(true);
+    }
+    setPhase("result");
+  }, []);
 
+  // O relógio escreve direto no DOM para não re-renderizar o jogo a cada quadro.
   useEffect(() => {
     if (phase !== "playing") return;
-    const id = setInterval(() => {
-      const left = Math.max(0, DURATION - (performance.now() - startedAt.current));
-      setRemaining(left);
-      if (left > 0) return;
-      const pts = points(statsRef.current);
-      if (pts > readBest()) {
-        try {
-          localStorage.setItem(BEST_KEY, String(pts));
-        } catch {}
-        setBest(pts);
-        setNewBest(true);
-      }
-      setPhase("result");
-    }, 100);
-    return () => clearInterval(id);
+    let raf = 0;
+    const tick = () => {
+      if (clockRef.current) clockRef.current.textContent = `${((performance.now() - startedAt.current) / 1000).toFixed(1)}s`;
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [phase]);
 
   useEffect(() => {
     if (phase !== "playing") return;
     let timer: ReturnType<typeof setTimeout>;
     const spawn = () => {
-      const progress = Math.min(1, (performance.now() - startedAt.current) / DURATION);
+      const t = (performance.now() - startedAt.current) / 1000;
       setTargets((ts) => {
         if (ts.length >= MAX_TARGETS) return ts;
         return [
           ...ts,
-          {
-            id: nextId.current++,
-            x: 8 + Math.random() * 84,
-            y: 14 + Math.random() * 76,
-            born: performance.now(),
-            life: 1500 - 600 * progress,
-          },
+          { id: nextId.current++, x: 8 + Math.random() * 84, y: 10 + Math.random() * 80, born: performance.now(), life: lifeAt(t) },
         ];
       });
-      timer = setTimeout(spawn, 700 - 330 * progress);
+      timer = setTimeout(spawn, spawnEvery(t));
     };
-    spawn();
+    timer = setTimeout(spawn, 400);
     return () => clearTimeout(timer);
   }, [phase]);
 
   const hit = useCallback((t: Target, e: ReactPointerEvent) => {
     e.stopPropagation();
+    hitsRef.current++;
     setTargets((ts) => ts.filter((x) => x.id !== t.id));
     setStats((s) => ({ ...s, hits: s.hits + 1, reactions: [...s.reactions, performance.now() - t.born] }));
     setPops((p) => [...p.slice(-5), { id: t.id, x: t.x, y: t.y }]);
   }, []);
 
-  const expire = useCallback((id: number) => {
-    setTargets((ts) => ts.filter((t) => t.id !== id));
-    setStats((s) => ({ ...s, expired: s.expired + 1 }));
-  }, []);
+  const expire = useCallback(
+    (id: number) => {
+      if (livesRef.current <= 0) return;
+      livesRef.current--;
+      setLives(livesRef.current);
+      setTargets((ts) => ts.filter((t) => t.id !== id));
+      setStats((s) => ({ ...s, expired: s.expired + 1 }));
+      if (livesRef.current === 0) finish();
+    },
+    [finish],
+  );
 
   const moveCrosshair = (e: ReactPointerEvent) => {
-    const arena = arenaRef.current;
     const cross = crosshairRef.current;
-    if (!arena || !cross || e.pointerType !== "mouse") return;
-    const r = arena.getBoundingClientRect();
-    cross.style.transform = `translate(${e.clientX - r.left}px, ${e.clientY - r.top}px)`;
+    if (!cross || e.pointerType !== "mouse") return;
+    const r = (arenaRect.current ??= arenaRef.current!.getBoundingClientRect());
+    cross.style.transform = `translate3d(${e.clientX - r.left}px, ${e.clientY - r.top}px, 0)`;
   };
 
-  const pts = points(stats);
-  const rank = rankFor(pts);
-  const seconds = (remaining / 1000).toFixed(1);
+  useEffect(() => {
+    const reset = () => (arenaRect.current = null);
+    window.addEventListener("resize", reset);
+    return () => window.removeEventListener("resize", reset);
+  }, []);
+
+  const score = stats.hits;
+  const rank = rankFor(score);
+  const seconds = (elapsed / 1000).toFixed(1);
 
   return (
     <div className="relative flex h-full w-full flex-col">
@@ -163,25 +188,25 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
           <motion.div key="playing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex h-full flex-col">
             <div className="flex items-center justify-between gap-4 border-b border-border py-3 pr-14 pl-5 font-mono text-sm">
               <span>
-                <span className="text-muted">{dict.time}</span> <span className="tabular-nums">{seconds}s</span>
+                <span className="text-muted">{dict.time}</span> <span ref={clockRef} className="tabular-nums">0.0s</span>
               </span>
               <span>
                 <span className="text-muted">{dict.hits}</span> <span className="tabular-nums text-accent">{stats.hits}</span>
               </span>
-              <span>
-                <span className="text-muted">{dict.accuracy}</span>{" "}
-                <span className="tabular-nums">{Math.round(accuracy(stats) * 100)}%</span>
+              <span className="flex items-center gap-1.5" aria-label={`${dict.lives}: ${lives}`}>
+                <span className="mr-1 text-muted">{dict.lives}</span>
+                {Array.from({ length: LIVES }, (_, i) => (
+                  <Ball key={i} className={`size-4 transition-opacity ${i < lives ? "" : "opacity-20 grayscale"}`} />
+                ))}
               </span>
-            </div>
-            <div className="h-0.5 bg-border">
-              <div className="h-full bg-accent transition-[width] duration-100 ease-linear" style={{ width: `${(remaining / DURATION) * 100}%` }} />
             </div>
             <div
               ref={arenaRef}
               data-cursor="none"
               onPointerMove={moveCrosshair}
+              onPointerEnter={() => (arenaRect.current = null)}
               onPointerDown={() => setStats((s) => ({ ...s, misses: s.misses + 1 }))}
-              className="relative flex-1 cursor-none touch-none overflow-hidden select-none"
+              className="relative flex-1 cursor-none touch-none overflow-hidden select-none [contain:strict]"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px)",
@@ -196,13 +221,10 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
                   tabIndex={-1}
                   onPointerDown={(e) => hit(t, e)}
                   onAnimationEnd={() => expire(t.id)}
-                  className="aim-target absolute size-14 -translate-x-1/2 -translate-y-1/2 cursor-none"
+                  className="aim-target absolute size-14 -translate-x-1/2 -translate-y-1/2 cursor-none rounded-full sm:size-16"
                   style={{ left: `${t.x}%`, top: `${t.y}%`, animationDuration: `${t.life}ms` }}
                 >
-                  <svg viewBox="0 0 20 20" className="size-full drop-shadow-[0_0_12px_rgba(212,255,63,0.45)]">
-                    <circle cx="10" cy="10" r="9.5" fill="#d4ff3f" />
-                    <path d="M2.6 4.2c3.2 2.7 3.2 8.9 0 11.6M17.4 4.2c-3.2 2.7-3.2 8.9 0 11.6" stroke="#fff" strokeWidth="1.2" fill="none" />
-                  </svg>
+                  <Ball className="size-full" />
                 </button>
               ))}
 
@@ -216,7 +238,7 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
                 </span>
               ))}
 
-              <div ref={crosshairRef} className="pointer-events-none absolute top-0 left-0 hidden [@media(pointer:fine)]:block">
+              <div ref={crosshairRef} className="pointer-events-none absolute top-0 left-0 hidden will-change-transform [@media(pointer:fine)]:block">
                 <div className="relative -translate-x-1/2 -translate-y-1/2">
                   <span className="absolute top-1/2 left-1/2 size-[3px] -translate-1/2 bg-accent" />
                   <span className="absolute top-1/2 left-[calc(50%-13px)] h-[2px] w-[8px] -translate-y-1/2 bg-accent" />
@@ -237,18 +259,18 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
             exit={{ opacity: 0 }}
             className="m-auto w-full max-w-lg p-8 text-center sm:p-10"
           >
-            <BuckSvg pose={pts >= 25 ? "happy" : "idle"} className="mx-auto w-32" />
+            <BuckSvg pose={score >= 30 ? "happy" : "idle"} className="mx-auto w-32" />
             <p className="mt-4 font-mono text-xs tracking-[0.2em] text-muted uppercase">Rank</p>
             <h2 className="mt-1 text-5xl font-semibold tracking-tight sm:text-6xl" style={{ color: rank.color }}>
               {dict.ranks[rank.id]}
             </h2>
             <p className="mt-2 font-mono text-sm text-muted">
-              {pts} {dict.points}
+              {score} {dict.points}
               {newBest && <span className="ml-2 text-accent">· {dict.newBest}</span>}
             </p>
             <dl className="mt-8 grid grid-cols-2 gap-3 text-left sm:grid-cols-4">
               {[
-                [dict.hits, String(stats.hits)],
+                [dict.time, `${seconds}s`],
                 [dict.accuracy, `${Math.round(accuracy(stats) * 100)}%`],
                 [dict.reaction, `${avgReaction(stats)} ms`],
                 [dict.best, String(best)],
@@ -259,7 +281,7 @@ export function AimTrainer({ dict, onClose }: { dict: Dictionary["game"]; onClos
                 </div>
               ))}
             </dl>
-            <p className="mt-6 text-muted">{pts < 18 ? dict.verdictLow : pts < 37 ? dict.verdictMid : dict.verdictHigh}</p>
+            <p className="mt-6 text-muted">{score < 20 ? dict.verdictLow : score < 55 ? dict.verdictMid : dict.verdictHigh}</p>
             <div className="mt-8 flex gap-3">
               <button
                 type="button"
