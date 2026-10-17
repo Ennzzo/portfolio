@@ -16,11 +16,25 @@ export function AboutSection({ lang, dict, index }: { lang: Locale; dict: Dictio
     <Section id="about">
       <SectionHeading index={index} label={dict.nav.about} title={t.title} />
 
-      <Reveal className="max-w-3xl space-y-5 text-xl leading-relaxed sm:text-2xl">
-        {about.intro[lang].map((p) => (
-          <p key={p}>{p}</p>
-        ))}
-      </Reveal>
+      <div className="flex flex-col-reverse gap-10 md:flex-row md:items-start md:justify-between">
+        <Reveal className="max-w-3xl space-y-5 text-xl leading-relaxed sm:text-2xl">
+          {about.intro[lang].map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </Reveal>
+        <Reveal className="w-44 shrink-0 sm:w-56 md:w-64">
+          <figure className="overflow-hidden rounded-2xl border border-border bg-surface p-1.5">
+            <Image
+              src="/enzo.webp"
+              alt={t.photoAlt}
+              width={601}
+              height={601}
+              sizes="(min-width: 768px) 256px, 224px"
+              className="aspect-[4/5] w-full rounded-xl object-cover object-top"
+            />
+          </figure>
+        </Reveal>
+      </div>
 
       <Reveal className="mt-10 flex max-w-xl items-center gap-5 rounded-2xl border border-border bg-surface/60 p-4 sm:gap-6 sm:p-5">
         <BuckPhoto alt={t.buckAlt} play={t.buckPlay} />
